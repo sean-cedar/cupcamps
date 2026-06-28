@@ -14,7 +14,7 @@ export function Header() {
       <HostNationStripe height={2} />
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
         <Link href="/" className="min-w-0 shrink">
-          <SiteLogo markSize={30} />
+          <SiteLogo />
         </Link>
         <nav className="flex shrink-0 items-center gap-0.5 sm:gap-1">
           {navLinks.map((link) => (

@@ -10,7 +10,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
         <div className="grid gap-8 md:grid-cols-[1.2fr_1fr]">
           <div>
-            <SiteLogo markSize={32} />
+            <SiteLogo />
             <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
               Fan-made guide to FIFA World Cup 26™ Team Base Camps. Not
               affiliated with or endorsed by FIFA.
