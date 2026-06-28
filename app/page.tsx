@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { Suspense } from "react";
+import { HostNationStripe } from "@/components/brand/HostNationStripe";
+import { SectionHeading } from "@/components/brand/SectionHeading";
+import { Wc26Mark } from "@/components/brand/Wc26Mark";
 import { HostCityCard } from "@/components/host-cities/HostCityCard";
 import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
 import { TeamCard } from "@/components/teams/TeamCard";
@@ -15,39 +17,45 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-card-border">
-        <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-transparent" />
+        <HostNationStripe height={4} />
+        <div className="hero-glow absolute inset-0" />
+        <div className="pointer-events-none absolute -right-8 top-8 opacity-[0.07] sm:right-12 sm:top-12">
+          <Wc26Mark size={280} variant="gold" />
+        </div>
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
           <div className="grid items-end gap-12 lg:grid-cols-2">
             <div className="animate-fade-up">
-              <p className="mb-2 text-sm uppercase tracking-[0.3em] text-gold">
-                FIFA World Cup 2026
-              </p>
-              <h1 className="font-display text-6xl leading-[0.9] tracking-wide text-cream sm:text-8xl">
-                WHERE TEAMS
+              <div className="mb-4 flex items-center gap-3">
+                <Wc26Mark size={48} variant="multicolor" />
+                <p className="font-display text-sm font-bold uppercase tracking-[0.35em] text-gold">
+                  FIFA World Cup 26™
+                </p>
+              </div>
+              <h1 className="font-display text-6xl font-black uppercase leading-[0.88] tracking-[0.04em] text-cream sm:text-8xl">
+                Where Teams
                 <br />
-                <span className="text-gold">CALL HOME</span>
+                <span className="bg-gradient-to-r from-gold-light via-gold to-gold-dark bg-clip-text text-transparent">
+                  Call Home
+                </span>
               </h1>
-              <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
+              <p className="mt-6 max-w-lg text-base leading-relaxed text-muted">
                 Every nation has picked their Team Base Camp. Explore all 48
-                training sites, the host cities they connect to, and where
-                squads play during the group stage.
+                training sites across Canada, Mexico, and the United States —
+                and see where squads play during the group stage.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/teams"
-                  className="bg-gold px-6 py-3 font-display text-lg tracking-wide text-background transition hover:bg-gold-light"
-                >
-                  BROWSE ALL TEAMS
+                <Link href="/teams" className="wc26-btn-primary px-8 py-3.5 text-base">
+                  Browse All Teams
                 </Link>
                 <Link
                   href="/map"
-                  className="border border-gold/40 px-6 py-3 font-display text-lg tracking-wide text-gold transition hover:border-gold hover:bg-gold/10"
+                  className="wc26-btn-secondary px-8 py-3.5 text-base"
                 >
-                  VIEW MAP
+                  View Map
                 </Link>
               </div>
             </div>
-            <div className="animate-fade-up stagger-2 grid grid-cols-2 gap-6">
+            <div className="animate-fade-up stagger-2 grid grid-cols-2 gap-6 border border-card-border bg-card/60 p-6 backdrop-blur-sm">
               <StatBlock value={stats.teamCount} label="Nations" />
               <StatBlock value={stats.hostCityCount} label="Host cities" />
               <StatBlock
@@ -61,43 +69,38 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <div className="mb-8 flex items-end justify-between">
-          <div>
-            <h2 className="font-display text-3xl tracking-wide text-cream">
-              BASE CAMP MAP
-            </h2>
-            <p className="mt-1 text-sm text-muted">
-              48 training sites across North America
-            </p>
-          </div>
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+          <SectionHeading
+            title="Base Camp Map"
+            subtitle="48 training sites · 3 host nations"
+          />
           <Link
             href="/map"
-            className="text-sm text-gold hover:text-gold-light"
+            className="font-display text-sm font-bold uppercase tracking-[0.15em] text-gold hover:text-gold-light"
           >
-            Full screen map →
+            Full screen →
           </Link>
         </div>
-        <div className="overflow-hidden border border-card-border">
+        <div className="overflow-hidden border border-gold/20">
+          <HostNationStripe height={3} />
           <TbcMapWrapper teams={teams} height="420px" zoom={3} />
         </div>
-        <div className="mt-4 flex flex-wrap gap-4 text-xs text-muted">
+        <div className="mt-4 flex flex-wrap gap-6 text-xs uppercase tracking-widest text-muted">
           <span className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-accent-usa" /> USA TBC
+            <span className="h-2.5 w-2.5 bg-accent-usa-light" /> USA
           </span>
           <span className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-accent-mexico" /> Mexico TBC
+            <span className="h-2.5 w-2.5 bg-accent-mexico-light" /> Mexico
           </span>
           <span className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-accent-canada" /> Canada TBC
+            <span className="h-2.5 w-2.5 bg-accent-canada-light" /> Canada
           </span>
         </div>
       </section>
 
-      <section className="border-y border-card-border bg-card/50 py-16">
+      <section className="border-y border-card-border bg-card/40 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <h2 className="font-display text-3xl tracking-wide text-cream">
-            FEATURED TEAMS
-          </h2>
+          <SectionHeading title="Featured Teams" />
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {featuredTeams.map((team) => (
               <TeamCard key={team.slug} team={team} />
@@ -106,7 +109,7 @@ export default function HomePage() {
           <div className="mt-8 text-center">
             <Link
               href="/teams"
-              className="text-sm font-medium text-gold hover:text-gold-light"
+              className="font-display text-sm font-bold uppercase tracking-[0.15em] text-gold hover:text-gold-light"
             >
               View all 48 teams →
             </Link>
@@ -115,12 +118,10 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <h2 className="font-display text-3xl tracking-wide text-cream">
-          HOST CITIES
-        </h2>
-        <p className="mt-1 text-sm text-muted">
-          16 cities hosting group-stage and knockout matches
-        </p>
+        <SectionHeading
+          title="Host Cities"
+          subtitle="16 cities · group stage & knockout"
+        />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {featuredCities.map((city) => {
             const cityStats = getHostCityStats(city.slug);
@@ -137,7 +138,7 @@ export default function HomePage() {
         <div className="mt-8 text-center">
           <Link
             href="/host-cities"
-            className="text-sm font-medium text-gold hover:text-gold-light"
+            className="font-display text-sm font-bold uppercase tracking-[0.15em] text-gold hover:text-gold-light"
           >
             Explore all host cities →
           </Link>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { HostNationStripe } from "@/components/brand/HostNationStripe";
+import { SectionHeading } from "@/components/brand/SectionHeading";
 import { TeamListItem } from "@/components/host-cities/HostCityCard";
 import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
 import { getHostCityStats } from "@/lib/host-cities";
@@ -23,7 +25,7 @@ export async function generateMetadata({
 
   return {
     title: city.name,
-    description: `${city.name} hosts World Cup 2026 matches at ${city.stadium}. See teams training nearby and playing here.`,
+    description: `${city.name} hosts FIFA World Cup 26™ matches at ${city.stadium}. See teams training nearby and playing here.`,
   };
 }
 
@@ -39,42 +41,50 @@ export default async function HostCityDetailPage({ params }: PageProps) {
       <section
         className="border-b border-card-border"
         style={{
-          background: `linear-gradient(135deg, ${city.accentColor}22 0%, transparent 60%)`,
+          background: `linear-gradient(135deg, ${city.accentColor}28 0%, transparent 55%), linear-gradient(180deg, rgba(181,152,90,0.05) 0%, transparent 100%)`,
         }}
       >
+        <div
+          className="h-1.5 w-full"
+          style={{ backgroundColor: city.accentColor }}
+        />
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
           <Link
             href="/host-cities"
-            className="text-sm text-muted hover:text-gold-light"
+            className="font-display text-xs font-bold uppercase tracking-[0.15em] text-muted hover:text-gold-light"
           >
             ← All host cities
           </Link>
           <div className="mt-6 flex items-center gap-4">
             <span
-              className="h-16 w-2"
+              className="h-20 w-1.5"
               style={{ backgroundColor: city.accentColor }}
             />
             <div>
-              <h1 className="font-display text-5xl tracking-wide text-cream sm:text-6xl">
+              <h1 className="font-display text-5xl font-black uppercase tracking-[0.04em] text-cream sm:text-6xl">
                 {city.name}
               </h1>
-              <p className="mt-2 text-muted">
+              <p className="mt-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-muted">
                 {city.country} · {city.stadium}
               </p>
             </div>
           </div>
-          <div className="mt-8 flex gap-8 text-sm">
+          <div className="mt-8 flex gap-10">
             <div>
-              <span className="font-display text-3xl text-gold">
+              <span className="font-display text-4xl font-black text-gold">
                 {stats.tbcTeamCount}
               </span>
-              <p className="text-muted">teams with nearby TBC</p>
+              <p className="font-display text-xs uppercase tracking-widest text-muted">
+                nearby TBC
+              </p>
             </div>
             <div>
-              <span className="font-display text-3xl text-gold">
+              <span className="font-display text-4xl font-black text-gold">
                 {stats.playingTeamCount}
               </span>
-              <p className="text-muted">teams playing group stage here</p>
+              <p className="font-display text-xs uppercase tracking-widest text-muted">
+                playing here
+              </p>
             </div>
           </div>
         </div>
@@ -83,9 +93,7 @@ export default async function HostCityDetailPage({ params }: PageProps) {
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-2">
           <section>
-            <h2 className="font-display text-2xl tracking-wide text-gold">
-              TEAMS WITH NEARBY TBC
-            </h2>
+            <SectionHeading title="Teams With Nearby TBC" />
             {stats.tbcTeams.length === 0 ? (
               <p className="mt-4 text-muted">No teams mapped to this zone.</p>
             ) : (
@@ -98,9 +106,7 @@ export default async function HostCityDetailPage({ params }: PageProps) {
           </section>
 
           <section>
-            <h2 className="font-display text-2xl tracking-wide text-gold">
-              TEAMS PLAYING HERE
-            </h2>
+            <SectionHeading title="Teams Playing Here" />
             {stats.playingTeams.length === 0 ? (
               <p className="mt-4 text-muted">
                 No group-stage assignments in this city.
@@ -117,10 +123,9 @@ export default async function HostCityDetailPage({ params }: PageProps) {
 
         {stats.tbcTeams.length > 0 && (
           <section className="mt-12">
-            <h2 className="font-display text-2xl tracking-wide text-gold">
-              TBC LOCATIONS
-            </h2>
-            <div className="mt-4 overflow-hidden border border-card-border">
+            <SectionHeading title="TBC Locations" />
+            <div className="mt-4 overflow-hidden border border-gold/20">
+              <HostNationStripe height={2} />
               <TbcMapWrapper
                 teams={stats.tbcTeams}
                 height="400px"

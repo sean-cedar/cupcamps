@@ -33,12 +33,19 @@ export function TeamFilters() {
     [router, searchParams],
   );
 
+  const inputClass =
+    "wc26-input w-full px-3 py-2.5 text-sm";
+
   return (
     <div
-      className={`space-y-4 rounded-sm border border-card-border bg-card p-4 ${isPending ? "opacity-70" : ""}`}
+      className={`wc26-panel space-y-4 p-4 ${isPending ? "opacity-70" : ""}`}
     >
+      <div className="amplify-edge h-0.5 w-12" />
       <div>
-        <label htmlFor="search" className="mb-1 block text-xs uppercase tracking-widest text-muted">
+        <label
+          htmlFor="search"
+          className="mb-1 block font-display text-xs font-bold uppercase tracking-[0.2em] text-muted"
+        >
           Search
         </label>
         <input
@@ -46,20 +53,23 @@ export function TeamFilters() {
           type="search"
           defaultValue={search}
           placeholder="Country, city, or training site..."
-          className="w-full border border-card-border bg-background px-3 py-2 text-sm text-cream placeholder:text-muted focus:border-gold focus:outline-none"
+          className={inputClass}
           onChange={(e) => updateParams({ search: e.target.value })}
         />
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <label htmlFor="group" className="mb-1 block text-xs uppercase tracking-widest text-muted">
+          <label
+            htmlFor="group"
+            className="mb-1 block font-display text-xs font-bold uppercase tracking-[0.2em] text-muted"
+          >
             Group
           </label>
           <select
             id="group"
             value={group}
             onChange={(e) => updateParams({ group: e.target.value })}
-            className="w-full border border-card-border bg-background px-3 py-2 text-sm text-cream focus:border-gold focus:outline-none"
+            className={inputClass}
           >
             <option value="">All groups</option>
             {getGroups().map((g) => (
@@ -70,14 +80,17 @@ export function TeamFilters() {
           </select>
         </div>
         <div>
-          <label htmlFor="tbcCountry" className="mb-1 block text-xs uppercase tracking-widest text-muted">
+          <label
+            htmlFor="tbcCountry"
+            className="mb-1 block font-display text-xs font-bold uppercase tracking-[0.2em] text-muted"
+          >
             TBC country
           </label>
           <select
             id="tbcCountry"
             value={tbcCountry}
             onChange={(e) => updateParams({ tbcCountry: e.target.value })}
-            className="w-full border border-card-border bg-background px-3 py-2 text-sm text-cream focus:border-gold focus:outline-none"
+            className={inputClass}
           >
             <option value="">All countries</option>
             {(["USA", "Mexico", "Canada"] as TbcCountry[]).map((c) => (
@@ -88,14 +101,17 @@ export function TeamFilters() {
           </select>
         </div>
         <div>
-          <label htmlFor="hostCity" className="mb-1 block text-xs uppercase tracking-widest text-muted">
+          <label
+            htmlFor="hostCity"
+            className="mb-1 block font-display text-xs font-bold uppercase tracking-[0.2em] text-muted"
+          >
             Host city zone
           </label>
           <select
             id="hostCity"
             value={hostCity}
             onChange={(e) => updateParams({ hostCity: e.target.value })}
-            className="w-full border border-card-border bg-background px-3 py-2 text-sm text-cream focus:border-gold focus:outline-none"
+            className={inputClass}
           >
             <option value="">All host cities</option>
             {hostCities.map((city) => (
@@ -106,14 +122,17 @@ export function TeamFilters() {
           </select>
         </div>
         <div>
-          <label htmlFor="sort" className="mb-1 block text-xs uppercase tracking-widest text-muted">
+          <label
+            htmlFor="sort"
+            className="mb-1 block font-display text-xs font-bold uppercase tracking-[0.2em] text-muted"
+          >
             Sort by
           </label>
           <select
             id="sort"
             value={sort}
             onChange={(e) => updateParams({ sort: e.target.value })}
-            className="w-full border border-card-border bg-background px-3 py-2 text-sm text-cream focus:border-gold focus:outline-none"
+            className={inputClass}
           >
             <option value="name">Name</option>
             <option value="group">Group</option>

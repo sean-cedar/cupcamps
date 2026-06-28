@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <defs>
+    <pattern id="unify" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="#ffffff" opacity="0.03"/>
+      <circle cx="18" cy="6" r="6" fill="none" stroke="#b5985a" stroke-width="0.75" opacity="0.08"/>
+      <rect x="12" y="12" width="12" height="12" fill="#003087" opacity="0.04"/>
+    </pattern>
+  </defs>
+  <rect width="120" height="120" fill="url(#unify)"/>
+</svg>

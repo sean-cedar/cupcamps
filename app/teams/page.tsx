@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { SectionHeading } from "@/components/brand/SectionHeading";
 import { TeamCard } from "@/components/teams/TeamCard";
 import { TeamFilters } from "@/components/teams/TeamFilters";
 import { filterTeams } from "@/lib/teams";
@@ -8,7 +9,7 @@ import type { TbcCountry } from "@/lib/types";
 export const metadata: Metadata = {
   title: "All Teams",
   description:
-    "Browse all 48 FIFA World Cup 2026 nations and their Team Base Camp training sites.",
+    "Browse all 48 FIFA World Cup 26™ nations and their Team Base Camp training sites.",
 };
 
 type PageProps = {
@@ -33,26 +34,22 @@ export default async function TeamsPage({ searchParams }: PageProps) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <div className="mb-8">
-        <h1 className="font-display text-4xl tracking-wide text-cream sm:text-5xl">
-          ALL 48 TEAMS
-        </h1>
-        <p className="mt-2 max-w-2xl text-muted">
-          Every qualified nation and their Team Base Camp — where players train,
-          rest, and prepare for the biggest World Cup ever.
-        </p>
-      </div>
+      <SectionHeading
+        title="All 48 Teams"
+        subtitle="Team base camps · group stage"
+        className="mb-8"
+      />
 
       <Suspense fallback={<div className="h-40 animate-pulse bg-card" />}>
         <TeamFilters />
       </Suspense>
 
-      <p className="my-6 text-sm text-muted">
+      <p className="my-6 font-display text-xs font-semibold uppercase tracking-[0.2em] text-muted">
         Showing {filtered.length} team{filtered.length !== 1 ? "s" : ""}
       </p>
 
       {filtered.length === 0 ? (
-        <div className="border border-card-border bg-card p-12 text-center">
+        <div className="wc26-panel p-12 text-center">
           <p className="text-cream">No teams match your filters.</p>
         </div>
       ) : (

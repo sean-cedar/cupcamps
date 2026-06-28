@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { HostNationStripe } from "@/components/brand/HostNationStripe";
+import { SectionHeading } from "@/components/brand/SectionHeading";
 import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
 import { CountryFlag } from "@/components/ui/CountryFlag";
 import { teams } from "@/lib/teams";
@@ -7,29 +9,26 @@ import { teams } from "@/lib/teams";
 export const metadata: Metadata = {
   title: "Base Camp Map",
   description:
-    "Interactive map of all 48 FIFA World Cup 2026 Team Base Camp training sites across North America.",
+    "Interactive map of all 48 FIFA World Cup 26™ Team Base Camp training sites across North America.",
 };
 
 export default function MapPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <div className="mb-8">
-        <h1 className="font-display text-4xl tracking-wide text-cream sm:text-5xl">
-          BASE CAMP MAP
-        </h1>
-        <p className="mt-2 max-w-2xl text-muted">
-          All 48 Team Base Camp training sites across the USA, Mexico, and
-          Canada. Click a pin for details.
-        </p>
-      </div>
+      <SectionHeading
+        title="Base Camp Map"
+        subtitle="48 sites · 3 host nations"
+        className="mb-8"
+      />
 
       <div className="grid gap-8 lg:grid-cols-3">
-        <div className="overflow-hidden border border-card-border lg:col-span-2">
+        <div className="overflow-hidden border border-gold/20 lg:col-span-2">
+          <HostNationStripe height={3} />
           <TbcMapWrapper teams={teams} height="650px" zoom={3} />
         </div>
-        <div className="max-h-[650px] overflow-y-auto border border-card-border bg-card">
+        <div className="max-h-[650px] overflow-y-auto wc26-panel">
           <div className="sticky top-0 border-b border-card-border bg-card px-4 py-3">
-            <p className="text-xs uppercase tracking-widest text-muted">
+            <p className="font-display text-xs font-bold uppercase tracking-[0.2em] text-muted">
               All teams ({teams.length})
             </p>
           </div>
@@ -48,7 +47,7 @@ export default function MapPage() {
                       className="text-lg"
                     />
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-cream">
+                      <p className="truncate font-display text-sm font-semibold uppercase tracking-wide text-cream">
                         {team.name}
                       </p>
                       <p className="truncate text-xs text-muted">

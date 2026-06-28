@@ -24,5 +24,9 @@ type TbcMapWrapperProps = {
 };
 
 export function TbcMapWrapper(props: TbcMapWrapperProps) {
-  return <TbcMap {...props} />;
+  return (
+    <div className="map-shell relative z-0 isolate overflow-hidden">
+      <TbcMap {...props} />
+    </div>
+  );
 }

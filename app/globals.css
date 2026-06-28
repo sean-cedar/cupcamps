@@ -2,17 +2,27 @@
 @import "flag-icons/css/flag-icons.min.css";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #f5f0e8;
-  --gold: #c9a227;
-  --gold-light: #e8c547;
-  --cream: #f5f0e8;
-  --muted: #9a9488;
-  --card: #141414;
-  --card-border: #2a2a2a;
-  --accent-usa: #4b9cd3;
-  --accent-mexico: #006847;
-  --accent-canada: #ff0000;
+  /* WC26 core palette */
+  --background: #000000;
+  --foreground: #ffffff;
+  --gold: #b5985a;
+  --gold-light: #d4bc82;
+  --gold-dark: #8a7344;
+  --cream: #ffffff;
+  --muted: #a3a3a3;
+  --card: #0d0d0d;
+  --card-border: #262626;
+
+  /* Host-nation tones (three shades each) */
+  --usa-blue: #003087;
+  --usa-blue-light: #0066cc;
+  --usa-blue-dark: #041e42;
+  --mexico-green: #006847;
+  --mexico-green-light: #00a651;
+  --mexico-green-dark: #004d30;
+  --canada-red: #c8102e;
+  --canada-red-light: #ff0000;
+  --canada-red-dark: #9b0d24;
 }
 
 @theme inline {
@@ -20,14 +30,21 @@
   --color-foreground: var(--foreground);
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
   --color-cream: var(--cream);
   --color-muted: var(--muted);
   --color-card: var(--card);
   --color-card-border: var(--card-border);
-  --color-accent-usa: var(--accent-usa);
-  --color-accent-mexico: var(--accent-mexico);
-  --color-accent-canada: var(--accent-canada);
-  --font-display: var(--font-bebas);
+  --color-accent-usa: var(--usa-blue);
+  --color-accent-usa-light: var(--usa-blue-light);
+  --color-accent-mexico: var(--mexico-green);
+  --color-accent-mexico-light: var(--mexico-green-light);
+  --color-accent-canada: var(--canada-red);
+  --color-accent-canada-light: var(--canada-red-light);
+  --color-usa-blue: var(--usa-blue);
+  --color-mexico-green: var(--mexico-green);
+  --color-canada-red: var(--canada-red);
+  --font-display: var(--font-barlow);
   --font-sans: var(--font-noto);
 }
 
@@ -37,9 +54,66 @@ body {
   font-family: var(--font-noto), system-ui, sans-serif;
 }
 
-.grid-26-bg {
-  background-image: url("/patterns/grid-26.svg");
-  background-size: 120px 120px;
+.wc26-bg {
+  background-color: var(--background);
+  background-image:
+    url("/patterns/unify.svg"),
+    url("/patterns/amplify.svg");
+  background-size: 120px 120px, 240px 240px;
+}
+
+.amplify-edge {
+  background: linear-gradient(
+    90deg,
+    var(--canada-red) 0%,
+    var(--canada-red) 33.3%,
+    var(--mexico-green) 33.3%,
+    var(--mexico-green) 66.6%,
+    var(--usa-blue) 66.6%,
+    var(--usa-blue) 100%
+  );
+}
+
+.hero-glow {
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 20%, rgba(181, 152, 90, 0.12), transparent),
+    radial-gradient(ellipse 50% 40% at 10% 80%, rgba(0, 48, 135, 0.08), transparent),
+    radial-gradient(ellipse 40% 30% at 90% 90%, rgba(200, 16, 46, 0.06), transparent);
+}
+
+.wc26-panel {
+  border: 1px solid var(--card-border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%),
+    var(--card);
+}
+
+.wc26-btn-primary {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  color: #000;
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.wc26-btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.wc26-btn-secondary {
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+
+.wc26-btn-secondary:hover {
+  background: rgba(181, 152, 90, 0.12);
+  color: var(--cream);
 }
 
 @keyframes fade-up {
@@ -63,9 +137,19 @@ body {
 .stagger-4 { animation-delay: 0.2s; }
 .stagger-5 { animation-delay: 0.25s; }
 
+/* Keep Leaflet layers scoped below the site header (header is z-index 1100). */
+.map-shell {
+  isolation: isolate;
+}
+
+.map-shell .leaflet-container,
 .leaflet-container {
   font-family: var(--font-noto), system-ui, sans-serif;
-  background: #1a1a1a;
+  background: #0a0a0a;
+}
+
+.map-shell .leaflet-container {
+  z-index: 0;
 }
 
 .tbc-marker {
@@ -75,8 +159,27 @@ body {
   transform: rotate(-45deg);
   width: 24px;
   height: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-.tbc-marker-usa { background: var(--accent-usa); }
-.tbc-marker-mexico { background: var(--accent-mexico); }
-.tbc-marker-canada { background: var(--accent-canada); }
+.tbc-marker-usa { background: var(--usa-blue-light); }
+.tbc-marker-mexico { background: var(--mexico-green-light); }
+.tbc-marker-canada { background: var(--canada-red-light); }
+
+/* WC26-style form controls */
+.wc26-input {
+  border: 1px solid var(--card-border);
+  background: var(--background);
+  color: var(--cream);
+  font-family: var(--font-noto), sans-serif;
+}
+
+.wc26-input:focus {
+  border-color: var(--gold);
+  outline: none;
+  box-shadow: 0 0 0 1px var(--gold);
+}
+
+.group-badge {
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+}
