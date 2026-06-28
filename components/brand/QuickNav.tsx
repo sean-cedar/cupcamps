@@ -8,23 +8,29 @@ const items = [
     hint: "Every nation & TBC",
   },
   {
+    href: "/host-cities",
+    value: "16",
+    label: "Cities",
+    hint: "Host venues",
+  },
+  {
     href: "/map",
     value: "48",
     label: "Map",
     hint: "All training sites",
   },
   {
-    href: "/host-cities",
-    value: "16",
-    label: "Cities",
-    hint: "Host venues",
+    href: "/bracket",
+    value: "32",
+    label: "Bracket",
+    hint: "Knockout path",
   },
 ];
 
 export function QuickNav() {
   return (
     <nav
-      className="grid grid-cols-3 gap-2 sm:gap-3"
+      className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3"
       aria-label="Quick navigation"
     >
       {items.map((item) => (
