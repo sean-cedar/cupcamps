@@ -8,7 +8,7 @@ import {
   resolveMatch,
 } from "@/lib/schedule/bracket";
 import { matches, roundOf32Entry } from "@/lib/schedule/matches";
-import type { MatchRecord, MatchStage, TeamMatch } from "@/lib/schedule/types";
+import type { CityMatch, MatchRecord, MatchStage, TeamMatch } from "@/lib/schedule/types";
 import { getTeam } from "@/lib/teams";
 
 const matchByNumber = new Map(matches.map((m) => [m.matchNumber, m]));
@@ -179,4 +179,39 @@ export function formatScore(match: TeamMatch): string | null {
   const teamScore = match.isHome ? match.homeScore : match.awayScore;
   const oppScore = match.isHome ? match.awayScore : match.homeScore;
   return `${teamScore}–${oppScore}`;
+}
+
+export function formatFixtureScore(match: CityMatch): string | null {
+  if (match.homeScore === null || match.awayScore === null) {
+    return null;
+  }
+  return `${match.homeScore}–${match.awayScore}`;
+}
+
+export function getHostCitySchedule(hostCitySlug: string): CityMatch[] {
+  const outcomes = buildMatchOutcomes();
+
+  return matches
+    .filter((match) => match.hostCitySlug === hostCitySlug)
+    .sort(
+      (a, b) =>
+        a.date.localeCompare(b.date) || a.matchNumber - b.matchNumber,
+    )
+    .map((match) => {
+      const resolved = resolveMatch(match.matchNumber, outcomes);
+
+      return {
+        matchNumber: match.matchNumber,
+        stage: match.stage,
+        date: match.date,
+        matchday: match.matchday,
+        group: match.group,
+        homeSlug: resolved?.resolvedHomeSlug ?? match.homeSlug,
+        awaySlug: resolved?.resolvedAwaySlug ?? match.awaySlug,
+        homeScore: match.homeScore,
+        awayScore: match.awayScore,
+        stadium: match.stadium,
+        isPlayed: match.homeScore !== null && match.awayScore !== null,
+      };
+    });
 }

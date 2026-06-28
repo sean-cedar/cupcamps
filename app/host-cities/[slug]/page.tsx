@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { HostNationStripe } from "@/components/brand/HostNationStripe";
 import { SectionHeading } from "@/components/brand/SectionHeading";
+import { HostCitySchedule } from "@/components/host-cities/HostCitySchedule";
 import { TeamListItem } from "@/components/host-cities/HostCityCard";
 import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
 import { getHostCityStats } from "@/lib/host-cities";
@@ -135,6 +136,8 @@ export default async function HostCityDetailPage({ params }: PageProps) {
             </div>
           </section>
         )}
+
+        <HostCitySchedule city={city} />
       </div>
     </div>
   );

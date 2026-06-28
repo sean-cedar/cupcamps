@@ -34,6 +34,8 @@ const DEFAULT_BASE_URL = "https://soccer.highlightly.net";
 const FALLBACK_BASE_URL = "https://sports.highlightly.net";
 const RAPIDAPI_BASE_URL = "https://football-highlights-api.p.rapidapi.com";
 const RAPIDAPI_HOST = "football-highlights-api.p.rapidapi.com";
+/** World Cup 2026 league ID — https://highlightly.net/blogs/build-a-world-cup-2026-live-tracker */
+const DEFAULT_LEAGUE_ID = 1635;
 const LEAGUE_NAME_CANDIDATES = [
   "World Cup",
   "FIFA World Cup",
@@ -55,6 +57,27 @@ function useRapidApi(): boolean {
 function getLeagueCandidates(): string[] {
   const configured = process.env.HIGHLIGHTLY_LEAGUE_NAME?.trim();
   return configured ? [configured, ...LEAGUE_NAME_CANDIDATES] : LEAGUE_NAME_CANDIDATES;
+}
+
+export function getLeagueId(): number | undefined {
+  const configured = process.env.HIGHLIGHTLY_LEAGUE_ID?.trim();
+  if (configured?.toLowerCase() === "none") {
+    return undefined;
+  }
+  if (configured) {
+    const parsed = Number(configured);
+    if (Number.isFinite(parsed) && parsed > 0) {
+      return parsed;
+    }
+  }
+  return DEFAULT_LEAGUE_ID;
+}
+
+function getHighlightsPath(baseUrl: string): string {
+  if (baseUrl.includes("sports.highlightly.net")) {
+    return "/football/highlights";
+  }
+  return "/highlights";
 }
 
 function getTimezone(): string | undefined {
@@ -214,6 +237,7 @@ type HighlightQuery = {
   date: string;
   offset?: number;
   limit?: number;
+  leagueId?: number;
   leagueName?: string;
   homeTeamName?: string;
   awayTeamName?: string;
@@ -229,7 +253,7 @@ async function fetchHighlightlyPage(
   }
 
   const { headers } = getRequestConfig(baseUrl);
-  const path = useRapidApi() ? "/highlights" : "/football/highlights";
+  const path = useRapidApi() ? "/highlights" : getHighlightsPath(baseUrl);
   const params = new URLSearchParams({
     date: query.date,
     limit: String(query.limit ?? PAGE_LIMIT),
@@ -241,6 +265,9 @@ async function fetchHighlightlyPage(
     params.set("timezone", timezone);
   }
 
+  if (query.leagueId) {
+    params.set("leagueId", String(query.leagueId));
+  }
   if (query.leagueName) {
     params.set("leagueName", query.leagueName);
   }
@@ -318,13 +345,19 @@ function buildTeamQueryPlans(
   return plans;
 }
 
-/** One Highlightly request per date — all matches that day share this feed. */
+/** Shared World Cup date feed (leagueId 1635 by default). */
 export async function fetchWorldCupDateFeed(
   date: string,
 ): Promise<HighlightlyHighlight[]> {
-  const leagueCandidates = getLeagueCandidates();
+  const leagueId = getLeagueId();
+  if (leagueId) {
+    const byLeagueId = await fetchWithBaseUrls({ date, leagueId });
+    if (byLeagueId.length > 0) {
+      return byLeagueId;
+    }
+  }
 
-  for (const leagueName of leagueCandidates) {
+  for (const leagueName of getLeagueCandidates()) {
     const highlights = await fetchWithBaseUrls({ date, leagueName });
     if (highlights.length > 0) {
       return highlights;
@@ -340,16 +373,19 @@ export async function fetchHighlightsForMatch(
   homeName: string,
   awayName: string,
 ): Promise<HighlightVideo[]> {
+  const leagueId = getLeagueId();
+
   async function queryVideos(
     homeTeamName: string,
     awayTeamName: string,
-    leagueName?: string,
+    options?: { leagueName?: string; leagueId?: number },
   ): Promise<HighlightVideo[]> {
     const highlights = await fetchWithBaseUrls({
       date,
       homeTeamName,
       awayTeamName,
-      leagueName,
+      leagueId: options?.leagueId ?? leagueId,
+      leagueName: options?.leagueName,
       limit: MATCH_QUERY_LIMIT,
     });
 
@@ -372,13 +408,21 @@ export async function fetchHighlightsForMatch(
     return [];
   }
 
+  if (leagueId) {
+    const feed = await fetchWorldCupDateFeed(date);
+    const fromFeed = findVideosInDateFeed(feed, homeName, awayName);
+    if (fromFeed.length > 0) {
+      return fromFeed;
+    }
+  }
+
   let videos = await queryVideos(homeName, awayName);
   if (videos.length > 0) {
     return videos;
   }
 
   for (const leagueName of getLeagueCandidates()) {
-    videos = await queryVideos(homeName, awayName, leagueName);
+    videos = await queryVideos(homeName, awayName, { leagueName });
     if (videos.length > 0) {
       return videos;
     }

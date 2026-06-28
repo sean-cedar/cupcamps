@@ -2,6 +2,7 @@ import {
   fetchHighlightsForMatch,
   getFeedCacheSeconds,
   getHighlightlyTeamName,
+  getLeagueId,
   isHighlightlyConfigured,
 } from "@/lib/highlights/highlightly";
 import {
@@ -23,7 +24,7 @@ function getCachedMatchHighlights(
 ) {
   return unstable_cache(
     async () => fetchHighlightsForMatch(date, homeName, awayName),
-    ["highlightly-match", date, homeSlug, awaySlug],
+    ["highlightly-match", date, homeSlug, awaySlug, String(getLeagueId() ?? "none")],
     { revalidate: getFeedCacheSeconds() },
   )();
 }
@@ -113,7 +114,7 @@ export async function getMatchHighlights(
       fallbackUrl,
       cachedAt,
       message:
-        "No embeddable highlights found yet. Try FIFA.com, or confirm your Highlightly key matches the API mode (direct vs RapidAPI).",
+        "No embeddable highlights found for this match in Highlightly yet. Check FIFA.com, or verify your key is from highlightly.net (not RapidAPI) with league ID 1635.",
     };
   } catch {
     return {
