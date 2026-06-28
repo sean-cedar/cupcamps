@@ -324,7 +324,14 @@
     "photoUrl": "https://www.outlookindia.com/sports/football/norway-vs-senegal-fifa-world-cup-2026-group-i-nor-vs-sen-new-york-new-jersey-stadium-in-pics",
     "kits": {
       "norway": "away",
-      "senegal": "home"
+      "senegal": {
+        "variant": "home",
+        "shorts": {
+          "primary": "#FFFFFF",
+          "accent": "#00853F",
+          "pattern": "solid"
+        }
+      }
     }
   },
   "42": {
@@ -420,7 +427,14 @@
     "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=scotland%20vs%20brazil%20FIFA%20World%20Cup%202026%20match%20photos",
     "kits": {
       "scotland": "home",
-      "brazil": "home"
+      "brazil": {
+        "variant": "home",
+        "shorts": {
+          "primary": "#FFFFFF",
+          "accent": "#009C3B",
+          "pattern": "solid"
+        }
+      }
     }
   },
   "54": {
@@ -523,7 +537,14 @@
     "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
     "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=senegal%20vs%20iraq%20FIFA%20World%20Cup%202026%20match%20photos",
     "kits": {
-      "senegal": "home",
+      "senegal": {
+        "variant": "home",
+        "shorts": {
+          "primary": "#FFFFFF",
+          "accent": "#00853F",
+          "pattern": "solid"
+        }
+      },
       "iraq": "away"
     }
   },

@@ -139,11 +139,47 @@ function matchPhotoUrl(matchNumber, homeSlug, awaySlug) {
   return `https://www.fifa.com/fifaplus/en/search?q=${encodeURIComponent(label)}`;
 }
 
+/**
+ * Match-day outfit patches keyed by team slug.
+ * Use when FIFA assigns a variant but with different shorts/shirt pieces.
+ */
+const OUTFIT_PATCHES = {
+  "41": {
+    senegal: {
+      shorts: { primary: "#FFFFFF", accent: "#00853F", pattern: "solid" },
+    },
+  },
+  "53": {
+    brazil: {
+      shorts: { primary: "#FFFFFF", accent: "#009C3B", pattern: "solid" },
+    },
+  },
+  "66": {
+    senegal: {
+      shorts: { primary: "#FFFFFF", accent: "#00853F", pattern: "solid" },
+    },
+  },
+};
+
+function buildKitSpec(matchNumber, teamSlug, variant) {
+  const patch = OUTFIT_PATCHES[String(matchNumber)]?.[teamSlug];
+  if (!patch) {
+    return variant;
+  }
+
+  return {
+    variant,
+    ...patch,
+  };
+}
+
 function buildEntry(matchNumber, homeSlug, awaySlug) {
   const overrides = TEAM_KIT_OVERRIDES[String(matchNumber)] ?? {};
+  const homeVariant = overrides[homeSlug] ?? "home";
+  const awayVariant = overrides[awaySlug] ?? "away";
   const kits = {
-    [homeSlug]: overrides[homeSlug] ?? "home",
-    [awaySlug]: overrides[awaySlug] ?? "away",
+    [homeSlug]: buildKitSpec(matchNumber, homeSlug, homeVariant),
+    [awaySlug]: buildKitSpec(matchNumber, awaySlug, awayVariant),
   };
 
   return {

@@ -2,7 +2,11 @@ import Link from "next/link";
 import { TeamKit } from "@/components/ui/TeamKit";
 import { CountryFlag } from "@/components/ui/CountryFlag";
 import { getTeamKitSet } from "@/lib/kits";
-import { getMatchWornKits, getWornKitVariantId } from "@/lib/kits/match-kits";
+import {
+  getMatchWornKits,
+  getWornKitOutfit,
+  getWornKitVariantId,
+} from "@/lib/kits/match-kits";
 import type { MatchParticipantView } from "@/lib/schedule/match-page";
 
 type MatchParticipantPanelProps = {
@@ -17,14 +21,17 @@ export function MatchParticipantPanel({
   matchNumber,
 }: MatchParticipantPanelProps) {
   const wornKitEntry = getMatchWornKits(matchNumber);
-  const kitVariantId = participant.team
+  const wornOutfit = participant.team
+    ? getWornKitOutfit(matchNumber, participant.team.slug)
+    : null;
+  const variantId = participant.team
     ? getWornKitVariantId(matchNumber, participant.team.slug)
     : null;
-  const wornKit =
-    kitVariantId && participant.team
+  const wornKitLabel =
+    variantId && participant.team
       ? getTeamKitSet(participant.team.slug)?.variants.find(
-          (variant) => variant.id === kitVariantId,
-        )
+          (variant) => variant.id === variantId,
+        )?.label
       : null;
   const showPotential =
     participant.isPlaceholder &&
@@ -82,22 +89,22 @@ export function MatchParticipantPanel({
               </p>
             )}
 
-            {wornKit && participant.team && kitVariantId && (
+            {wornOutfit && participant.team && wornKitLabel && (
               <div
                 className={`mt-3 inline-flex flex-col gap-2 ${
                   side === "away" ? "items-end" : "items-start"
                 }`}
               >
-                <div className="rounded-md border border-card-border bg-background/80 px-2 py-2">
+                <div className="kit-gallery-cell !min-h-0 px-3 py-3">
                   <TeamKit
-                    outfit={{ shirt: wornKit.shirt, shorts: wornKit.shorts }}
+                    outfit={wornOutfit}
                     size="md"
-                    title={`${participant.team.name} ${wornKit.label.toLowerCase()} kit worn in this match`}
+                    title={`${participant.team.name} ${wornKitLabel.toLowerCase()} kit worn in this match`}
                     framed={false}
                   />
                 </div>
                 <p className="font-display text-[10px] font-bold uppercase tracking-[0.12em] text-muted">
-                  {wornKit.label} kit · Match {matchNumber}
+                  {wornKitLabel} kit · Match {matchNumber}
                 </p>
                 {wornKitEntry?.photoUrl && (
                   <a

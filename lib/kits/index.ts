@@ -23,8 +23,8 @@ export function getTeamKitVariants(teamSlug: string): KitVariant[] {
 }
 
 export { getKitPhotoUrl, getKitOverviewUrl } from "@/lib/kits/photo-url";
-export { getMatchWornKits, getWornKitVariantId } from "@/lib/kits/match-kits";
-export type { MatchWornKitsEntry } from "@/lib/kits/match-kits";
+export { getMatchWornKits, getWornKitOutfit, getWornKitVariantId } from "@/lib/kits/match-kits";
+export type { MatchWornKitSpec, MatchWornKitsEntry } from "@/lib/kits/match-kits";
 
 export type {
   KitOutfit,

@@ -418,6 +418,20 @@ body {
   border-radius: 0.65rem;
 }
 
+.kit-gallery-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  min-height: 9rem;
+  padding: 1.25rem 1rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--kit-frame-bg);
+  border: 1px solid var(--kit-frame-border);
+  box-shadow: var(--kit-frame-shadow);
+}
+
 .highlight-embed-shell {
   aspect-ratio: 16 / 9;
   background: #000;
