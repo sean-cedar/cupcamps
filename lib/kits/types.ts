@@ -11,7 +11,8 @@ export type KitPattern =
   | "tricolor-vertical"
   | "chest-stripe"
   | "central-stripe"
-  | "side-panels";
+  | "side-panels"
+  | "nordic-cross";
 
 export type ShortsPattern = "solid" | "vertical-stripes";
 
@@ -41,6 +42,8 @@ export type KitVariantId = "home" | "away" | "third";
 export type KitVariant = KitOutfit & {
   id: KitVariantId;
   label: string;
+  /** Link to an official WC26 kit photo or product gallery. */
+  photoUrl?: string;
 };
 
 export type TeamKitSet = {

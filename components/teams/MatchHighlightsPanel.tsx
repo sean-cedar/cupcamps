@@ -88,10 +88,21 @@ export function MatchHighlightsPanel({
                 <p className="mb-2 text-xs font-medium uppercase tracking-wider text-cream">
                   {video.title}
                 </p>
-                <div
-                  className="highlight-embed-shell overflow-hidden border border-card-border"
-                  dangerouslySetInnerHTML={{ __html: video.embedHtml }}
-                />
+                {video.embedHtml ? (
+                  <div
+                    className="highlight-embed-shell overflow-hidden border border-card-border"
+                    dangerouslySetInnerHTML={{ __html: video.embedHtml }}
+                  />
+                ) : video.watchUrl ? (
+                  <a
+                    href={video.watchUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded border border-card-border bg-card px-3 py-2 text-sm text-cream transition hover:border-gold/40 hover:text-gold-light"
+                  >
+                    Watch highlight →
+                  </a>
+                ) : null}
               </div>
             ))
           ) : (

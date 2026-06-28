@@ -114,7 +114,7 @@ export async function getMatchHighlights(
       fallbackUrl,
       cachedAt,
       message:
-        "No embeddable highlights found for this match in Highlightly yet. Check FIFA.com, or verify your key is from highlightly.net (not RapidAPI) with league ID 1635.",
+        "No highlights for this match in Highlightly yet. Clips often appear hours after the final whistle — try FIFA.com meanwhile.",
     };
   } catch {
     return {

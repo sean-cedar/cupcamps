@@ -1,7 +1,8 @@
 export type HighlightVideo = {
   id: string;
   title: string;
-  embedHtml: string;
+  embedHtml?: string;
+  watchUrl?: string;
   thumbnailUrl?: string;
 };
 

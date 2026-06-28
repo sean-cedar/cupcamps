@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { HostNationStripe } from "@/components/brand/HostNationStripe";
 import { SiteLogo } from "@/components/brand/SiteLogo";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const navLinks = [
   { href: "/teams", label: "Teams" },
+  { href: "/groups", label: "Groups" },
   { href: "/host-cities", label: "Cities" },
   { href: "/map", label: "Map" },
   { href: "/bracket", label: "Bracket" },
@@ -27,6 +29,7 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+          <ThemeToggle />
         </nav>
       </div>
     </header>

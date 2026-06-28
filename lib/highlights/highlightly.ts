@@ -18,14 +18,21 @@ export type HighlightlyHighlight = {
   source?: string;
   type?: string;
   match?: {
+    id?: number;
     homeTeam?: { id?: number; name?: string };
     awayTeam?: { id?: number; name?: string };
     league?: { id?: number; name?: string };
   };
 };
 
-type HighlightlyResponse = {
-  data?: HighlightlyHighlight[];
+type HighlightlyMatch = {
+  id?: number;
+  homeTeam?: { name?: string };
+  awayTeam?: { name?: string };
+};
+
+type HighlightlyResponse<T> = {
+  data?: T[];
   pagination?: { totalCount?: number };
   plan?: { tier?: string; message?: string };
 };
@@ -36,6 +43,7 @@ const RAPIDAPI_BASE_URL = "https://football-highlights-api.p.rapidapi.com";
 const RAPIDAPI_HOST = "football-highlights-api.p.rapidapi.com";
 /** World Cup 2026 league ID — https://highlightly.net/blogs/build-a-world-cup-2026-live-tracker */
 const DEFAULT_LEAGUE_ID = 1635;
+const DEFAULT_TIMEZONE = "America/New_York";
 const LEAGUE_NAME_CANDIDATES = [
   "World Cup",
   "FIFA World Cup",
@@ -80,8 +88,15 @@ function getHighlightsPath(baseUrl: string): string {
   return "/highlights";
 }
 
-function getTimezone(): string | undefined {
-  return process.env.HIGHLIGHTLY_TIMEZONE?.trim() || undefined;
+function getMatchesPath(baseUrl: string): string {
+  if (baseUrl.includes("sports.highlightly.net")) {
+    return "/football/matches";
+  }
+  return "/matches";
+}
+
+function getTimezone(): string {
+  return process.env.HIGHLIGHTLY_TIMEZONE?.trim() || DEFAULT_TIMEZONE;
 }
 
 export function getFeedCacheSeconds(): number {
@@ -137,26 +152,40 @@ export function getHighlightlyTeamName(teamSlug: string): string | null {
   return getTeam(teamSlug)?.name ?? null;
 }
 
+function buildEmbedOrLink(
+  highlight: HighlightlyHighlight,
+): Pick<HighlightVideo, "embedHtml" | "watchUrl"> | null {
+  const candidates = [highlight.embedUrl, highlight.url].filter(Boolean) as string[];
+
+  for (const candidate of candidates) {
+    const embedHtml = buildHighlightEmbed(candidate, highlight.title ?? "Highlight");
+    if (embedHtml) {
+      return { embedHtml };
+    }
+  }
+
+  if (highlight.url) {
+    return { watchUrl: highlight.url };
+  }
+
+  return null;
+}
+
 function highlightToVideo(highlight: HighlightlyHighlight): HighlightVideo | null {
-  if (highlight.embeddable === false || !highlight.title) {
+  if (!highlight.title) {
     return null;
   }
 
-  const rawEmbed = highlight.embedUrl ?? highlight.url;
-  if (!rawEmbed) {
-    return null;
-  }
-
-  const embedHtml = buildHighlightEmbed(rawEmbed, highlight.title);
-  if (!embedHtml) {
+  const presentation = buildEmbedOrLink(highlight);
+  if (!presentation) {
     return null;
   }
 
   return {
     id: String(highlight.id ?? highlight.url ?? highlight.title),
     title: highlight.title,
-    embedHtml,
     thumbnailUrl: highlight.imgUrl,
+    ...presentation,
   };
 }
 
@@ -234,47 +263,59 @@ export function isHighlightlyConfigured(): boolean {
 }
 
 type HighlightQuery = {
-  date: string;
+  date?: string;
   offset?: number;
   limit?: number;
   leagueId?: number;
   leagueName?: string;
   homeTeamName?: string;
   awayTeamName?: string;
+  matchId?: number;
 };
 
-async function fetchHighlightlyPage(
-  query: HighlightQuery,
+type MatchQuery = {
+  date: string;
+  offset?: number;
+  limit?: number;
+  leagueId?: number;
+  leagueName?: string;
+};
+
+async function fetchHighlightlyPage<T>(
+  path: string,
+  query: HighlightQuery | MatchQuery,
   baseUrl: string,
-): Promise<HighlightlyResponse> {
+): Promise<HighlightlyResponse<T>> {
   const apiKey = getApiKey();
   if (!apiKey) {
     return { data: [] };
   }
 
   const { headers } = getRequestConfig(baseUrl);
-  const path = useRapidApi() ? "/highlights" : getHighlightsPath(baseUrl);
   const params = new URLSearchParams({
-    date: query.date,
     limit: String(query.limit ?? PAGE_LIMIT),
     offset: String(query.offset ?? 0),
   });
 
-  const timezone = getTimezone();
-  if (timezone) {
-    params.set("timezone", timezone);
+  if ("date" in query && query.date) {
+    params.set("date", query.date);
   }
 
+  params.set("timezone", getTimezone());
+
+  if ("matchId" in query && query.matchId) {
+    params.set("matchId", String(query.matchId));
+  }
   if (query.leagueId) {
     params.set("leagueId", String(query.leagueId));
   }
-  if (query.leagueName) {
+  if ("leagueName" in query && query.leagueName) {
     params.set("leagueName", query.leagueName);
   }
-  if (query.homeTeamName) {
+  if ("homeTeamName" in query && query.homeTeamName) {
     params.set("homeTeamName", query.homeTeamName);
   }
-  if (query.awayTeamName) {
+  if ("awayTeamName" in query && query.awayTeamName) {
     params.set("awayTeamName", query.awayTeamName);
   }
 
@@ -284,35 +325,70 @@ async function fetchHighlightlyPage(
   });
 
   if (!response.ok) {
-    throw new Error(`Highlightly feed failed (${response.status})`);
+    throw new Error(`Highlightly request failed (${response.status})`);
   }
 
-  return (await response.json()) as HighlightlyResponse;
+  return (await response.json()) as HighlightlyResponse<T>;
 }
 
-async function fetchAllPages(
+async function fetchAllHighlightPages(
   query: Omit<HighlightQuery, "offset">,
   baseUrl: string,
 ): Promise<HighlightlyHighlight[]> {
-  const firstPage = await fetchHighlightlyPage(query, baseUrl);
+  const path = useRapidApi() ? "/highlights" : getHighlightsPath(baseUrl);
+  const firstPage = await fetchHighlightlyPage<HighlightlyHighlight>(
+    path,
+    query,
+    baseUrl,
+  );
   const highlights = [...(firstPage.data ?? [])];
   const totalCount = firstPage.pagination?.totalCount ?? highlights.length;
   const limit = query.limit ?? PAGE_LIMIT;
 
   for (let offset = limit; offset < totalCount; offset += limit) {
-    const page = await fetchHighlightlyPage({ ...query, offset }, baseUrl);
+    const page = await fetchHighlightlyPage<HighlightlyHighlight>(
+      path,
+      { ...query, offset },
+      baseUrl,
+    );
     highlights.push(...(page.data ?? []));
   }
 
   return highlights;
 }
 
-async function fetchWithBaseUrls(
+async function fetchAllMatchPages(
+  query: Omit<MatchQuery, "offset">,
+  baseUrl: string,
+): Promise<HighlightlyMatch[]> {
+  const path = useRapidApi() ? "/matches" : getMatchesPath(baseUrl);
+  const firstPage = await fetchHighlightlyPage<HighlightlyMatch>(
+    path,
+    query,
+    baseUrl,
+  );
+  const matches = [...(firstPage.data ?? [])];
+  const totalCount = firstPage.pagination?.totalCount ?? matches.length;
+  const limit = query.limit ?? PAGE_LIMIT;
+
+  for (let offset = limit; offset < totalCount; offset += limit) {
+    const page = await fetchHighlightlyPage<HighlightlyMatch>(
+      path,
+      { ...query, offset },
+      baseUrl,
+    );
+    matches.push(...(page.data ?? []));
+  }
+
+  return matches;
+}
+
+async function fetchHighlightsWithBaseUrls(
   query: Omit<HighlightQuery, "offset">,
 ): Promise<HighlightlyHighlight[]> {
   for (const baseUrl of getBaseUrls()) {
     try {
-      const highlights = await fetchAllPages(query, baseUrl);
+      const highlights = await fetchAllHighlightPages(query, baseUrl);
       if (highlights.length > 0) {
         return highlights;
       }
@@ -322,6 +398,72 @@ async function fetchWithBaseUrls(
   }
 
   return [];
+}
+
+async function fetchMatchesWithBaseUrls(
+  query: Omit<MatchQuery, "offset">,
+): Promise<HighlightlyMatch[]> {
+  for (const baseUrl of getBaseUrls()) {
+    try {
+      const matches = await fetchAllMatchPages(query, baseUrl);
+      if (matches.length > 0) {
+        return matches;
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return [];
+}
+
+function findHighlightlyMatchId(
+  matches: HighlightlyMatch[],
+  homeName: string,
+  awayName: string,
+): number | undefined {
+  for (const match of matches) {
+    if (
+      teamsMatchByName(
+        match.homeTeam?.name,
+        match.awayTeam?.name,
+        homeName,
+        awayName,
+      ) &&
+      match.id
+    ) {
+      return match.id;
+    }
+  }
+
+  return undefined;
+}
+
+async function fetchHighlightsByMatchId(
+  matchId: number,
+  leagueId?: number,
+): Promise<HighlightVideo[]> {
+  const highlights = await fetchHighlightsWithBaseUrls({
+    matchId,
+    leagueId,
+    limit: MATCH_QUERY_LIMIT,
+  });
+
+  return highlightsToVideos(highlights);
+}
+
+async function resolveHighlightlyMatchId(
+  date: string,
+  homeName: string,
+  awayName: string,
+  leagueId?: number,
+): Promise<number | undefined> {
+  if (!leagueId) {
+    return undefined;
+  }
+
+  const matches = await fetchMatchesWithBaseUrls({ date, leagueId });
+  return findHighlightlyMatchId(matches, homeName, awayName);
 }
 
 function buildTeamQueryPlans(
@@ -351,23 +493,23 @@ export async function fetchWorldCupDateFeed(
 ): Promise<HighlightlyHighlight[]> {
   const leagueId = getLeagueId();
   if (leagueId) {
-    const byLeagueId = await fetchWithBaseUrls({ date, leagueId });
+    const byLeagueId = await fetchHighlightsWithBaseUrls({ date, leagueId });
     if (byLeagueId.length > 0) {
       return byLeagueId;
     }
   }
 
   for (const leagueName of getLeagueCandidates()) {
-    const highlights = await fetchWithBaseUrls({ date, leagueName });
+    const highlights = await fetchHighlightsWithBaseUrls({ date, leagueName });
     if (highlights.length > 0) {
       return highlights;
     }
   }
 
-  return fetchWithBaseUrls({ date });
+  return fetchHighlightsWithBaseUrls({ date });
 }
 
-/** Targeted lookup for a single fixture, with shared date-feed fallback. */
+/** Targeted lookup for a single fixture, with matchId + date-feed fallbacks. */
 export async function fetchHighlightsForMatch(
   date: string,
   homeName: string,
@@ -375,12 +517,27 @@ export async function fetchHighlightsForMatch(
 ): Promise<HighlightVideo[]> {
   const leagueId = getLeagueId();
 
+  if (leagueId) {
+    const matchId = await resolveHighlightlyMatchId(
+      date,
+      homeName,
+      awayName,
+      leagueId,
+    );
+    if (matchId) {
+      const byMatchId = await fetchHighlightsByMatchId(matchId, leagueId);
+      if (byMatchId.length > 0) {
+        return byMatchId;
+      }
+    }
+  }
+
   async function queryVideos(
     homeTeamName: string,
     awayTeamName: string,
     options?: { leagueName?: string; leagueId?: number },
   ): Promise<HighlightVideo[]> {
-    const highlights = await fetchWithBaseUrls({
+    const highlights = await fetchHighlightsWithBaseUrls({
       date,
       homeTeamName,
       awayTeamName,

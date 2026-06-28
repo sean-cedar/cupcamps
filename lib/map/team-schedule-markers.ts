@@ -4,13 +4,16 @@ import {
   getOpponentDisplay,
   getTeamSchedule,
 } from "@/lib/schedule";
-import type { MatchStage } from "@/lib/schedule/types";
+import type { MatchStage, TeamMatch } from "@/lib/schedule/types";
 import { getHostCity } from "@/lib/teams";
 import type { Coordinates } from "@/lib/types";
+
+export type TeamScheduleMapMarkerStatus = "completed" | "scheduled" | "potential";
 
 export type TeamScheduleMapMarker = {
   sequence: number;
   matchNumber: number;
+  status: TeamScheduleMapMarkerStatus;
   hostCitySlug: string;
   hostCityName: string;
   coordinates: Coordinates;
@@ -21,6 +24,37 @@ export type TeamScheduleMapMarker = {
   score: string | null;
   isHome: boolean;
 };
+
+function isPlaceholderSlug(slug: string): boolean {
+  return slug.startsWith("winner:") || slug.startsWith("loser:");
+}
+
+export function getTeamScheduleMapMarkerStatus(
+  match: TeamMatch,
+): TeamScheduleMapMarkerStatus {
+  if (match.isPlayed) {
+    return "completed";
+  }
+
+  if (isPlaceholderSlug(match.opponentSlug)) {
+    return "potential";
+  }
+
+  return "scheduled";
+}
+
+export function getTeamScheduleMapMarkerStatusLabel(
+  status: TeamScheduleMapMarkerStatus,
+): string {
+  switch (status) {
+    case "completed":
+      return "Completed";
+    case "scheduled":
+      return "Scheduled";
+    case "potential":
+      return "Potential";
+  }
+}
 
 /** Small offset when a team plays multiple matches in the same host city. */
 function duplicateCityOffset(index: number): Coordinates {
@@ -58,6 +92,7 @@ export function getTeamScheduleMapMarkers(
       {
         sequence: index + 1,
         matchNumber: match.matchNumber,
+        status: getTeamScheduleMapMarkerStatus(match),
         hostCitySlug: match.hostCitySlug,
         hostCityName: hostCity.name,
         coordinates: {

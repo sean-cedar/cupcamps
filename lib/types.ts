@@ -16,6 +16,7 @@ export type Team = {
   tbc: {
     country: TbcCountry;
     city: string;
+    region: string;
     trainingSite: string;
     isHostCityCommunity: boolean;
     coordinates: Coordinates;

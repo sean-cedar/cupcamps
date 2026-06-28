@@ -2,12 +2,17 @@
 
 import Link from "next/link";
 import L from "leaflet";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, Marker, Popup, useMap } from "react-leaflet";
 import { useEffect, useMemo } from "react";
 import "leaflet/dist/leaflet.css";
+import { MapThemeTileLayer } from "@/components/map/MapThemeTileLayer";
 import type { TeamScheduleMapMarker } from "@/lib/map/team-schedule-markers";
-import { formatMapMarkerDate } from "@/lib/map/team-schedule-markers";
+import {
+  formatMapMarkerDate,
+  getTeamScheduleMapMarkerStatusLabel,
+} from "@/lib/map/team-schedule-markers";
 import { getStageLabel } from "@/lib/schedule";
+import { formatTeamTbcLocation } from "@/lib/teams";
 import type { Team } from "@/lib/types";
 
 type TbcMapProps = {
@@ -37,10 +42,13 @@ function createFlagIcon(countryCode: string, dimmed = false) {
   });
 }
 
-function createMatchNumberIcon(sequence: number) {
+function createMatchNumberIcon(
+  sequence: number,
+  status: TeamScheduleMapMarker["status"],
+) {
   return L.divIcon({
     className: "tbc-match-icon",
-    html: `<div class="tbc-match-marker"><span>${sequence}</span></div>`,
+    html: `<div class="tbc-match-marker tbc-match-marker--${status}"><span>${sequence}</span></div>`,
     iconSize: [28, 28],
     iconAnchor: [14, 14],
     popupAnchor: [0, -14],
@@ -113,10 +121,7 @@ export function TbcMap({
       scrollWheelZoom={true}
       aria-label={mapLabel}
     >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+      <MapThemeTileLayer />
 
       {shouldFitBounds && <FitMapBounds points={fitPoints} maxZoom={zoom} />}
 
@@ -134,18 +139,18 @@ export function TbcMap({
           >
             <Popup>
               <div className="min-w-[180px] text-sm">
-                <p className="flex items-center gap-2 font-bold text-gray-900">
+                <p className="map-popup-text flex items-center gap-2 font-bold">
                   <span className={`fi fi-${team.countryCode}`} />
                   {team.name}
                 </p>
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-500">
+                <p className="map-popup-muted text-[10px] font-semibold uppercase tracking-wider">
                   Base camp
                 </p>
-                <p className="text-gray-600">{team.tbc.city}</p>
-                <p className="text-xs text-gray-500">{team.tbc.trainingSite}</p>
+                <p className="map-popup-muted">{formatTeamTbcLocation(team)}</p>
+                <p className="map-popup-muted text-xs">{team.tbc.trainingSite}</p>
                 <Link
                   href={`/teams/${team.slug}`}
-                  className="mt-2 inline-block text-xs font-medium text-blue-600 hover:underline"
+                  className="map-popup-link mt-2 inline-block text-xs font-medium hover:underline"
                 >
                   View team →
                 </Link>
@@ -159,33 +164,41 @@ export function TbcMap({
         <Marker
           key={`${marker.matchNumber}-${marker.sequence}`}
           position={[marker.coordinates.lat, marker.coordinates.lng]}
-          icon={createMatchNumberIcon(marker.sequence)}
+          icon={createMatchNumberIcon(marker.sequence, marker.status)}
           zIndexOffset={500}
         >
           <Popup>
             <div className="min-w-[180px] text-sm">
-              <p className="font-display text-xs font-bold uppercase tracking-wider text-gray-500">
-                Game {marker.sequence} · Match {marker.matchNumber}
+              <p className="map-popup-muted font-display text-xs font-bold uppercase tracking-wider">
+                Game {marker.sequence} · Match {marker.matchNumber} ·{" "}
+                {getTeamScheduleMapMarkerStatusLabel(marker.status)}
               </p>
-              <p className="mt-1 font-bold text-gray-900">
-                {marker.isHome ? "vs" : "at"} {marker.opponentLabel}
+              <p className="map-popup-text mt-1 font-bold">
+                {marker.status === "potential" ? "Path: " : marker.isHome ? "vs" : "at"}{" "}
+                {marker.opponentLabel}
               </p>
               {marker.score && (
-                <p className="mt-0.5 font-display text-lg font-black text-gray-900">
+                <p className="map-popup-text mt-0.5 font-display text-lg font-black">
                   {marker.score}
                 </p>
               )}
-              <p className="mt-1 text-gray-600">{marker.hostCityName}</p>
-              <p className="text-xs text-gray-500">{marker.stadium}</p>
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="map-popup-muted mt-1">{marker.hostCityName}</p>
+              <p className="map-popup-muted text-xs">{marker.stadium}</p>
+              <p className="map-popup-muted mt-1 text-xs">
                 {formatMapMarkerDate(marker.date)}
               </p>
-              <p className="text-[10px] uppercase tracking-wider text-gray-400">
+              <p className="map-popup-muted text-[10px] uppercase tracking-wider">
                 {getStageLabel(marker.stage)}
               </p>
               <Link
+                href={`/matches/${marker.matchNumber}`}
+                className="map-popup-link mt-2 inline-block text-xs font-medium hover:underline"
+              >
+                View match →
+              </Link>
+              <Link
                 href={`/host-cities/${marker.hostCitySlug}`}
-                className="mt-2 inline-block text-xs font-medium text-blue-600 hover:underline"
+                className="map-popup-link mt-1 inline-block text-xs font-medium hover:underline"
               >
                 View host city →
               </Link>

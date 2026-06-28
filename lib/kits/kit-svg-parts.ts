@@ -31,6 +31,7 @@ export function kitBodyFill(shirt: KitShirt, patternId: string): string {
   if (
     shirt.pattern === "solid" ||
     shirt.pattern === "cross" ||
+    shirt.pattern === "nordic-cross" ||
     shirt.pattern === "shoulder-yoke" ||
     shirt.pattern === "central-band" ||
     shirt.pattern === "split-diagonal" ||
@@ -78,6 +79,17 @@ export function kitOverlayElements(shirt: KitShirt): Array<{
       return [
         { type: "rect", props: { x: 13.5, y: 12, width: 5, height: 18, fill: secondary } },
         { type: "rect", props: { x: 10, y: 18, width: 12, height: 5, fill: secondary } },
+      ];
+    case "nordic-cross":
+      return [
+        { type: "rect", props: { x: 13.5, y: 9, width: 5, height: 24, fill: secondary } },
+        { type: "rect", props: { x: 8, y: 18, width: 16, height: 5, fill: secondary } },
+        ...(shirt.accent
+          ? [
+              { type: "rect" as const, props: { x: 14.75, y: 9, width: 2.5, height: 24, fill: accent } },
+              { type: "rect" as const, props: { x: 8, y: 19.25, width: 16, height: 2.5, fill: accent } },
+            ]
+          : []),
       ];
     case "chest-stripe":
       return [

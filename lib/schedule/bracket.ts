@@ -133,7 +133,7 @@ function compareStandings(a: GroupStanding, b: GroupStanding): number {
   );
 }
 
-function computeGroupStandings(group: string): GroupStanding[] {
+export function getGroupStandings(group: string): GroupStanding[] {
   const groupTeams = teamsByGroup.get(group) ?? [];
   const standings = new Map<string, GroupStanding>(
     groupTeams.map((slug) => [
@@ -186,7 +186,7 @@ function getThirdPlaceCandidates(): GroupStanding[] {
   const candidates: GroupStanding[] = [];
 
   for (const group of groups) {
-    const standings = computeGroupStandings(group);
+    const standings = getGroupStandings(group);
     const third = standings[2];
     if (third && third.played === 3) {
       candidates.push(third);
@@ -194,6 +194,22 @@ function getThirdPlaceCandidates(): GroupStanding[] {
   }
 
   return candidates.sort(compareStandings);
+}
+
+export function getAdvancingThirdPlaceSlugs(): Set<string> | null {
+  if (!isGroupStageComplete()) {
+    return null;
+  }
+
+  return new Set(getThirdPlaceCandidates().slice(0, 8).map((team) => team.slug));
+}
+
+export function isGroupComplete(group: string): boolean {
+  return matches
+    .filter((match) => match.group === group)
+    .every(
+      (match) => match.homeScore !== null && match.awayScore !== null,
+    );
 }
 
 export function getQualifiedTeams(): Set<string> | null {
@@ -204,7 +220,7 @@ export function getQualifiedTeams(): Set<string> | null {
   const qualified = new Set<string>();
 
   for (const group of teamsByGroup.keys()) {
-    const standings = computeGroupStandings(group);
+    const standings = getGroupStandings(group);
     qualified.add(standings[0].slug);
     qualified.add(standings[1].slug);
   }

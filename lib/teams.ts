@@ -20,6 +20,18 @@ export function getTeam(slug: string): Team | undefined {
   return teams.find((team) => team.slug === slug);
 }
 
+/** e.g. "Kansas City, Kansas, USA" or "Vancouver, British Columbia, Canada" */
+export function formatTeamTbcLocation(
+  team: Team,
+  options?: { includeCountry?: boolean },
+): string {
+  const base = `${team.tbc.city}, ${team.tbc.region}`;
+  if (options?.includeCountry === false) {
+    return base;
+  }
+  return `${base}, ${team.tbc.country}`;
+}
+
 export function getTeamsByGroup(group: string): Team[] {
   return teams.filter((team) => team.group === group);
 }
@@ -51,6 +63,7 @@ export function filterTeams(filters: TeamFilters): Team[] {
       (team) =>
         team.name.toLowerCase().includes(query) ||
         team.tbc.city.toLowerCase().includes(query) ||
+        team.tbc.region.toLowerCase().includes(query) ||
         team.tbc.trainingSite.toLowerCase().includes(query),
     );
   }
@@ -75,7 +88,11 @@ export function filterTeams(filters: TeamFilters): Team[] {
       return a.group.localeCompare(b.group) || a.name.localeCompare(b.name);
     }
     if (sort === "tbcCity") {
-      return a.tbc.city.localeCompare(b.tbc.city) || a.name.localeCompare(b.name);
+      return (
+        a.tbc.region.localeCompare(b.tbc.region) ||
+        a.tbc.city.localeCompare(b.tbc.city) ||
+        a.name.localeCompare(b.name)
+      );
     }
     return a.name.localeCompare(b.name);
   });

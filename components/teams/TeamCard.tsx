@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CountryFlag } from "@/components/ui/CountryFlag";
 import { GroupBadge } from "@/components/ui/GroupBadge";
-import { getHostCity } from "@/lib/teams";
+import { formatTeamTbcLocation, getHostCity } from "@/lib/teams";
 import type { Team } from "@/lib/types";
 
 type TeamCardProps = {
@@ -41,7 +41,7 @@ export function TeamCard({ team }: TeamCardProps) {
           <span className="font-display text-xs font-semibold uppercase tracking-widest text-muted">
             TBC ·{" "}
           </span>
-          {team.tbc.city}
+          {formatTeamTbcLocation(team, { includeCountry: false })}
         </p>
         <p className="truncate text-sm text-muted">{team.tbc.trainingSite}</p>
         <div className="flex flex-wrap items-center gap-2 pt-1">

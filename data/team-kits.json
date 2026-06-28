@@ -29,7 +29,8 @@
         },
         "shorts": {
           "primary": "#111111",
-          "accent": "#006233"
+          "accent": "#006233",
+          "pattern": "solid"
         }
       }
     ]
@@ -57,13 +58,15 @@
         "label": "Away",
         "shirt": {
           "pattern": "solid",
-          "primary": "#1B2A7C",
+          "primary": "#000000",
+          "accent": "#43B0F1",
           "collar": "#FFFFFF",
-          "sleeves": "#1B2A7C"
+          "sleeves": "#000000"
         },
         "shorts": {
-          "primary": "#1B2A7C",
-          "accent": "#FFFFFF"
+          "primary": "#000000",
+          "accent": "#43B0F1",
+          "pattern": "solid"
         }
       }
     ]
@@ -90,14 +93,16 @@
         "id": "away",
         "label": "Away",
         "shirt": {
-          "pattern": "solid",
-          "primary": "#00843D",
-          "accent": "#FFCD00",
-          "collar": "#FFCD00"
+          "pattern": "split-diagonal",
+          "primary": "#FF6B5A",
+          "secondary": "#00857A",
+          "accent": "#FFFFFF",
+          "collar": "#00857A"
         },
         "shorts": {
-          "primary": "#00843D",
-          "accent": "#FFCD00"
+          "primary": "#00857A",
+          "accent": "#FF6B5A",
+          "pattern": "solid"
         }
       }
     ]
@@ -130,7 +135,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#ED1C24"
+          "accent": "#ED1C24",
+          "pattern": "solid"
         }
       }
     ]
@@ -165,7 +171,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#EF3340"
+          "accent": "#EF3340",
+          "pattern": "solid"
         }
       }
     ]
@@ -199,7 +206,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#002395"
+          "accent": "#002395",
+          "pattern": "solid"
         }
       }
     ]
@@ -234,7 +242,8 @@
         },
         "shorts": {
           "primary": "#041E42",
-          "accent": "#009C3B"
+          "accent": "#009C3B",
+          "pattern": "solid"
         }
       }
     ]
@@ -268,7 +277,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#003893"
+          "accent": "#003893",
+          "pattern": "solid"
         }
       }
     ]
@@ -302,7 +312,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#FF0000"
+          "accent": "#FF0000",
+          "pattern": "solid"
         }
       }
     ]
@@ -336,7 +347,8 @@
         },
         "shorts": {
           "primary": "#111111",
-          "accent": "#CE1126"
+          "accent": "#CE1126",
+          "pattern": "solid"
         }
       }
     ]
@@ -370,7 +382,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#C8102E"
+          "accent": "#C8102E",
+          "pattern": "solid"
         }
       }
     ]
@@ -404,7 +417,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#FF8200"
+          "accent": "#FF8200",
+          "pattern": "solid"
         }
       }
     ]
@@ -415,13 +429,15 @@
         "id": "home",
         "label": "Home",
         "shirt": {
-          "pattern": "checker",
-          "primary": "#FF0000",
-          "secondary": "#FFFFFF"
+          "pattern": "side-panels",
+          "primary": "#FFFFFF",
+          "secondary": "#E4002B",
+          "accent": "#0047AB",
+          "collar": "#0047AB"
         },
         "shorts": {
-          "primary": "#111111",
-          "accent": "#FF0000",
+          "primary": "#FFFFFF",
+          "accent": "#E4002B",
           "pattern": "solid"
         }
       },
@@ -429,14 +445,16 @@
         "id": "away",
         "label": "Away",
         "shirt": {
-          "pattern": "solid",
+          "pattern": "checker",
           "primary": "#001A57",
+          "secondary": "#003087",
           "accent": "#FF0000",
           "collar": "#FF0000"
         },
         "shorts": {
           "primary": "#001A57",
-          "accent": "#FF0000"
+          "accent": "#FF0000",
+          "pattern": "solid"
         }
       }
     ]
@@ -470,7 +488,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#002B7F"
+          "accent": "#002B7F",
+          "pattern": "solid"
         }
       }
     ]
@@ -504,7 +523,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#D7141A"
+          "accent": "#D7141A",
+          "pattern": "solid"
         }
       }
     ]
@@ -538,7 +558,8 @@
         },
         "shorts": {
           "primary": "#111111",
-          "accent": "#ED1C24"
+          "accent": "#ED1C24",
+          "pattern": "solid"
         }
       }
     ]
@@ -549,15 +570,16 @@
         "id": "home",
         "label": "Home",
         "shirt": {
-          "pattern": "solid",
+          "pattern": "side-panels",
           "primary": "#FFFFFF",
-          "accent": "#132257",
-          "collar": "#132257",
-          "sleeves": "#132257"
+          "secondary": "#E31837",
+          "accent": "#041E42",
+          "collar": "#041E42",
+          "sleeves": "#041E42"
         },
         "shorts": {
-          "primary": "#132257",
-          "accent": "#FFFFFF",
+          "primary": "#FFFFFF",
+          "accent": "#041E42",
           "pattern": "solid"
         }
       },
@@ -565,15 +587,17 @@
         "id": "away",
         "label": "Away",
         "shirt": {
-          "pattern": "solid",
-          "primary": "#132257",
+          "pattern": "side-panels",
+          "primary": "#E31837",
+          "secondary": "#041E42",
           "accent": "#FFFFFF",
           "collar": "#FFFFFF",
-          "sleeves": "#132257"
+          "sleeves": "#E31837"
         },
         "shorts": {
-          "primary": "#FFFFFF",
-          "accent": "#132257"
+          "primary": "#041E42",
+          "accent": "#FFFFFF",
+          "pattern": "solid"
         }
       }
     ]
@@ -607,7 +631,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#C8102E"
+          "accent": "#C8102E",
+          "pattern": "solid"
         }
       }
     ]
@@ -619,13 +644,14 @@
         "label": "Home",
         "shirt": {
           "pattern": "solid",
-          "primary": "#1B2A59",
-          "accent": "#FFFFFF",
-          "collar": "#FFFFFF"
+          "primary": "#0077C8",
+          "accent": "#B87333",
+          "collar": "#FFFFFF",
+          "sleeves": "#0077C8"
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#1B2A59",
+          "accent": "#0077C8",
           "pattern": "solid"
         }
       },
@@ -634,14 +660,15 @@
         "label": "Away",
         "shirt": {
           "pattern": "solid",
-          "primary": "#FFFFFF",
-          "accent": "#1B2A59",
-          "collar": "#1B2A59",
-          "sleeves": "#FFFFFF"
+          "primary": "#98D4C2",
+          "accent": "#B87333",
+          "collar": "#FFFFFF",
+          "sleeves": "#98D4C2"
         },
         "shorts": {
-          "primary": "#FFFFFF",
-          "accent": "#1B2A59"
+          "primary": "#98D4C2",
+          "accent": "#B87333",
+          "pattern": "solid"
         }
       }
     ]
@@ -654,8 +681,8 @@
         "shirt": {
           "pattern": "chest-stripe",
           "primary": "#FFFFFF",
-          "accent": "#000000",
           "secondary": "#DD0000",
+          "accent": "#000000",
           "collar": "#000000",
           "sleeves": "#FFFFFF"
         },
@@ -677,7 +704,8 @@
         },
         "shorts": {
           "primary": "#000000",
-          "accent": "#DD0000"
+          "accent": "#DD0000",
+          "pattern": "solid"
         }
       }
     ]
@@ -691,11 +719,12 @@
           "pattern": "central-band",
           "primary": "#FFFFFF",
           "secondary": "#000000",
-          "accent": "#CE1126"
+          "accent": "#CE1126",
+          "collar": "#000000"
         },
         "shorts": {
-          "primary": "#CE1126",
-          "accent": "#FFFFFF",
+          "primary": "#FFFFFF",
+          "accent": "#000000",
           "pattern": "solid"
         }
       },
@@ -704,14 +733,15 @@
         "label": "Away",
         "shirt": {
           "pattern": "solid",
-          "primary": "#111111",
+          "primary": "#FFD100",
           "accent": "#CE1126",
           "collar": "#CE1126",
-          "sleeves": "#111111"
+          "sleeves": "#006B3F"
         },
         "shorts": {
-          "primary": "#111111",
-          "accent": "#CE1126"
+          "primary": "#FFD100",
+          "accent": "#CE1126",
+          "pattern": "solid"
         }
       }
     ]
@@ -744,7 +774,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#00209F"
+          "accent": "#00209F",
+          "pattern": "solid"
         }
       }
     ]
@@ -778,7 +809,8 @@
         },
         "shorts": {
           "primary": "#111111",
-          "accent": "#239F40"
+          "accent": "#239F40",
+          "pattern": "solid"
         }
       }
     ]
@@ -813,7 +845,8 @@
         },
         "shorts": {
           "primary": "#111111",
-          "accent": "#007A3D"
+          "accent": "#007A3D",
+          "pattern": "solid"
         }
       }
     ]
@@ -824,14 +857,15 @@
         "id": "home",
         "label": "Home",
         "shirt": {
-          "pattern": "central-stripe",
-          "primary": "#0C1F77",
-          "accent": "#BC002D",
-          "collar": "#BC002D"
+          "pattern": "solid",
+          "primary": "#1B4F72",
+          "accent": "#5B7FA5",
+          "collar": "#BC002D",
+          "sleeves": "#1B4F72"
         },
         "shorts": {
-          "primary": "#BC002D",
-          "accent": "#0C1F77",
+          "primary": "#1B4F72",
+          "accent": "#BC002D",
           "pattern": "solid"
         }
       },
@@ -839,15 +873,16 @@
         "id": "away",
         "label": "Away",
         "shirt": {
-          "pattern": "solid",
-          "primary": "#FFFFFF",
+          "pattern": "central-stripe",
+          "primary": "#F4F1EA",
           "accent": "#BC002D",
-          "collar": "#BC002D",
-          "sleeves": "#FFFFFF"
+          "collar": "#000000",
+          "sleeves": "#F4F1EA"
         },
         "shorts": {
-          "primary": "#FFFFFF",
-          "accent": "#0C1F77"
+          "primary": "#000000",
+          "accent": "#F4F1EA",
+          "pattern": "solid"
         }
       }
     ]
@@ -881,7 +916,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#CE1126"
+          "accent": "#CE1126",
+          "pattern": "solid"
         }
       }
     ]
@@ -894,11 +930,13 @@
         "shirt": {
           "pattern": "side-panels",
           "primary": "#C8102E",
-          "secondary": "#003478",
-          "collar": "#003478"
+          "secondary": "#000000",
+          "accent": "#C5A572",
+          "collar": "#000000",
+          "sleeves": "#000000"
         },
         "shorts": {
-          "primary": "#003478",
+          "primary": "#000000",
           "accent": "#C8102E",
           "pattern": "solid"
         }
@@ -908,14 +946,15 @@
         "label": "Away",
         "shirt": {
           "pattern": "solid",
-          "primary": "#FFFFFF",
-          "accent": "#C8102E",
-          "collar": "#C8102E",
-          "sleeves": "#FFFFFF"
+          "primary": "#B8A9D4",
+          "accent": "#003478",
+          "collar": "#003478",
+          "sleeves": "#B8A9D4"
         },
         "shorts": {
-          "primary": "#FFFFFF",
-          "accent": "#C8102E"
+          "primary": "#003478",
+          "accent": "#B8A9D4",
+          "pattern": "solid"
         }
       }
     ]
@@ -929,11 +968,12 @@
           "pattern": "solid",
           "primary": "#006847",
           "accent": "#CE1126",
-          "collar": "#FFFFFF"
+          "collar": "#FFFFFF",
+          "sleeves": "#006847"
         },
         "shorts": {
-          "primary": "#CE1126",
-          "accent": "#006847",
+          "primary": "#FFFFFF",
+          "accent": "#CE1126",
           "pattern": "solid"
         }
       },
@@ -949,7 +989,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#006847"
+          "accent": "#006847",
+          "pattern": "solid"
         }
       }
     ]
@@ -983,7 +1024,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#C1272D"
+          "accent": "#C1272D",
+          "pattern": "solid"
         }
       }
     ]
@@ -994,14 +1036,14 @@
         "id": "home",
         "label": "Home",
         "shirt": {
-          "pattern": "shoulder-yoke",
+          "pattern": "solid",
           "primary": "#FF6600",
-          "accent": "#21468B",
-          "collar": "#21468B",
+          "accent": "#000000",
+          "collar": "#000000",
           "sleeves": "#FF6600"
         },
         "shorts": {
-          "primary": "#21468B",
+          "primary": "#000000",
           "accent": "#FF6600",
           "pattern": "solid"
         }
@@ -1010,15 +1052,16 @@
         "id": "away",
         "label": "Away",
         "shirt": {
-          "pattern": "solid",
-          "primary": "#21468B",
+          "pattern": "chest-stripe",
+          "primary": "#FFFFFF",
           "accent": "#FF6600",
           "collar": "#FF6600",
-          "sleeves": "#21468B"
+          "sleeves": "#FFFFFF"
         },
         "shorts": {
-          "primary": "#21468B",
-          "accent": "#FF6600"
+          "primary": "#000000",
+          "accent": "#FF6600",
+          "pattern": "solid"
         }
       }
     ]
@@ -1053,7 +1096,8 @@
         },
         "shorts": {
           "primary": "#111111",
-          "accent": "#000000"
+          "accent": "#000000",
+          "pattern": "solid"
         }
       }
     ]
@@ -1064,14 +1108,16 @@
         "id": "home",
         "label": "Home",
         "shirt": {
-          "pattern": "solid",
+          "pattern": "nordic-cross",
           "primary": "#BA0C2F",
+          "secondary": "#FFFFFF",
           "accent": "#00205B",
-          "collar": "#00205B"
+          "collar": "#00205B",
+          "sleeves": "#BA0C2F"
         },
         "shorts": {
           "primary": "#00205B",
-          "accent": "#BA0C2F",
+          "accent": "#FFFFFF",
           "pattern": "solid"
         }
       },
@@ -1080,14 +1126,15 @@
         "label": "Away",
         "shirt": {
           "pattern": "solid",
-          "primary": "#FFFFFF",
+          "primary": "#111111",
           "accent": "#BA0C2F",
           "collar": "#BA0C2F",
-          "sleeves": "#FFFFFF"
+          "sleeves": "#111111"
         },
         "shorts": {
-          "primary": "#FFFFFF",
-          "accent": "#BA0C2F"
+          "primary": "#111111",
+          "accent": "#BA0C2F",
+          "pattern": "solid"
         }
       }
     ]
@@ -1121,7 +1168,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#DA121A"
+          "accent": "#DA121A",
+          "pattern": "solid"
         }
       }
     ]
@@ -1155,7 +1203,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#D52B1E"
+          "accent": "#D52B1E",
+          "pattern": "solid"
         }
       }
     ]
@@ -1190,7 +1239,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#006600"
+          "accent": "#006600",
+          "pattern": "solid"
         }
       }
     ]
@@ -1224,7 +1274,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#8A1538"
+          "accent": "#8A1538",
+          "pattern": "solid"
         }
       }
     ]
@@ -1258,7 +1309,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#006C35"
+          "accent": "#006C35",
+          "pattern": "solid"
         }
       }
     ]
@@ -1269,14 +1321,15 @@
         "id": "home",
         "label": "Home",
         "shirt": {
-          "pattern": "solid",
+          "pattern": "nordic-cross",
           "primary": "#003876",
-          "accent": "#FFFFFF",
-          "collar": "#FFFFFF"
+          "secondary": "#FFFFFF",
+          "collar": "#FFFFFF",
+          "sleeves": "#003876"
         },
         "shorts": {
-          "primary": "#FFFFFF",
-          "accent": "#003876",
+          "primary": "#003876",
+          "accent": "#FFFFFF",
           "pattern": "solid"
         }
       },
@@ -1285,14 +1338,15 @@
         "label": "Away",
         "shirt": {
           "pattern": "solid",
-          "primary": "#FFFFFF",
+          "primary": "#F4C7D8",
           "accent": "#003876",
           "collar": "#003876",
-          "sleeves": "#FFFFFF"
+          "sleeves": "#F4C7D8"
         },
         "shorts": {
-          "primary": "#FFFFFF",
-          "accent": "#003876"
+          "primary": "#003876",
+          "accent": "#F4C7D8",
+          "pattern": "solid"
         }
       }
     ]
@@ -1326,7 +1380,8 @@
         },
         "shorts": {
           "primary": "#111111",
-          "accent": "#00853F"
+          "accent": "#00853F",
+          "pattern": "solid"
         }
       }
     ]
@@ -1360,7 +1415,8 @@
         },
         "shorts": {
           "primary": "#111111",
-          "accent": "#007A4D"
+          "accent": "#007A4D",
+          "pattern": "solid"
         }
       }
     ]
@@ -1395,7 +1451,8 @@
         },
         "shorts": {
           "primary": "#003087",
-          "accent": "#FFB612"
+          "accent": "#FFB612",
+          "pattern": "solid"
         }
       }
     ]
@@ -1406,10 +1463,11 @@
         "id": "home",
         "label": "Home",
         "shirt": {
-          "pattern": "solid",
+          "pattern": "nordic-cross",
           "primary": "#FFCD00",
-          "accent": "#005293",
-          "collar": "#005293"
+          "secondary": "#005293",
+          "collar": "#005293",
+          "sleeves": "#FFCD00"
         },
         "shorts": {
           "primary": "#005293",
@@ -1429,7 +1487,8 @@
         },
         "shorts": {
           "primary": "#111111",
-          "accent": "#005293"
+          "accent": "#005293",
+          "pattern": "solid"
         }
       }
     ]
@@ -1462,7 +1521,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#FF0000"
+          "accent": "#FF0000",
+          "pattern": "solid"
         }
       }
     ]
@@ -1496,7 +1556,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#E70013"
+          "accent": "#E70013",
+          "pattern": "solid"
         }
       }
     ]
@@ -1530,7 +1591,8 @@
         },
         "shorts": {
           "primary": "#FFFFFF",
-          "accent": "#E30A17"
+          "accent": "#E30A17",
+          "pattern": "solid"
         }
       }
     ]
@@ -1541,14 +1603,16 @@
         "id": "home",
         "label": "Home",
         "shirt": {
-          "pattern": "central-band",
-          "primary": "#FFFFFF",
-          "secondary": "#002868",
-          "accent": "#BF0A30"
+          "pattern": "horizontal-stripes",
+          "primary": "#F4F1EA",
+          "secondary": "#BF0A30",
+          "accent": "#041E42",
+          "collar": "#041E42",
+          "sleeves": "#041E42"
         },
         "shorts": {
-          "primary": "#BF0A30",
-          "accent": "#FFFFFF",
+          "primary": "#041E42",
+          "accent": "#BF0A30",
           "pattern": "solid"
         }
       },
@@ -1557,14 +1621,15 @@
         "label": "Away",
         "shirt": {
           "pattern": "solid",
-          "primary": "#002868",
+          "primary": "#1A1A1A",
           "accent": "#BF0A30",
           "collar": "#FFFFFF",
-          "sleeves": "#002868"
+          "sleeves": "#1A1A1A"
         },
         "shorts": {
-          "primary": "#002868",
-          "accent": "#BF0A30"
+          "primary": "#1A1A1A",
+          "accent": "#BF0A30",
+          "pattern": "solid"
         }
       }
     ]
@@ -1577,11 +1642,12 @@
         "shirt": {
           "pattern": "solid",
           "primary": "#7BCDE8",
-          "accent": "#FFFFFF",
-          "collar": "#FFFFFF"
+          "accent": "#041E42",
+          "collar": "#FFFFFF",
+          "sleeves": "#7BCDE8"
         },
         "shorts": {
-          "primary": "#FFFFFF",
+          "primary": "#041E42",
           "accent": "#7BCDE8",
           "pattern": "solid"
         }
@@ -1590,15 +1656,16 @@
         "id": "away",
         "label": "Away",
         "shirt": {
-          "pattern": "solid",
-          "primary": "#FFFFFF",
-          "accent": "#7BCDE8",
-          "collar": "#000000",
-          "sleeves": "#FFFFFF"
+          "pattern": "shoulder-yoke",
+          "primary": "#041E42",
+          "accent": "#0047FF",
+          "collar": "#0047FF",
+          "sleeves": "#041E42"
         },
         "shorts": {
-          "primary": "#000000",
-          "accent": "#7BCDE8"
+          "primary": "#041E42",
+          "accent": "#0047FF",
+          "pattern": "solid"
         }
       }
     ]
@@ -1632,7 +1699,8 @@
         },
         "shorts": {
           "primary": "#111111",
-          "accent": "#1EB53A"
+          "accent": "#1EB53A",
+          "pattern": "solid"
         }
       }
     ]

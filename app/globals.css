@@ -1,19 +1,13 @@
 @import "tailwindcss";
 @import "flag-icons/css/flag-icons.min.css";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  /* WC26 core palette */
-  --background: #000000;
-  --foreground: #ffffff;
+  /* WC26 brand tones (shared) */
   --gold: #b5985a;
   --gold-light: #d4bc82;
   --gold-dark: #8a7344;
-  --cream: #ffffff;
-  --muted: #a3a3a3;
-  --card: #0d0d0d;
-  --card-border: #262626;
-
-  /* Host-nation tones (three shades each) */
   --usa-blue: #003087;
   --usa-blue-light: #0066cc;
   --usa-blue-dark: #041e42;
@@ -23,6 +17,35 @@
   --canada-red: #c8102e;
   --canada-red-light: #ff0000;
   --canada-red-dark: #9b0d24;
+}
+
+:root,
+.light {
+  --background: #f4f1ea;
+  --foreground: #111111;
+  --cream: #111111;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --card-border: #e5e7eb;
+  --map-background: #dce3ea;
+  --map-popup-bg: #ffffff;
+  --map-popup-text: #111111;
+  --map-popup-muted: #6b7280;
+  --map-link: #003087;
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+  --cream: #ffffff;
+  --muted: #a3a3a3;
+  --card: #0d0d0d;
+  --card-border: #262626;
+  --map-background: #0a0a0a;
+  --map-popup-bg: #141414;
+  --map-popup-text: #ffffff;
+  --map-popup-muted: #a3a3a3;
+  --map-link: #d4bc82;
 }
 
 @theme inline {
@@ -63,6 +86,14 @@ body {
   );
 }
 
+.light .wc26-bg {
+  background-image: radial-gradient(
+    ellipse 100% 60% at 50% -10%,
+    rgba(181, 152, 90, 0.12),
+    transparent 55%
+  );
+}
+
 .section-accent {
   height: 2px;
   width: 3rem;
@@ -72,6 +103,11 @@ body {
 .wc26-panel {
   border: 1px solid var(--card-border);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%),
+    var(--card);
+}
+
+.light .wc26-panel {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, transparent 100%),
     var(--card);
 }
 
@@ -91,12 +127,16 @@ body {
 
 .wc26-btn-secondary {
   border: 1px solid var(--gold);
-  color: var(--gold-light);
+  color: var(--gold-dark);
   font-family: var(--font-barlow), sans-serif;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: background 0.2s, color 0.2s;
+}
+
+.dark .wc26-btn-secondary {
+  color: var(--gold-light);
 }
 
 .wc26-btn-secondary:hover {
@@ -133,11 +173,27 @@ body {
 .map-shell .leaflet-container,
 .leaflet-container {
   font-family: var(--font-noto), system-ui, sans-serif;
-  background: #0a0a0a;
+  background: var(--map-background);
 }
 
 .map-shell .leaflet-container {
   z-index: 0;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--map-popup-bg);
+  color: var(--map-popup-text);
+  border: 1px solid var(--card-border);
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px;
+  color: var(--map-popup-text);
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--map-popup-muted);
 }
 
 .tbc-flag-icon {
@@ -184,21 +240,57 @@ body {
   justify-content: center;
   border: 2px solid #ffffff;
   border-radius: 9999px;
-  background: var(--gold);
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.35),
     0 2px 4px rgba(0, 0, 0, 0.45);
-  color: #111111;
   font-family: var(--font-display);
   font-size: 12px;
   font-weight: 900;
   line-height: 1;
 }
 
+.tbc-match-marker--completed {
+  background: #2f855a;
+  color: #ffffff;
+}
+
+.tbc-match-marker--scheduled {
+  background: var(--gold);
+  color: #111111;
+}
+
+.tbc-match-marker--potential {
+  background: #2a2a2a;
+  border-style: dashed;
+  color: #d4bc82;
+  opacity: 0.92;
+}
+
+.light .tbc-match-marker--potential {
+  background: #ffffff;
+  color: var(--gold-dark);
+}
+
 .leaflet-popup-content .fi {
   width: 20px;
   height: 15px;
   border-radius: 2px;
+}
+
+.map-popup-link {
+  color: var(--map-link);
+}
+
+.map-popup-link:hover {
+  color: var(--gold);
+}
+
+.map-popup-muted {
+  color: var(--map-popup-muted);
+}
+
+.map-popup-text {
+  color: var(--map-popup-text);
 }
 
 /* WC26-style form controls */

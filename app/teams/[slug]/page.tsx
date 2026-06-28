@@ -11,7 +11,7 @@ import { CountryFlag } from "@/components/ui/CountryFlag";
 import { GroupBadge } from "@/components/ui/GroupBadge";
 import { getTeamKitVariants } from "@/lib/kits";
 import { getTeamScheduleMapMarkers } from "@/lib/map/team-schedule-markers";
-import { getHostCity, getTeam, teams } from "@/lib/teams";
+import { formatTeamTbcLocation, getHostCity, getTeam, teams } from "@/lib/teams";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${team.name} Base Camp`,
-    description: `${team.name} will train at ${team.tbc.trainingSite} in ${team.tbc.city} during FIFA World Cup 26™. Group ${team.group}.`,
+    description: `${team.name} will train at ${team.tbc.trainingSite} in ${formatTeamTbcLocation(team)} during FIFA World Cup 26™. Group ${team.group}.`,
   };
 }
 
@@ -55,20 +55,42 @@ export default async function TeamDetailPage({ params }: PageProps) {
           >
             ← All teams
           </Link>
-          <div className="mt-6 flex flex-wrap items-center gap-6">
-            <CountryFlag countryCode={team.countryCode} className="text-6xl" />
-            <div>
-              <div className="flex flex-wrap items-center gap-3">
-                <h1 className="font-display text-5xl font-black uppercase tracking-[0.04em] text-cream sm:text-6xl">
-                  {team.name}
-                </h1>
-                <GroupBadge group={team.group} size="lg" />
+          <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="flex flex-wrap items-center gap-6">
+              <CountryFlag countryCode={team.countryCode} className="text-6xl" />
+              <div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <h1 className="font-display text-5xl font-black uppercase tracking-[0.04em] text-cream sm:text-6xl">
+                    {team.name}
+                  </h1>
+                  <GroupBadge group={team.group} size="lg" />
+                </div>
+                <p className="mt-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-muted">
+                  {team.confederation} · Group {team.group}
+                </p>
               </div>
-              <p className="mt-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-muted">
-                {team.confederation} · Group {team.group}
-              </p>
             </div>
+
+            {kitVariants.length > 0 && (
+              <div className="hidden lg:block">
+                <TeamKitGallery
+                  teamName={team.name}
+                  variants={kitVariants}
+                  layout="hero"
+                />
+              </div>
+            )}
           </div>
+
+          {kitVariants.length > 0 && (
+            <div className="mt-6 lg:hidden">
+              <TeamKitGallery
+                teamName={team.name}
+                variants={kitVariants}
+                layout="hero"
+              />
+            </div>
+          )}
         </div>
       </section>
 
@@ -88,7 +110,7 @@ export default async function TeamDetailPage({ params }: PageProps) {
                   Location
                 </p>
                 <p className="mt-1 text-lg text-cream">
-                  {team.tbc.city}, {team.tbc.country}
+                  {formatTeamTbcLocation(team)}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -124,17 +146,6 @@ export default async function TeamDetailPage({ params }: PageProps) {
               </div>
             </section>
 
-            {kitVariants.length > 0 && (
-              <section className="mt-10">
-                <SectionHeading
-                  title="Tournament Kits"
-                  subtitle="Home and away shirt & shorts combinations"
-                />
-                <div className="mt-4">
-                  <TeamKitGallery teamName={team.name} variants={kitVariants} />
-                </div>
-              </section>
-            )}
           </section>
 
           <section>
@@ -155,8 +166,28 @@ export default async function TeamDetailPage({ params }: PageProps) {
             </div>
             <p className="mt-2 text-xs text-muted">
               Flag marks the base camp. Numbered pins follow this team&apos;s
-              tournament schedule in order (group stage through knockout rounds).
+              tournament path in order.
             </p>
+            <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-muted">
+              <li className="flex items-center gap-1.5">
+                <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border-2 border-white bg-[#2f855a] text-[9px] font-black text-white shadow-sm">
+                  1
+                </span>
+                Completed
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border-2 border-white bg-gold text-[9px] font-black text-[#111] shadow-sm">
+                  2
+                </span>
+                Scheduled
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border-2 border-dashed border-white bg-[#2a2a2a] text-[9px] font-black text-gold-light shadow-sm">
+                  3
+                </span>
+                Potential
+              </li>
+            </ul>
           </section>
 
           <TeamSchedule team={team} />
