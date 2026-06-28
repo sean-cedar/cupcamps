@@ -38,6 +38,8 @@
   --kit-frame-bg: rgba(255, 255, 255, 0.98);
   --kit-frame-border: rgba(17, 17, 17, 0.1);
   --kit-frame-shadow: 0 1px 3px rgba(17, 17, 17, 0.08);
+  --kit-frame-label: #111111;
+  --kit-frame-muted: #6b7280;
 }
 
 .dark {
@@ -454,6 +456,19 @@ body {
   background: var(--kit-frame-bg);
   border: 1px solid var(--kit-frame-border);
   box-shadow: var(--kit-frame-shadow);
+  color: var(--kit-frame-label);
+}
+
+.kit-gallery-cell--link {
+  text-decoration: none;
+}
+
+.kit-gallery-cell .kit-gallery-label {
+  color: var(--kit-frame-label);
+}
+
+.kit-gallery-cell .kit-gallery-sublabel {
+  color: var(--kit-frame-muted);
 }
 
 .kit-match-showcase {

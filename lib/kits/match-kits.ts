@@ -83,3 +83,26 @@ export function getWornKitOutfit(
     shorts: { ...base.shorts, ...shortsOverride },
   };
 }
+
+/** First group-stage match where a team wore a given kit variant. */
+export function getFirstMatchForKitVariant(
+  teamSlug: string,
+  variantId: KitVariantId,
+): number | null {
+  const matches = Object.entries(wornKitsByMatch).sort(
+    ([left], [right]) => Number(left) - Number(right),
+  );
+
+  for (const [matchNumber, entry] of matches) {
+    const spec = entry.kits[teamSlug];
+    if (!spec) {
+      continue;
+    }
+
+    if (normalizeSpec(spec).variant === variantId) {
+      return Number(matchNumber);
+    }
+  }
+
+  return null;
+}

@@ -11,7 +11,7 @@ import { CountryFlag } from "@/components/ui/CountryFlag";
 import { GroupBadge, groupPageHref } from "@/components/ui/GroupBadge";
 import { getTeamKitVariants } from "@/lib/kits";
 import { getTeamScheduleMapMarkers } from "@/lib/map/team-schedule-markers";
-import { formatTeamTbcLocation, getHostCity, getTeam, teams } from "@/lib/teams";
+import { formatTeamTbcAddress, getHostCity, getTeam, teams } from "@/lib/teams";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${team.name} Base Camp`,
-    description: `${team.name} will train at ${team.tbc.trainingSite} in ${formatTeamTbcLocation(team)} during FIFA World Cup 26™. Group ${team.group}.`,
+    description: `${team.name} will train at ${team.tbc.trainingSite}, ${team.tbc.address}, during FIFA World Cup 26™. Group ${team.group}.`,
   };
 }
 
@@ -79,6 +79,7 @@ export default async function TeamDetailPage({ params, searchParams }: PageProps
             {kitVariants.length > 0 && (
               <div className="w-full lg:w-auto lg:max-w-md">
                 <TeamKitGallery
+                  teamSlug={team.slug}
                   teamName={team.name}
                   variants={kitVariants}
                   layout="hero"
@@ -102,11 +103,9 @@ export default async function TeamDetailPage({ params, searchParams }: PageProps
               </div>
               <div>
                 <p className="font-display text-xs font-bold uppercase tracking-[0.2em] text-muted">
-                  Location
+                  Address
                 </p>
-                <p className="mt-1 text-lg text-cream">
-                  {formatTeamTbcLocation(team)}
-                </p>
+                <p className="mt-1 text-lg text-cream">{formatTeamTbcAddress(team)}</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 <span
@@ -160,8 +159,8 @@ export default async function TeamDetailPage({ params, searchParams }: PageProps
               />
             </div>
             <p className="mt-2 text-xs text-muted">
-              Flag marks the base camp. Numbered pins follow this team&apos;s
-              tournament path in order.
+              Flag marks the base camp address. Numbered pins follow this
+              team&apos;s tournament path in order.
             </p>
             <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-muted">
               <li className="flex items-center gap-1.5">

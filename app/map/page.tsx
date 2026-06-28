@@ -4,7 +4,7 @@ import { HostNationStripe } from "@/components/brand/HostNationStripe";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
 import { CountryFlag } from "@/components/ui/CountryFlag";
-import { formatTeamTbcLocation, teams } from "@/lib/teams";
+import { formatTeamTbcAddress, teams } from "@/lib/teams";
 
 export const metadata: Metadata = {
   title: "Base Camp Map",
@@ -51,7 +51,7 @@ export default function MapPage() {
                         {team.name}
                       </p>
                       <p className="truncate text-xs text-muted">
-                        {formatTeamTbcLocation(team)}
+                        {formatTeamTbcAddress(team)}
                       </p>
                     </div>
                   </Link>

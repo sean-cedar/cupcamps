@@ -12,7 +12,7 @@ import {
   getTeamScheduleMapMarkerStatusLabel,
 } from "@/lib/map/team-schedule-markers";
 import { getStageLabel } from "@/lib/schedule";
-import { formatTeamTbcLocation } from "@/lib/teams";
+import { formatTeamTbcAddress } from "@/lib/teams";
 import type { Team } from "@/lib/types";
 
 type TbcMapProps = {
@@ -162,20 +162,24 @@ export function TbcMap({
               opacity={1}
               className="tbc-country-tooltip"
             >
-              {team.name}
+              <span className="block font-display text-[11px] font-black uppercase tracking-[0.12em]">
+                {team.name}
+              </span>
             </Tooltip>
             <Popup>
               <div className="min-w-[180px] text-sm">
-                <p className="map-popup-text flex items-center gap-2 font-bold">
+                <div className="flex items-center gap-2">
                   <span className="country-flag-frame shrink-0 text-xl">
                     <span className={`fi fi-${team.countryCode}`} />
                   </span>
-                  {team.name}
-                </p>
-                <p className="map-popup-muted text-[10px] font-semibold uppercase tracking-wider">
+                  <p className="map-popup-text font-display text-sm font-black uppercase tracking-[0.08em]">
+                    {team.name}
+                  </p>
+                </div>
+                <p className="map-popup-muted mt-2 text-[10px] font-semibold uppercase tracking-wider">
                   Base camp
                 </p>
-                <p className="map-popup-muted">{formatTeamTbcLocation(team)}</p>
+                <p className="map-popup-muted">{formatTeamTbcAddress(team)}</p>
                 <p className="map-popup-muted text-xs">{team.tbc.trainingSite}</p>
                 <Link
                   href={`/countries/${team.slug}`}

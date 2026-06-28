@@ -1,13 +1,98 @@
+import Link from "next/link";
 import { TeamKit } from "@/components/ui/TeamKit";
+import { getFirstMatchForKitVariant } from "@/lib/kits/match-kits";
 import type { KitVariant } from "@/lib/kits/types";
 
 type TeamKitGalleryProps = {
+  teamSlug: string;
   teamName: string;
   variants: KitVariant[];
   layout?: "gallery" | "hero";
 };
 
+type KitGalleryCardProps = {
+  teamSlug: string;
+  teamName: string;
+  variant: KitVariant;
+  size: "xl" | "2xl";
+  showSublabel?: boolean;
+};
+
+function KitGalleryCard({
+  teamSlug,
+  teamName,
+  variant,
+  size,
+  showSublabel = false,
+}: KitGalleryCardProps) {
+  const matchNumber = getFirstMatchForKitVariant(teamSlug, variant.id);
+  const href = matchNumber
+    ? `/matches/${matchNumber}`
+    : (variant.photoUrl ?? null);
+  const isExternal = !matchNumber && Boolean(variant.photoUrl);
+  const label = `${teamName} ${variant.label.toLowerCase()} kit`;
+  const sublabel =
+    variant.id === "home"
+      ? "Primary"
+      : variant.id === "away"
+        ? "Alternate"
+        : "Third";
+
+  const content = (
+    <>
+      <TeamKit
+        outfit={{ shirt: variant.shirt, shorts: variant.shorts }}
+        size={size}
+        title={label}
+        framed={false}
+      />
+      <figcaption className={showSublabel ? "text-center" : undefined}>
+        <p className="kit-gallery-label font-display text-xs font-bold uppercase tracking-[0.14em]">
+          {variant.label}
+        </p>
+        {showSublabel && (
+          <p className="kit-gallery-sublabel mt-1 text-[10px] uppercase tracking-wider">
+            {sublabel}
+          </p>
+        )}
+      </figcaption>
+    </>
+  );
+
+  const className =
+    "kit-gallery-cell kit-gallery-cell--link transition hover:border-gold/40 hover:shadow-[0_0_0_1px_color-mix(in_srgb,var(--gold)_35%,transparent)]";
+
+  if (!href) {
+    return <figure className="kit-gallery-cell">{content}</figure>;
+  }
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+        aria-label={`${label} photos`}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      href={href}
+      className={className}
+      aria-label={`${label} worn in match ${matchNumber}`}
+    >
+      {content}
+    </Link>
+  );
+}
+
 export function TeamKitGallery({
+  teamSlug,
   teamName,
   variants,
   layout = "gallery",
@@ -31,22 +116,14 @@ export function TeamKitGallery({
         </div>
         <div className="grid grid-cols-2 gap-3 p-4 sm:gap-4 sm:p-5">
           {variants.map((variant) => (
-            <figure key={variant.id} className="kit-gallery-cell">
-              <TeamKit
-                outfit={{ shirt: variant.shirt, shorts: variant.shorts }}
-                size="2xl"
-                title={`${teamName} ${variant.label.toLowerCase()} kit`}
-                framed={false}
-              />
-              <figcaption className="text-center">
-                <p className="font-display text-xs font-bold uppercase tracking-[0.14em] text-cream">
-                  {variant.label}
-                </p>
-                <p className="mt-1 text-[10px] uppercase tracking-wider text-muted">
-                  {variant.id === "home" ? "Primary" : "Alternate"}
-                </p>
-              </figcaption>
-            </figure>
+            <KitGalleryCard
+              key={variant.id}
+              teamSlug={teamSlug}
+              teamName={teamName}
+              variant={variant}
+              size="2xl"
+              showSublabel
+            />
           ))}
         </div>
       </div>
@@ -56,17 +133,13 @@ export function TeamKitGallery({
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       {variants.map((variant) => (
-        <figure key={variant.id} className="kit-gallery-cell">
-          <TeamKit
-            outfit={{ shirt: variant.shirt, shorts: variant.shorts }}
-            size="xl"
-            title={`${teamName} ${variant.label.toLowerCase()} kit`}
-            framed={false}
-          />
-          <figcaption className="font-display text-xs font-bold uppercase tracking-[0.14em] text-cream">
-            {variant.label}
-          </figcaption>
-        </figure>
+        <KitGalleryCard
+          key={variant.id}
+          teamSlug={teamSlug}
+          teamName={teamName}
+          variant={variant}
+          size="xl"
+        />
       ))}
     </div>
   );

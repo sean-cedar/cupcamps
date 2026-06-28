@@ -18,6 +18,7 @@ export type Team = {
     city: string;
     region: string;
     trainingSite: string;
+    address: string;
     isHostCityCommunity: boolean;
     coordinates: Coordinates;
     nearestHostCitySlug: string;

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CountryFlag } from "@/components/ui/CountryFlag";
 import { GroupBadge } from "@/components/ui/GroupBadge";
-import { formatTeamTbcLocation, getHostCity } from "@/lib/teams";
+import { formatTeamTbcAddress, getHostCity } from "@/lib/teams";
 import type { Team } from "@/lib/types";
 
 type TeamCardProps = {
@@ -37,11 +37,11 @@ export function TeamCard({ team }: TeamCardProps) {
         <GroupBadge group={team.group} size="sm" />
       </div>
       <div className="mt-4 space-y-1 border-t border-card-border pt-4">
-        <p className="text-sm text-cream">
+        <p className="text-sm text-cream line-clamp-2">
           <span className="font-display text-xs font-semibold uppercase tracking-widest text-muted">
             TBC ·{" "}
           </span>
-          {formatTeamTbcLocation(team, { includeCountry: false })}
+          {formatTeamTbcAddress(team)}
         </p>
         <p className="truncate text-sm text-muted">{team.tbc.trainingSite}</p>
         <div className="flex flex-wrap items-center gap-2 pt-1">

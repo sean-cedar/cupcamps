@@ -1,6 +1,7 @@
 const ALLOWED_FROM_PREFIXES = [
   "/matches/",
   "/groups/",
+  "/schedule",
   "/host-cities/",
   "/bracket",
   "/map",
@@ -56,6 +57,10 @@ export function resolveBackLink(from: string | undefined): BackLink | null {
       href: from,
       label: `← ${slug.replace(/\b\w/g, (char) => char.toUpperCase())}`,
     };
+  }
+
+  if (from === "/schedule") {
+    return { href: from, label: "← Schedule" };
   }
 
   if (from === "/bracket") {

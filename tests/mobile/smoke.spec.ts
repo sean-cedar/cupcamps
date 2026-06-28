@@ -6,6 +6,7 @@ const routes = [
   "/countries/argentina",
   "/groups",
   "/groups/j",
+  "/schedule",
   "/host-cities",
   "/host-cities/boston",
   "/map",
@@ -45,6 +46,20 @@ test.describe("mobile smoke", () => {
 
     await page.getByRole("button", { name: "Dismiss menu overlay" }).click();
     await expect(page.getByRole("button", { name: "Open menu" })).toBeVisible();
+  });
+
+  test("mobile navigation stays visible after scrolling", async ({ page }) => {
+    await page.goto("/");
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
+    const menuButton = page.getByRole("button", { name: "Open menu" });
+    await menuButton.click();
+
+    const countriesLink = page.getByRole("navigation", {
+      name: "Mobile navigation",
+    }).getByRole("link", { name: "Countries" });
+    await expect(countriesLink).toBeVisible();
+    await expect(countriesLink).toBeInViewport();
   });
 
   test("country card navigates to country page", async ({ page }) => {

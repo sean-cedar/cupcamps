@@ -1212,6 +1212,22 @@
           "accent": "#C9A227",
           "pattern": "solid"
         }
+      },
+      {
+        "id": "third",
+        "label": "Third",
+        "shirt": {
+          "pattern": "solid",
+          "primary": "#005EB8",
+          "accent": "#FFFFFF",
+          "collar": "#FFFFFF",
+          "sleeves": "#005EB8"
+        },
+        "shorts": {
+          "primary": "#005EB8",
+          "accent": "#FFFFFF",
+          "pattern": "solid"
+        }
       }
     ]
   },

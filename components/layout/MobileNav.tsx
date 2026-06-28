@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const navLinks = [
   { href: "/countries", label: "Countries" },
   { href: "/groups", label: "Groups" },
+  { href: "/schedule", label: "Schedule" },
   { href: "/host-cities", label: "Cities" },
   { href: "/map", label: "Map" },
   { href: "/bracket", label: "Bracket" },
@@ -25,6 +27,11 @@ export function MobileNav() {
   const panelId = useId();
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -52,6 +59,55 @@ export function MobileNav() {
     };
   }, [open]);
 
+  const menuPanel =
+    open && mounted ? (
+      <div
+        className="fixed inset-x-0 bottom-0 z-[1200] flex flex-col"
+        style={{ top: "var(--site-chrome-height, 5.5rem)" }}
+      >
+        <nav
+          id={panelId}
+          className="relative z-[1201] shrink-0 overflow-y-auto border-b border-card-border bg-background/98 px-4 py-4 shadow-lg backdrop-blur-sm site-shell-inline"
+          aria-label="Mobile navigation"
+        >
+          <ul className="space-y-1">
+            {navLinks.map((link) => {
+              const active = isActivePath(pathname, link.href);
+
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`flex min-h-11 items-center rounded px-3 font-display text-sm font-bold uppercase tracking-[0.12em] transition ${
+                      active
+                        ? "bg-gold/15 text-gold-light"
+                        : "text-cream hover:bg-card/60 hover:text-gold-light"
+                    }`}
+                    onClick={() => setOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="mt-5 border-t border-card-border pt-4">
+            <p className="mb-3 font-display text-[10px] font-bold uppercase tracking-[0.16em] text-muted">
+              Theme
+            </p>
+            <ThemeToggle layout="menu" />
+          </div>
+        </nav>
+        <button
+          type="button"
+          className="min-h-0 flex-1 bg-black/50"
+          aria-label="Dismiss menu overlay"
+          onClick={() => setOpen(false)}
+        />
+      </div>
+    ) : null;
+
   return (
     <div className="lg:hidden">
       <button
@@ -61,7 +117,22 @@ export function MobileNav() {
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={open ? "Close menu" : "Open menu"}
-        onClick={() => setOpen((current) => !current)}
+        onClick={() => {
+          setOpen((current) => {
+            const next = !current;
+            if (next) {
+              const chrome = document.getElementById("site-sticky-chrome");
+              if (chrome) {
+                document.documentElement.style.setProperty(
+                  "--site-chrome-height",
+                  `${chrome.getBoundingClientRect().height}px`,
+                );
+              }
+              window.scrollTo({ top: 0, behavior: "auto" });
+            }
+            return next;
+          });
+        }}
       >
         {open ? (
           <svg
@@ -88,50 +159,7 @@ export function MobileNav() {
         )}
       </button>
 
-      {open && (
-        <>
-          <button
-            type="button"
-            className="fixed inset-0 z-[1090] bg-black/50"
-            aria-label="Dismiss menu overlay"
-            onClick={() => setOpen(false)}
-          />
-          <nav
-            id={panelId}
-            className="fixed inset-x-0 top-[calc(2.625rem+2px)] z-[1095] max-h-[calc(100dvh-2.625rem-2px)] overflow-y-auto border-b border-card-border bg-background/98 px-4 py-4 shadow-lg backdrop-blur-sm site-shell-inline"
-            aria-label="Mobile navigation"
-          >
-            <ul className="space-y-1">
-              {navLinks.map((link) => {
-                const active = isActivePath(pathname, link.href);
-
-                return (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className={`flex min-h-11 items-center rounded px-3 font-display text-sm font-bold uppercase tracking-[0.12em] transition ${
-                        active
-                          ? "bg-gold/15 text-gold-light"
-                          : "text-cream hover:bg-card/60 hover:text-gold-light"
-                      }`}
-                      onClick={() => setOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <div className="mt-5 border-t border-card-border pt-4">
-              <p className="mb-3 font-display text-[10px] font-bold uppercase tracking-[0.16em] text-muted">
-                Theme
-              </p>
-              <ThemeToggle layout="menu" />
-            </div>
-          </nav>
-        </>
-      )}
+      {menuPanel ? createPortal(menuPanel, document.body) : null}
     </div>
   );
 }

@@ -94,28 +94,51 @@ const GROUP_FIXTURES = [
   [72, "croatia", "ghana"],
 ];
 
+/** Teams that always wear a specific variant regardless of home/away role. */
+const ALWAYS_HOME_VARIANT = new Set(["ghana"]);
+const ALWAYS_AWAY_VARIANT = new Set(["uzbekistan"]);
+
 /**
- * Per-match kit variant overrides keyed by team slug.
- * Only entries that differ from home=home / away=away defaults.
- * Audited against FIFA designation + Khel Now unused-kit matrix.
+ * Khel Now / BBC audit: away kits not worn in the group stage.
+ * When away, these teams wear their home variant instead.
+ */
+const AWAY_KIT_UNUSED = new Set([
+  "south-africa",
+  "australia",
+  "austria",
+  "belgium",
+  "ivory-coast",
+  "congo-dr",
+  "curacao",
+  "iran",
+  "iraq",
+  "japan",
+  "netherlands",
+  "portugal",
+  "senegal",
+]);
+
+/**
+ * Per-match overrides for FIFA coordination exceptions.
+ * Applied after automatic designation rules.
  */
 const TEAM_KIT_OVERRIDES = {
-  "1": { "south-africa": "home" },
   "2": { czechia: "away" },
   "4": { qatar: "home", switzerland: "away" },
-  "10": { curacao: "away" },
   "16": { "cabo-verde": "away" },
   "17": { senegal: "home" },
   "18": { norway: "away" },
   "20": { jordan: "away" },
-  "22": { uzbekistan: "away" },
+  "23": { panama: "home" },
   "39": { "cabo-verde": "home" },
+  "48": { panama: "away" },
   "41": { norway: "away", senegal: "home" },
-  "47": { ghana: "home" },
   "53": { brazil: "home", scotland: "home" },
+  "58": { ecuador: "home" },
+  "65": { france: "away" },
   "66": { senegal: "home" },
   "68": { jordan: "away", argentina: "away" },
-  "72": { ghana: "home" },
+  "71": { panama: "third" },
 };
 
 /**
@@ -141,6 +164,15 @@ const OUTFIT_PATCHES = {
       shorts: { primary: "#FFFFFF", accent: "#009C3B", pattern: "solid" },
     },
   },
+  "65": {
+    france: {
+      shirt: {
+        primary: "#7FD4C8",
+        secondary: "#FFFFFF",
+        accent: "#E30613",
+      },
+    },
+  },
   "66": {
     senegal: {
       shorts: { primary: "#FFFFFF", accent: "#00853F", pattern: "solid" },
@@ -150,16 +182,19 @@ const OUTFIT_PATCHES = {
 
 /** Extra source citations for played matches with photo/article verification. */
 const MATCH_SOURCE_NOTES = {
+  "6": "Footy Headlines FIFA designation · Brazil yellow/blue vs Morocco",
   "14":
     "Bolavip Belgium vs Egypt debut kit assignment (Jun 2026)",
+  "16":
+    "Ministry of Sport · Cabo Verde all-white debut vs Spain",
   "17":
-    "FIFA designation · Khel Now audit (Senegal away kit unused in group stage)",
+    "FIFA designation · Khel Now audit (Senegal home kit in Group I)",
+  "18":
+    "FIFA match centre · Iraq vs Norway kit confirmation",
   "41":
     "Bolavip Matchday 2 Norway vs Senegal kit confirmation (22 Jun 2026)",
   "43":
     "Bolavip Matchday 2 Argentina vs Austria kit confirmation (22 Jun 2026)",
-  "47":
-    "Khel Now audit (Ghana away kit unused in group stage)",
   "53":
     "Footy Headlines FIFA designation · Brazil white shorts vs Scotland (24 Jun 2026)",
   "58":
@@ -169,7 +204,9 @@ const MATCH_SOURCE_NOTES = {
   "66":
     "FIFA designation · Senegal white shorts vs Iraq",
   "68":
-    "Bolavip Matchday 3 Jordan vs Argentina kit confirmation (27 Jun 2026)",
+    "Bolavip · Footy Headlines Argentina away vs Jordan (27 Jun 2026)",
+  "71":
+    "Footy Headlines · Panama three-kit rotation (Group L MD3)",
   "72":
     "Khel Now audit · Footy Headlines referee kit note (Croatia vs Ghana)",
 };
@@ -178,6 +215,8 @@ const CURATED_PHOTO_URLS = {
   "6": "https://www.outlookindia.com/sports/football/brazil-vs-morocco-fifa-world-cup-2026",
   "14":
     "https://bolavip.com/en/world-cup/lineups-uniforms-and-referee-for-belgium-vs-egypt-in-2026-world-cup-debut",
+  "16":
+    "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021488",
   "17":
     "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021490",
   "18":
@@ -186,11 +225,46 @@ const CURATED_PHOTO_URLS = {
     "https://www.outlookindia.com/sports/football/norway-vs-senegal-fifa-world-cup-2026-group-i-nor-vs-sen-new-york-new-jersey-stadium-in-pics",
   "43":
     "https://bolavip.com/en/world-cup/the-uniforms-argentina-and-austria-are-wearing-today-for-2026-world-cup-matchday-2",
+  "53":
+    "https://www.footyheadlines.com/2026/06/all-71-2026-world-cup-group-stage-kit.html",
   "58":
     "https://bolavip.com/en/world-cup/who-is-the-referee-for-ecuador-vs-germany-and-what-uniforms-are-they-wearing-today-at-2026-world-cup",
+  "65":
+    "https://www.footyheadlines.com/2026/06/all-71-2026-world-cup-group-stage-kit.html",
   "68":
     "https://bolavip.com/en/world-cup/the-uniforms-argentina-and-jordan-are-wearing-today-for-2026-world-cup-matchday-3",
+  "72":
+    "https://www.footyheadlines.com/2481096030/panama-wear-three-kits-at-2026-world-cup.html",
 };
+
+function defaultVariant(teamSlug, role) {
+  if (ALWAYS_HOME_VARIANT.has(teamSlug)) {
+    return "home";
+  }
+
+  if (ALWAYS_AWAY_VARIANT.has(teamSlug)) {
+    return "away";
+  }
+
+  if (role === "home") {
+    return "home";
+  }
+
+  if (AWAY_KIT_UNUSED.has(teamSlug)) {
+    return "home";
+  }
+
+  return "away";
+}
+
+function resolveMatchKits(matchNumber, homeSlug, awaySlug) {
+  const overrides = TEAM_KIT_OVERRIDES[String(matchNumber)] ?? {};
+
+  return {
+    [homeSlug]: overrides[homeSlug] ?? defaultVariant(homeSlug, "home"),
+    [awaySlug]: overrides[awaySlug] ?? defaultVariant(awaySlug, "away"),
+  };
+}
 
 function matchPhotoUrl(matchNumber, homeSlug, awaySlug) {
   const curated = CURATED_PHOTO_URLS[String(matchNumber)];
@@ -224,18 +298,15 @@ function buildSource(matchNumber) {
 }
 
 function buildEntry(matchNumber, homeSlug, awaySlug) {
-  const overrides = TEAM_KIT_OVERRIDES[String(matchNumber)] ?? {};
-  const homeVariant = overrides[homeSlug] ?? "home";
-  const awayVariant = overrides[awaySlug] ?? "away";
-  const kits = {
-    [homeSlug]: buildKitSpec(matchNumber, homeSlug, homeVariant),
-    [awaySlug]: buildKitSpec(matchNumber, awaySlug, awayVariant),
-  };
+  const kitVariants = resolveMatchKits(matchNumber, homeSlug, awaySlug);
 
   return {
     source: buildSource(matchNumber),
     photoUrl: matchPhotoUrl(matchNumber, homeSlug, awaySlug),
-    kits,
+    kits: {
+      [homeSlug]: buildKitSpec(matchNumber, homeSlug, kitVariants[homeSlug]),
+      [awaySlug]: buildKitSpec(matchNumber, awaySlug, kitVariants[awaySlug]),
+    },
   };
 }
 

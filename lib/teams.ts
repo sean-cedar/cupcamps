@@ -20,16 +20,19 @@ export function getTeam(slug: string): Team | undefined {
   return teams.find((team) => team.slug === slug);
 }
 
-/** e.g. "Kansas City, Kansas, USA" or "Vancouver, British Columbia, Canada" */
+/** Street address for the TBC training site. */
+export function formatTeamTbcAddress(team: Team): string {
+  return team.tbc.address;
+}
+
 export function formatTeamTbcLocation(
   team: Team,
   options?: { includeCountry?: boolean },
 ): string {
-  const base = `${team.tbc.city}, ${team.tbc.region}`;
   if (options?.includeCountry === false) {
-    return base;
+    return team.tbc.address.replace(/, (USA|Mexico|Canada)$/, "");
   }
-  return `${base}, ${team.tbc.country}`;
+  return team.tbc.address;
 }
 
 export function getTeamsByGroup(group: string): Team[] {
@@ -64,6 +67,7 @@ export function filterTeams(filters: TeamFilters): Team[] {
         team.name.toLowerCase().includes(query) ||
         team.tbc.city.toLowerCase().includes(query) ||
         team.tbc.region.toLowerCase().includes(query) ||
+        team.tbc.address.toLowerCase().includes(query) ||
         team.tbc.trainingSite.toLowerCase().includes(query),
     );
   }
