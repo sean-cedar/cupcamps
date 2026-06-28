@@ -1,0 +1,526 @@
+{
+  "source": "https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json",
+  "generatedAt": "2026-06-28T06:55:45.319Z",
+  "kickoffs": {
+    "1": {
+      "kickoffIso": "2026-06-11T13:00:00-06:00",
+      "localTime": "13:00",
+      "utcOffset": "-06:00"
+    },
+    "2": {
+      "kickoffIso": "2026-06-11T20:00:00-06:00",
+      "localTime": "20:00",
+      "utcOffset": "-06:00"
+    },
+    "3": {
+      "kickoffIso": "2026-06-12T15:00:00-04:00",
+      "localTime": "15:00",
+      "utcOffset": "-04:00"
+    },
+    "4": {
+      "kickoffIso": "2026-06-13T12:00:00-07:00",
+      "localTime": "12:00",
+      "utcOffset": "-07:00"
+    },
+    "5": {
+      "kickoffIso": "2026-06-13T21:00:00-04:00",
+      "localTime": "21:00",
+      "utcOffset": "-04:00"
+    },
+    "6": {
+      "kickoffIso": "2026-06-13T18:00:00-04:00",
+      "localTime": "18:00",
+      "utcOffset": "-04:00"
+    },
+    "7": {
+      "kickoffIso": "2026-06-12T18:00:00-07:00",
+      "localTime": "18:00",
+      "utcOffset": "-07:00"
+    },
+    "8": {
+      "kickoffIso": "2026-06-13T21:00:00-07:00",
+      "localTime": "21:00",
+      "utcOffset": "-07:00"
+    },
+    "9": {
+      "kickoffIso": "2026-06-14T19:00:00-04:00",
+      "localTime": "19:00",
+      "utcOffset": "-04:00"
+    },
+    "10": {
+      "kickoffIso": "2026-06-14T12:00:00-05:00",
+      "localTime": "12:00",
+      "utcOffset": "-05:00"
+    },
+    "11": {
+      "kickoffIso": "2026-06-14T15:00:00-05:00",
+      "localTime": "15:00",
+      "utcOffset": "-05:00"
+    },
+    "12": {
+      "kickoffIso": "2026-06-14T20:00:00-06:00",
+      "localTime": "20:00",
+      "utcOffset": "-06:00"
+    },
+    "13": {
+      "kickoffIso": "2026-06-15T18:00:00-07:00",
+      "localTime": "18:00",
+      "utcOffset": "-07:00"
+    },
+    "14": {
+      "kickoffIso": "2026-06-15T12:00:00-07:00",
+      "localTime": "12:00",
+      "utcOffset": "-07:00"
+    },
+    "15": {
+      "kickoffIso": "2026-06-15T18:00:00-04:00",
+      "localTime": "18:00",
+      "utcOffset": "-04:00"
+    },
+    "16": {
+      "kickoffIso": "2026-06-15T12:00:00-04:00",
+      "localTime": "12:00",
+      "utcOffset": "-04:00"
+    },
+    "17": {
+      "kickoffIso": "2026-06-16T15:00:00-04:00",
+      "localTime": "15:00",
+      "utcOffset": "-04:00"
+    },
+    "18": {
+      "kickoffIso": "2026-06-16T18:00:00-04:00",
+      "localTime": "18:00",
+      "utcOffset": "-04:00"
+    },
+    "19": {
+      "kickoffIso": "2026-06-16T20:00:00-05:00",
+      "localTime": "20:00",
+      "utcOffset": "-05:00"
+    },
+    "20": {
+      "kickoffIso": "2026-06-16T21:00:00-07:00",
+      "localTime": "21:00",
+      "utcOffset": "-07:00"
+    },
+    "21": {
+      "kickoffIso": "2026-06-17T12:00:00-05:00",
+      "localTime": "12:00",
+      "utcOffset": "-05:00"
+    },
+    "22": {
+      "kickoffIso": "2026-06-17T20:00:00-06:00",
+      "localTime": "20:00",
+      "utcOffset": "-06:00"
+    },
+    "23": {
+      "kickoffIso": "2026-06-17T19:00:00-04:00",
+      "localTime": "19:00",
+      "utcOffset": "-04:00"
+    },
+    "24": {
+      "kickoffIso": "2026-06-17T15:00:00-05:00",
+      "localTime": "15:00",
+      "utcOffset": "-05:00"
+    },
+    "25": {
+      "kickoffIso": "2026-06-18T12:00:00-04:00",
+      "localTime": "12:00",
+      "utcOffset": "-04:00"
+    },
+    "26": {
+      "kickoffIso": "2026-06-18T19:00:00-06:00",
+      "localTime": "19:00",
+      "utcOffset": "-06:00"
+    },
+    "27": {
+      "kickoffIso": "2026-06-18T12:00:00-07:00",
+      "localTime": "12:00",
+      "utcOffset": "-07:00"
+    },
+    "28": {
+      "kickoffIso": "2026-06-18T15:00:00-07:00",
+      "localTime": "15:00",
+      "utcOffset": "-07:00"
+    },
+    "29": {
+      "kickoffIso": "2026-06-19T20:30:00-04:00",
+      "localTime": "20:30",
+      "utcOffset": "-04:00"
+    },
+    "30": {
+      "kickoffIso": "2026-06-19T18:00:00-04:00",
+      "localTime": "18:00",
+      "utcOffset": "-04:00"
+    },
+    "31": {
+      "kickoffIso": "2026-06-19T20:00:00-07:00",
+      "localTime": "20:00",
+      "utcOffset": "-07:00"
+    },
+    "32": {
+      "kickoffIso": "2026-06-19T12:00:00-07:00",
+      "localTime": "12:00",
+      "utcOffset": "-07:00"
+    },
+    "33": {
+      "kickoffIso": "2026-06-20T16:00:00-04:00",
+      "localTime": "16:00",
+      "utcOffset": "-04:00"
+    },
+    "34": {
+      "kickoffIso": "2026-06-20T19:00:00-05:00",
+      "localTime": "19:00",
+      "utcOffset": "-05:00"
+    },
+    "35": {
+      "kickoffIso": "2026-06-20T12:00:00-05:00",
+      "localTime": "12:00",
+      "utcOffset": "-05:00"
+    },
+    "36": {
+      "kickoffIso": "2026-06-20T22:00:00-06:00",
+      "localTime": "22:00",
+      "utcOffset": "-06:00"
+    },
+    "37": {
+      "kickoffIso": "2026-06-26T20:00:00-07:00",
+      "localTime": "20:00",
+      "utcOffset": "-07:00"
+    },
+    "38": {
+      "kickoffIso": "2026-06-26T20:00:00-07:00",
+      "localTime": "20:00",
+      "utcOffset": "-07:00"
+    },
+    "39": {
+      "kickoffIso": "2026-06-21T18:00:00-04:00",
+      "localTime": "18:00",
+      "utcOffset": "-04:00"
+    },
+    "40": {
+      "kickoffIso": "2026-06-21T12:00:00-04:00",
+      "localTime": "12:00",
+      "utcOffset": "-04:00"
+    },
+    "41": {
+      "kickoffIso": "2026-06-22T20:00:00-04:00",
+      "localTime": "20:00",
+      "utcOffset": "-04:00"
+    },
+    "42": {
+      "kickoffIso": "2026-06-22T17:00:00-04:00",
+      "localTime": "17:00",
+      "utcOffset": "-04:00"
+    },
+    "43": {
+      "kickoffIso": "2026-06-22T12:00:00-05:00",
+      "localTime": "12:00",
+      "utcOffset": "-05:00"
+    },
+    "44": {
+      "kickoffIso": "2026-06-22T20:00:00-07:00",
+      "localTime": "20:00",
+      "utcOffset": "-07:00"
+    },
+    "45": {
+      "kickoffIso": "2026-06-23T12:00:00-05:00",
+      "localTime": "12:00",
+      "utcOffset": "-05:00"
+    },
+    "46": {
+      "kickoffIso": "2026-06-23T20:00:00-06:00",
+      "localTime": "20:00",
+      "utcOffset": "-06:00"
+    },
+    "47": {
+      "kickoffIso": "2026-06-23T16:00:00-04:00",
+      "localTime": "16:00",
+      "utcOffset": "-04:00"
+    },
+    "48": {
+      "kickoffIso": "2026-06-23T19:00:00-04:00",
+      "localTime": "19:00",
+      "utcOffset": "-04:00"
+    },
+    "49": {
+      "kickoffIso": "2026-06-24T19:00:00-06:00",
+      "localTime": "19:00",
+      "utcOffset": "-06:00"
+    },
+    "50": {
+      "kickoffIso": "2026-06-24T19:00:00-06:00",
+      "localTime": "19:00",
+      "utcOffset": "-06:00"
+    },
+    "51": {
+      "kickoffIso": "2026-06-24T12:00:00-07:00",
+      "localTime": "12:00",
+      "utcOffset": "-07:00"
+    },
+    "52": {
+      "kickoffIso": "2026-06-24T12:00:00-07:00",
+      "localTime": "12:00",
+      "utcOffset": "-07:00"
+    },
+    "53": {
+      "kickoffIso": "2026-06-24T18:00:00-04:00",
+      "localTime": "18:00",
+      "utcOffset": "-04:00"
+    },
+    "54": {
+      "kickoffIso": "2026-06-24T18:00:00-04:00",
+      "localTime": "18:00",
+      "utcOffset": "-04:00"
+    },
+    "55": {
+      "kickoffIso": "2026-06-25T19:00:00-07:00",
+      "localTime": "19:00",
+      "utcOffset": "-07:00"
+    },
+    "56": {
+      "kickoffIso": "2026-06-25T19:00:00-07:00",
+      "localTime": "19:00",
+      "utcOffset": "-07:00"
+    },
+    "57": {
+      "kickoffIso": "2026-06-25T16:00:00-04:00",
+      "localTime": "16:00",
+      "utcOffset": "-04:00"
+    },
+    "58": {
+      "kickoffIso": "2026-06-25T16:00:00-04:00",
+      "localTime": "16:00",
+      "utcOffset": "-04:00"
+    },
+    "59": {
+      "kickoffIso": "2026-06-25T18:00:00-05:00",
+      "localTime": "18:00",
+      "utcOffset": "-05:00"
+    },
+    "60": {
+      "kickoffIso": "2026-06-25T18:00:00-05:00",
+      "localTime": "18:00",
+      "utcOffset": "-05:00"
+    },
+    "61": {
+      "kickoffIso": "2026-06-21T18:00:00-07:00",
+      "localTime": "18:00",
+      "utcOffset": "-07:00"
+    },
+    "62": {
+      "kickoffIso": "2026-06-21T12:00:00-07:00",
+      "localTime": "12:00",
+      "utcOffset": "-07:00"
+    },
+    "63": {
+      "kickoffIso": "2026-06-26T19:00:00-05:00",
+      "localTime": "19:00",
+      "utcOffset": "-05:00"
+    },
+    "64": {
+      "kickoffIso": "2026-06-26T18:00:00-06:00",
+      "localTime": "18:00",
+      "utcOffset": "-06:00"
+    },
+    "65": {
+      "kickoffIso": "2026-06-26T15:00:00-04:00",
+      "localTime": "15:00",
+      "utcOffset": "-04:00"
+    },
+    "66": {
+      "kickoffIso": "2026-06-26T15:00:00-04:00",
+      "localTime": "15:00",
+      "utcOffset": "-04:00"
+    },
+    "67": {
+      "kickoffIso": "2026-06-27T21:00:00-05:00",
+      "localTime": "21:00",
+      "utcOffset": "-05:00"
+    },
+    "68": {
+      "kickoffIso": "2026-06-27T21:00:00-05:00",
+      "localTime": "21:00",
+      "utcOffset": "-05:00"
+    },
+    "69": {
+      "kickoffIso": "2026-06-27T19:30:00-04:00",
+      "localTime": "19:30",
+      "utcOffset": "-04:00"
+    },
+    "70": {
+      "kickoffIso": "2026-06-27T19:30:00-04:00",
+      "localTime": "19:30",
+      "utcOffset": "-04:00"
+    },
+    "71": {
+      "kickoffIso": "2026-06-27T17:00:00-04:00",
+      "localTime": "17:00",
+      "utcOffset": "-04:00"
+    },
+    "72": {
+      "kickoffIso": "2026-06-27T17:00:00-04:00",
+      "localTime": "17:00",
+      "utcOffset": "-04:00"
+    },
+    "73": {
+      "kickoffIso": "2026-06-28T12:00:00-07:00",
+      "localTime": "12:00",
+      "utcOffset": "-07:00"
+    },
+    "74": {
+      "kickoffIso": "2026-06-29T12:00:00-05:00",
+      "localTime": "12:00",
+      "utcOffset": "-05:00"
+    },
+    "75": {
+      "kickoffIso": "2026-06-29T16:30:00-04:00",
+      "localTime": "16:30",
+      "utcOffset": "-04:00"
+    },
+    "76": {
+      "kickoffIso": "2026-06-29T19:00:00-06:00",
+      "localTime": "19:00",
+      "utcOffset": "-06:00"
+    },
+    "77": {
+      "kickoffIso": "2026-06-30T12:00:00-05:00",
+      "localTime": "12:00",
+      "utcOffset": "-05:00"
+    },
+    "78": {
+      "kickoffIso": "2026-06-30T17:00:00-04:00",
+      "localTime": "17:00",
+      "utcOffset": "-04:00"
+    },
+    "79": {
+      "kickoffIso": "2026-06-30T19:00:00-06:00",
+      "localTime": "19:00",
+      "utcOffset": "-06:00"
+    },
+    "80": {
+      "kickoffIso": "2026-07-01T12:00:00-04:00",
+      "localTime": "12:00",
+      "utcOffset": "-04:00"
+    },
+    "81": {
+      "kickoffIso": "2026-07-01T13:00:00-07:00",
+      "localTime": "13:00",
+      "utcOffset": "-07:00"
+    },
+    "82": {
+      "kickoffIso": "2026-07-01T17:00:00-07:00",
+      "localTime": "17:00",
+      "utcOffset": "-07:00"
+    },
+    "83": {
+      "kickoffIso": "2026-07-02T12:00:00-07:00",
+      "localTime": "12:00",
+      "utcOffset": "-07:00"
+    },
+    "84": {
+      "kickoffIso": "2026-07-02T19:00:00-04:00",
+      "localTime": "19:00",
+      "utcOffset": "-04:00"
+    },
+    "85": {
+      "kickoffIso": "2026-07-02T20:00:00-07:00",
+      "localTime": "20:00",
+      "utcOffset": "-07:00"
+    },
+    "86": {
+      "kickoffIso": "2026-07-03T13:00:00-05:00",
+      "localTime": "13:00",
+      "utcOffset": "-05:00"
+    },
+    "87": {
+      "kickoffIso": "2026-07-03T18:00:00-04:00",
+      "localTime": "18:00",
+      "utcOffset": "-04:00"
+    },
+    "88": {
+      "kickoffIso": "2026-07-03T20:30:00-05:00",
+      "localTime": "20:30",
+      "utcOffset": "-05:00"
+    },
+    "89": {
+      "kickoffIso": "2026-07-04T12:00:00-05:00",
+      "localTime": "12:00",
+      "utcOffset": "-05:00"
+    },
+    "90": {
+      "kickoffIso": "2026-07-04T17:00:00-04:00",
+      "localTime": "17:00",
+      "utcOffset": "-04:00"
+    },
+    "91": {
+      "kickoffIso": "2026-07-05T16:00:00-04:00",
+      "localTime": "16:00",
+      "utcOffset": "-04:00"
+    },
+    "92": {
+      "kickoffIso": "2026-07-05T18:00:00-06:00",
+      "localTime": "18:00",
+      "utcOffset": "-06:00"
+    },
+    "93": {
+      "kickoffIso": "2026-07-06T14:00:00-05:00",
+      "localTime": "14:00",
+      "utcOffset": "-05:00"
+    },
+    "94": {
+      "kickoffIso": "2026-07-06T17:00:00-07:00",
+      "localTime": "17:00",
+      "utcOffset": "-07:00"
+    },
+    "95": {
+      "kickoffIso": "2026-07-07T12:00:00-04:00",
+      "localTime": "12:00",
+      "utcOffset": "-04:00"
+    },
+    "96": {
+      "kickoffIso": "2026-07-07T13:00:00-07:00",
+      "localTime": "13:00",
+      "utcOffset": "-07:00"
+    },
+    "97": {
+      "kickoffIso": "2026-07-09T16:00:00-04:00",
+      "localTime": "16:00",
+      "utcOffset": "-04:00"
+    },
+    "98": {
+      "kickoffIso": "2026-07-10T12:00:00-07:00",
+      "localTime": "12:00",
+      "utcOffset": "-07:00"
+    },
+    "99": {
+      "kickoffIso": "2026-07-11T17:00:00-04:00",
+      "localTime": "17:00",
+      "utcOffset": "-04:00"
+    },
+    "100": {
+      "kickoffIso": "2026-07-11T20:00:00-05:00",
+      "localTime": "20:00",
+      "utcOffset": "-05:00"
+    },
+    "101": {
+      "kickoffIso": "2026-07-14T14:00:00-05:00",
+      "localTime": "14:00",
+      "utcOffset": "-05:00"
+    },
+    "102": {
+      "kickoffIso": "2026-07-15T15:00:00-04:00",
+      "localTime": "15:00",
+      "utcOffset": "-04:00"
+    },
+    "103": {
+      "kickoffIso": "2026-07-18T17:00:00-04:00",
+      "localTime": "17:00",
+      "utcOffset": "-04:00"
+    },
+    "104": {
+      "kickoffIso": "2026-07-19T15:00:00-04:00",
+      "localTime": "15:00",
+      "utcOffset": "-04:00"
+    }
+  }
+}

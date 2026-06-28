@@ -88,6 +88,7 @@ export default async function GroupDetailPage({ params }: PageProps) {
                 group={view.group}
                 rows={toGroupStandingRows(view.standings)}
                 showAdvancement
+                countryFrom={`/groups/${view.group.toLowerCase()}`}
               />
             </div>
           </section>
@@ -107,7 +108,7 @@ export default async function GroupDetailPage({ params }: PageProps) {
         <section className="mt-10">
           <SectionHeading title="Teams" />
           <div className="mt-4">
-            <GroupTeamsPanel teams={view.teams} />
+            <GroupTeamsPanel teams={view.teams} group={view.group} />
           </div>
         </section>
 

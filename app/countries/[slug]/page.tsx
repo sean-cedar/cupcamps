@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { HostNationStripe } from "@/components/brand/HostNationStripe";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { HostCityLink } from "@/components/host-cities/HostCityCard";
+import { ContextBackLink } from "@/components/navigation/ContextBackLink";
 import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
 import { TeamKitGallery } from "@/components/teams/TeamKitGallery";
 import { TeamSchedule } from "@/components/teams/TeamSchedule";
@@ -15,6 +15,7 @@ import { formatTeamTbcLocation, getHostCity, getTeam, teams } from "@/lib/teams"
 
 type PageProps = {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ from?: string }>;
 };
 
 export async function generateStaticParams() {
@@ -32,8 +33,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function TeamDetailPage({ params }: PageProps) {
+export default async function TeamDetailPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
+  const { from } = await searchParams;
   const team = getTeam(slug);
   if (!team) notFound();
 
@@ -49,12 +51,11 @@ export default async function TeamDetailPage({ params }: PageProps) {
       <section className="border-b border-card-border bg-card/50">
         <HostNationStripe height={3} />
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-12">
-          <Link
-            href="/countries"
-            className="font-display text-xs font-bold uppercase tracking-[0.15em] text-muted hover:text-gold-light"
-          >
-            ← All countries
-          </Link>
+          <ContextBackLink
+            from={from}
+            fallbackHref="/countries"
+            fallbackLabel="← All countries"
+          />
           <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex min-w-0 flex-wrap items-center gap-4 sm:gap-6">
               <CountryFlag countryCode={team.countryCode} className="text-5xl sm:text-6xl" />

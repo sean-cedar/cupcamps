@@ -1,4 +1,5 @@
 import { buildMatchOutcomes, resolveMatch } from "@/lib/schedule/bracket";
+import { getMatchKickoffInstant } from "@/lib/schedule/kickoffs";
 import { matches } from "@/lib/schedule/matches";
 import type { MatchRecord } from "@/lib/schedule/types";
 import { getTeam } from "@/lib/teams";
@@ -63,7 +64,9 @@ export function getCacheTtlSeconds(match: MatchRecord): number {
     return 60;
   }
 
-  const kickoff = new Date(`${match.date}T20:00:00Z`).getTime();
+  const kickoff =
+    getMatchKickoffInstant(match.matchNumber)?.getTime() ??
+    new Date(`${match.date}T20:00:00Z`).getTime();
   const hoursSinceKickoff = (Date.now() - kickoff) / (1000 * 60 * 60);
 
   if (hoursSinceKickoff >= 24) {

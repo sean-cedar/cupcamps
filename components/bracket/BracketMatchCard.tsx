@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CountryFlag } from "@/components/ui/CountryFlag";
-import { formatMatchDate } from "@/lib/schedule";
+import { formatMatchSchedule } from "@/lib/schedule";
 import type { BracketMatchView } from "@/lib/schedule/bracket-board";
 import { getHostCity } from "@/lib/teams";
 
@@ -96,7 +96,13 @@ export function BracketMatchCard({
         </div>
 
         <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-card-border pt-2">
-          <p className="text-[10px] text-muted">{formatMatchDate(match.date)}</p>
+          <p className="text-[10px] text-muted">
+            {formatMatchSchedule(
+              match.matchNumber,
+              match.date,
+              match.hostCitySlug,
+            )}
+          </p>
           {hostCity && (
             <p className="text-[10px] font-medium text-muted">{hostCity.name}</p>
           )}

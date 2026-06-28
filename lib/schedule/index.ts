@@ -172,6 +172,14 @@ export function formatMatchDate(date: string): string {
   });
 }
 
+export {
+  formatMatchKickoff,
+  formatMatchSchedule,
+  getMatchKickoff,
+  getMatchKickoffInstant,
+} from "@/lib/schedule/kickoffs";
+export type { MatchKickoff } from "@/lib/schedule/kickoffs";
+
 export function formatScore(match: TeamMatch): string | null {
   if (match.homeScore === null || match.awayScore === null) {
     return null;

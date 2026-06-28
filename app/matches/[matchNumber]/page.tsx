@@ -9,7 +9,7 @@ import { MatchAdvancementPanel } from "@/components/matches/MatchAdvancementPane
 import { MatchFeedersPanel } from "@/components/matches/MatchFeedersPanel";
 import { MatchHighlightsSection } from "@/components/matches/MatchHighlightsSection";
 import { MatchParticipantPanel } from "@/components/matches/MatchParticipantPanel";
-import { formatMatchDate } from "@/lib/schedule";
+import { formatMatchSchedule } from "@/lib/schedule";
 import {
   getAllMatchNumbers,
   getMatchPageView,
@@ -85,7 +85,12 @@ export default async function MatchDetailPage({ params }: PageProps) {
                 {view.title}
               </h1>
               <p className="mt-2 text-sm text-muted">
-                Match {view.matchNumber} · {formatMatchDate(view.date)}
+                Match {view.matchNumber} ·{" "}
+                {formatMatchSchedule(
+                  view.matchNumber,
+                  view.date,
+                  view.hostCitySlug,
+                )}
               </p>
             </div>
 
@@ -166,7 +171,7 @@ export default async function MatchDetailPage({ params }: PageProps) {
           <section className="mt-10">
             <SectionHeading title="Group context" />
             <div className="mt-4">
-              <GroupStandingsTable group={view.group} rows={view.groupStandings} />
+              <GroupStandingsTable group={view.group} rows={view.groupStandings} countryFrom={`/matches/${matchNumber}`} />
             </div>
           </section>
         )}

@@ -31,6 +31,7 @@ export type HostCity = {
   country: HostCityCountry;
   stadium: string;
   accentColor: string;
+  timezone: string;
   coordinates: Coordinates;
 };
 

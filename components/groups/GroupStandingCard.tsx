@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CountryFlag } from "@/components/ui/CountryFlag";
+import { countryHref } from "@/lib/navigation/country-links";
 import {
   getGroupAdvancementLabel,
   type GroupAdvancementStatus,
@@ -23,6 +24,7 @@ type GroupStandingCardProps = {
   row: GroupStandingCardRow;
   rank: number;
   showAdvancement?: boolean;
+  countryFrom?: string;
 };
 
 function cardClassName(row: GroupStandingCardRow): string {
@@ -46,6 +48,7 @@ export function GroupStandingCard({
   row,
   rank,
   showAdvancement = false,
+  countryFrom,
 }: GroupStandingCardProps) {
   return (
     <article
@@ -53,7 +56,7 @@ export function GroupStandingCard({
     >
       <div className="flex items-start justify-between gap-3">
         <Link
-          href={`/countries/${row.slug}`}
+          href={countryHref(row.slug, countryFrom)}
           className="inline-flex min-w-0 flex-1 items-center gap-3 text-cream transition hover:text-gold-light"
         >
           <span className="w-5 shrink-0 text-xs tabular-nums text-muted">

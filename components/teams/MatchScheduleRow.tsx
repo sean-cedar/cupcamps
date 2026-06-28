@@ -3,7 +3,7 @@ import { ScheduleMatchCard } from "@/components/schedule/ScheduleMatchCard";
 import { HostCityLink } from "@/components/host-cities/HostCityCard";
 import { TeamIdentity } from "@/components/ui/TeamIdentity";
 import {
-  formatMatchDate,
+  formatMatchSchedule,
   formatScore,
   getOpponentDisplay,
   getStageLabel,
@@ -48,7 +48,11 @@ export function MatchScheduleRow({ match }: MatchScheduleRowProps) {
 
         <div className="relative z-[1] pointer-events-none">
           <p className="text-xs font-medium text-cream">
-            {formatMatchDate(match.date)}
+            {formatMatchSchedule(
+              match.matchNumber,
+              match.date,
+              match.hostCitySlug,
+            )}
           </p>
           {match.matchday && (
             <p className="text-[10px] uppercase tracking-wider text-muted">

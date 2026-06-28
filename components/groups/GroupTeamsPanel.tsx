@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { CountryFlag } from "@/components/ui/CountryFlag";
+import { countryHref } from "@/lib/navigation/country-links";
 import { getGroupAdvancementLabel } from "@/lib/schedule/groups";
 import type { GroupTeamView } from "@/lib/schedule/groups";
 
 type GroupTeamsPanelProps = {
   teams: GroupTeamView[];
+  group: string;
 };
 
 function advancementClass(status: GroupTeamView["advancement"]): string {
@@ -20,13 +22,15 @@ function advancementClass(status: GroupTeamView["advancement"]): string {
   }
 }
 
-export function GroupTeamsPanel({ teams }: GroupTeamsPanelProps) {
+export function GroupTeamsPanel({ teams, group }: GroupTeamsPanelProps) {
+  const countryFrom = `/groups/${group.toLowerCase()}`;
+
   return (
     <div className="grid gap-3 sm:grid-cols-2">
       {teams.map((team) => (
         <Link
           key={team.slug}
-          href={`/countries/${team.slug}`}
+          href={countryHref(team.slug, countryFrom)}
           className={`wc26-panel flex items-center gap-4 p-4 transition hover:border-gold/30 ${advancementClass(team.advancement)}`}
         >
           <CountryFlag countryCode={team.countryCode} className="text-3xl" />

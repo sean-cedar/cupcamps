@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import L from "leaflet";
-import { MapContainer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, Marker, Popup, Tooltip, useMap } from "react-leaflet";
 import { useEffect, useMemo, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapThemeTileLayer } from "@/components/map/MapThemeTileLayer";
@@ -156,6 +156,14 @@ export function TbcMap({
             icon={createFlagIcon(team.countryCode, dimmed)}
             zIndexOffset={dimmed ? 0 : 1000}
           >
+            <Tooltip
+              direction="top"
+              offset={[0, -28]}
+              opacity={1}
+              className="tbc-country-tooltip"
+            >
+              {team.name}
+            </Tooltip>
             <Popup>
               <div className="min-w-[180px] text-sm">
                 <p className="map-popup-text flex items-center gap-2 font-bold">
@@ -206,7 +214,11 @@ export function TbcMap({
               <p className="map-popup-muted mt-1">{marker.hostCityName}</p>
               <p className="map-popup-muted text-xs">{marker.stadium}</p>
               <p className="map-popup-muted mt-1 text-xs">
-                {formatMapMarkerDate(marker.date)}
+                {formatMapMarkerDate(
+                  marker.matchNumber,
+                  marker.date,
+                  marker.hostCitySlug,
+                )}
               </p>
               <p className="map-popup-muted text-[10px] uppercase tracking-wider">
                 {getStageLabel(marker.stage)}

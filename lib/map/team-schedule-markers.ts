@@ -1,5 +1,5 @@
 import {
-  formatMatchDate,
+  formatMatchSchedule,
   formatScore,
   getOpponentDisplay,
   getTeamSchedule,
@@ -110,6 +110,10 @@ export function getTeamScheduleMapMarkers(
   });
 }
 
-export function formatMapMarkerDate(date: string): string {
-  return formatMatchDate(date);
+export function formatMapMarkerDate(
+  matchNumber: number,
+  date: string,
+  hostCitySlug: string,
+): string {
+  return formatMatchSchedule(matchNumber, date, hostCitySlug);
 }

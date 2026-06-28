@@ -249,6 +249,30 @@ body {
   color: var(--map-popup-muted);
 }
 
+.leaflet-tooltip.tbc-country-tooltip {
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--card-border);
+  border-radius: 0.35rem;
+  background: var(--map-popup-bg);
+  color: var(--map-popup-text);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.18);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.leaflet-tooltip-top.tbc-country-tooltip::before {
+  border-top-color: var(--map-popup-bg);
+}
+
+.leaflet-tooltip-bottom.tbc-country-tooltip::before {
+  border-bottom-color: var(--map-popup-bg);
+}
+
 .tbc-flag-icon {
   background: transparent;
   border: none;
@@ -427,6 +451,15 @@ body {
   min-height: 9rem;
   padding: 1.25rem 1rem 1rem;
   border-radius: 0.5rem;
+  background: var(--kit-frame-bg);
+  border: 1px solid var(--kit-frame-border);
+  box-shadow: var(--kit-frame-shadow);
+}
+
+.kit-match-showcase {
+  min-height: 11rem;
+  padding: 1.5rem 1.25rem 1.25rem;
+  border-radius: 0.65rem;
   background: var(--kit-frame-bg);
   border: 1px solid var(--kit-frame-border);
   box-shadow: var(--kit-frame-shadow);

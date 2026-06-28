@@ -9,6 +9,7 @@
     "lint": "eslint",
     "kits:build": "node scripts/build-wc26-kits.mjs",
     "kits:build-match-worn": "node scripts/build-match-worn-kits.mjs",
+    "kickoffs:build": "node scripts/build-match-kickoffs.mjs",
     "test:mobile": "playwright test tests/mobile"
   },
   "dependencies": {

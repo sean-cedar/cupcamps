@@ -1,7 +1,11 @@
 /**
  * Builds explicit FIFA World Cup 26™ group-stage worn kit catalog.
- * Sources: FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)
- * and post-match kit confirmations where designations were updated.
+ *
+ * Primary source: FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)
+ * Cross-checked against:
+ * - Khel Now unused group-stage kit matrix (22 Jun 2026)
+ * - Bolavip match-day uniform articles (Jun 2026)
+ * - Footy Headlines FIFA designation summary (5 Jun 2026)
  *
  * Run: node scripts/build-match-worn-kits.mjs
  */
@@ -91,8 +95,9 @@ const GROUP_FIXTURES = [
 ];
 
 /**
- * Per-match kit overrides keyed by team slug.
- * Values must match FIFA designation / confirmed match-day wear.
+ * Per-match kit variant overrides keyed by team slug.
+ * Only entries that differ from home=home / away=away defaults.
+ * Audited against FIFA designation + Khel Now unused-kit matrix.
  */
 const TEAM_KIT_OVERRIDES = {
   "1": { "south-africa": "home" },
@@ -100,44 +105,18 @@ const TEAM_KIT_OVERRIDES = {
   "4": { qatar: "home", switzerland: "away" },
   "10": { curacao: "away" },
   "16": { "cabo-verde": "away" },
-  "17": { senegal: "away" },
+  "17": { senegal: "home" },
   "18": { norway: "away" },
   "20": { jordan: "away" },
   "22": { uzbekistan: "away" },
-  "23": { ghana: "away" },
   "39": { "cabo-verde": "home" },
-  "41": {
-    norway: "away",
-    senegal: "home",
-  },
-  "47": { ghana: "away" },
+  "41": { norway: "away", senegal: "home" },
+  "47": { ghana: "home" },
   "53": { brazil: "home", scotland: "home" },
   "66": { senegal: "home" },
-  "72": { ghana: "away" },
+  "68": { jordan: "away", argentina: "away" },
+  "72": { ghana: "home" },
 };
-
-const CURATED_PHOTO_URLS = {
-  "6": "https://www.outlookindia.com/sports/football/brazil-vs-morocco-fifa-world-cup-2026",
-  "41":
-    "https://www.outlookindia.com/sports/football/norway-vs-senegal-fifa-world-cup-2026-group-i-nor-vs-sen-new-york-new-jersey-stadium-in-pics",
-  "17":
-    "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021490",
-  "18":
-    "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021492",
-};
-
-const MATCH_41_SOURCE =
-  "FIFA match assignment · Bolavip Matchday 2 kit confirmation (22 Jun 2026)";
-
-function matchPhotoUrl(matchNumber, homeSlug, awaySlug) {
-  const curated = CURATED_PHOTO_URLS[String(matchNumber)];
-  if (curated) {
-    return curated;
-  }
-
-  const label = `${homeSlug} vs ${awaySlug} FIFA World Cup 2026 match photos`;
-  return `https://www.fifa.com/fifaplus/en/search?q=${encodeURIComponent(label)}`;
-}
 
 /**
  * Match-day outfit patches keyed by team slug.
@@ -147,6 +126,14 @@ const OUTFIT_PATCHES = {
   "41": {
     senegal: {
       shorts: { primary: "#FFFFFF", accent: "#00853F", pattern: "solid" },
+    },
+  },
+  "43": {
+    argentina: {
+      shorts: { primary: "#003E7E", accent: "#6CACE4", pattern: "solid" },
+    },
+    austria: {
+      shorts: { primary: "#FFFFFF", accent: "#E30613", pattern: "solid" },
     },
   },
   "53": {
@@ -161,6 +148,60 @@ const OUTFIT_PATCHES = {
   },
 };
 
+/** Extra source citations for played matches with photo/article verification. */
+const MATCH_SOURCE_NOTES = {
+  "14":
+    "Bolavip Belgium vs Egypt debut kit assignment (Jun 2026)",
+  "17":
+    "FIFA designation · Khel Now audit (Senegal away kit unused in group stage)",
+  "41":
+    "Bolavip Matchday 2 Norway vs Senegal kit confirmation (22 Jun 2026)",
+  "43":
+    "Bolavip Matchday 2 Argentina vs Austria kit confirmation (22 Jun 2026)",
+  "47":
+    "Khel Now audit (Ghana away kit unused in group stage)",
+  "53":
+    "Footy Headlines FIFA designation · Brazil white shorts vs Scotland (24 Jun 2026)",
+  "58":
+    "Bolavip Ecuador vs Germany kit assignment (Jun 2026)",
+  "65":
+    "The Mirror France mint away vs Norway home (27 Jun 2026)",
+  "66":
+    "FIFA designation · Senegal white shorts vs Iraq",
+  "68":
+    "Bolavip Matchday 3 Jordan vs Argentina kit confirmation (27 Jun 2026)",
+  "72":
+    "Khel Now audit · Footy Headlines referee kit note (Croatia vs Ghana)",
+};
+
+const CURATED_PHOTO_URLS = {
+  "6": "https://www.outlookindia.com/sports/football/brazil-vs-morocco-fifa-world-cup-2026",
+  "14":
+    "https://bolavip.com/en/world-cup/lineups-uniforms-and-referee-for-belgium-vs-egypt-in-2026-world-cup-debut",
+  "17":
+    "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021490",
+  "18":
+    "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021492",
+  "41":
+    "https://www.outlookindia.com/sports/football/norway-vs-senegal-fifa-world-cup-2026-group-i-nor-vs-sen-new-york-new-jersey-stadium-in-pics",
+  "43":
+    "https://bolavip.com/en/world-cup/the-uniforms-argentina-and-austria-are-wearing-today-for-2026-world-cup-matchday-2",
+  "58":
+    "https://bolavip.com/en/world-cup/who-is-the-referee-for-ecuador-vs-germany-and-what-uniforms-are-they-wearing-today-at-2026-world-cup",
+  "68":
+    "https://bolavip.com/en/world-cup/the-uniforms-argentina-and-jordan-are-wearing-today-for-2026-world-cup-matchday-3",
+};
+
+function matchPhotoUrl(matchNumber, homeSlug, awaySlug) {
+  const curated = CURATED_PHOTO_URLS[String(matchNumber)];
+  if (curated) {
+    return curated;
+  }
+
+  const label = `${homeSlug} vs ${awaySlug} FIFA World Cup 2026 match photos`;
+  return `https://www.fifa.com/fifaplus/en/search?q=${encodeURIComponent(label)}`;
+}
+
 function buildKitSpec(matchNumber, teamSlug, variant) {
   const patch = OUTFIT_PATCHES[String(matchNumber)]?.[teamSlug];
   if (!patch) {
@@ -173,6 +214,15 @@ function buildKitSpec(matchNumber, teamSlug, variant) {
   };
 }
 
+function buildSource(matchNumber) {
+  const notes = MATCH_SOURCE_NOTES[String(matchNumber)];
+  if (!notes) {
+    return FIFA_SOURCE;
+  }
+
+  return `${FIFA_SOURCE} · ${notes}`;
+}
+
 function buildEntry(matchNumber, homeSlug, awaySlug) {
   const overrides = TEAM_KIT_OVERRIDES[String(matchNumber)] ?? {};
   const homeVariant = overrides[homeSlug] ?? "home";
@@ -183,10 +233,7 @@ function buildEntry(matchNumber, homeSlug, awaySlug) {
   };
 
   return {
-    source:
-      matchNumber === 41
-        ? `${FIFA_SOURCE} · ${MATCH_41_SOURCE}`
-        : FIFA_SOURCE,
+    source: buildSource(matchNumber),
     photoUrl: matchPhotoUrl(matchNumber, homeSlug, awaySlug),
     kits,
   };

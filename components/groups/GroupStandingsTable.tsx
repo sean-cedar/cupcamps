@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { GroupStandingCard } from "@/components/groups/GroupStandingCard";
 import { CountryFlag } from "@/components/ui/CountryFlag";
+import { countryHref } from "@/lib/navigation/country-links";
 import { getGroupAdvancementLabel } from "@/lib/schedule/groups";
 import type { GroupAdvancementStatus } from "@/lib/schedule/groups";
 
@@ -22,6 +23,8 @@ type GroupStandingsTableProps = {
   group: string;
   rows: GroupStandingsRow[];
   showAdvancement?: boolean;
+  /** Passed through to country links for contextual back navigation. */
+  countryFrom?: string;
 };
 
 function rowClassName(row: GroupStandingsRow): string {
@@ -45,6 +48,7 @@ export function GroupStandingsTable({
   group,
   rows,
   showAdvancement = false,
+  countryFrom,
 }: GroupStandingsTableProps) {
   return (
     <div>
@@ -58,6 +62,7 @@ export function GroupStandingsTable({
             row={row}
             rank={index + 1}
             showAdvancement={showAdvancement}
+            countryFrom={countryFrom}
           />
         ))}
       </div>
@@ -88,7 +93,7 @@ export function GroupStandingsTable({
             >
               <td className="px-4 py-2">
                 <Link
-                  href={`/countries/${row.slug}`}
+                  href={countryHref(row.slug, countryFrom)}
                   className="inline-flex items-center gap-2 text-cream transition hover:text-gold-light"
                 >
                   <span className="w-4 text-[10px] tabular-nums text-muted">

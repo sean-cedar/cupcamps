@@ -104,8 +104,8 @@
     }
   },
   "14": {
-    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
-    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=belgium%20vs%20egypt%20FIFA%20World%20Cup%202026%20match%20photos",
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · Bolavip Belgium vs Egypt debut kit assignment (Jun 2026)",
+    "photoUrl": "https://bolavip.com/en/world-cup/lineups-uniforms-and-referee-for-belgium-vs-egypt-in-2026-world-cup-debut",
     "kits": {
       "belgium": "home",
       "egypt": "away"
@@ -128,11 +128,11 @@
     }
   },
   "17": {
-    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · FIFA designation · Khel Now audit (Senegal away kit unused in group stage)",
     "photoUrl": "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021490",
     "kits": {
       "france": "home",
-      "senegal": "away"
+      "senegal": "home"
     }
   },
   "18": {
@@ -179,7 +179,7 @@
     "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
     "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=ghana%20vs%20panama%20FIFA%20World%20Cup%202026%20match%20photos",
     "kits": {
-      "ghana": "away",
+      "ghana": "home",
       "panama": "away"
     }
   },
@@ -320,7 +320,7 @@
     }
   },
   "41": {
-    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · FIFA match assignment · Bolavip Matchday 2 kit confirmation (22 Jun 2026)",
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · Bolavip Matchday 2 Norway vs Senegal kit confirmation (22 Jun 2026)",
     "photoUrl": "https://www.outlookindia.com/sports/football/norway-vs-senegal-fifa-world-cup-2026-group-i-nor-vs-sen-new-york-new-jersey-stadium-in-pics",
     "kits": {
       "norway": "away",
@@ -343,11 +343,25 @@
     }
   },
   "43": {
-    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
-    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=argentina%20vs%20austria%20FIFA%20World%20Cup%202026%20match%20photos",
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · Bolavip Matchday 2 Argentina vs Austria kit confirmation (22 Jun 2026)",
+    "photoUrl": "https://bolavip.com/en/world-cup/the-uniforms-argentina-and-austria-are-wearing-today-for-2026-world-cup-matchday-2",
     "kits": {
-      "argentina": "home",
-      "austria": "away"
+      "argentina": {
+        "variant": "home",
+        "shorts": {
+          "primary": "#003E7E",
+          "accent": "#6CACE4",
+          "pattern": "solid"
+        }
+      },
+      "austria": {
+        "variant": "away",
+        "shorts": {
+          "primary": "#FFFFFF",
+          "accent": "#E30613",
+          "pattern": "solid"
+        }
+      }
     }
   },
   "44": {
@@ -375,11 +389,11 @@
     }
   },
   "47": {
-    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · Khel Now audit (Ghana away kit unused in group stage)",
     "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=england%20vs%20ghana%20FIFA%20World%20Cup%202026%20match%20photos",
     "kits": {
       "england": "home",
-      "ghana": "away"
+      "ghana": "home"
     }
   },
   "48": {
@@ -423,7 +437,7 @@
     }
   },
   "53": {
-    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · Footy Headlines FIFA designation · Brazil white shorts vs Scotland (24 Jun 2026)",
     "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=scotland%20vs%20brazil%20FIFA%20World%20Cup%202026%20match%20photos",
     "kits": {
       "scotland": "home",
@@ -470,8 +484,8 @@
     }
   },
   "58": {
-    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
-    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=ecuador%20vs%20germany%20FIFA%20World%20Cup%202026%20match%20photos",
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · Bolavip Ecuador vs Germany kit assignment (Jun 2026)",
+    "photoUrl": "https://bolavip.com/en/world-cup/who-is-the-referee-for-ecuador-vs-germany-and-what-uniforms-are-they-wearing-today-at-2026-world-cup",
     "kits": {
       "ecuador": "home",
       "germany": "away"
@@ -526,7 +540,7 @@
     }
   },
   "65": {
-    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · The Mirror France mint away vs Norway home (27 Jun 2026)",
     "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=norway%20vs%20france%20FIFA%20World%20Cup%202026%20match%20photos",
     "kits": {
       "norway": "home",
@@ -534,7 +548,7 @@
     }
   },
   "66": {
-    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · FIFA designation · Senegal white shorts vs Iraq",
     "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=senegal%20vs%20iraq%20FIFA%20World%20Cup%202026%20match%20photos",
     "kits": {
       "senegal": {
@@ -557,10 +571,10 @@
     }
   },
   "68": {
-    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
-    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=jordan%20vs%20argentina%20FIFA%20World%20Cup%202026%20match%20photos",
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · Bolavip Matchday 3 Jordan vs Argentina kit confirmation (27 Jun 2026)",
+    "photoUrl": "https://bolavip.com/en/world-cup/the-uniforms-argentina-and-jordan-are-wearing-today-for-2026-world-cup-matchday-3",
     "kits": {
-      "jordan": "home",
+      "jordan": "away",
       "argentina": "away"
     }
   },
@@ -589,11 +603,11 @@
     }
   },
   "72": {
-    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · Khel Now audit · Footy Headlines referee kit note (Croatia vs Ghana)",
     "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=croatia%20vs%20ghana%20FIFA%20World%20Cup%202026%20match%20photos",
     "kits": {
       "croatia": "home",
-      "ghana": "away"
+      "ghana": "home"
     }
   }
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { HostCityLink } from "@/components/host-cities/HostCityCard";
 import { MatchupTeams } from "@/components/ui/MatchupTeams";
 import { TeamIdentity } from "@/components/ui/TeamIdentity";
-import { formatMatchDate, getStageLabel } from "@/lib/schedule";
+import { formatMatchSchedule, getStageLabel } from "@/lib/schedule";
 import type { MatchStage } from "@/lib/schedule/types";
 
 type ScheduleParticipant = {
@@ -61,7 +61,11 @@ export function ScheduleMatchCard(
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
             <p className="text-xs font-medium text-cream">
-              {formatMatchDate(props.date)}
+              {formatMatchSchedule(
+                props.matchNumber,
+                props.date,
+                props.variant === "team" ? props.hostCitySlug : undefined,
+              )}
             </p>
             {props.matchday && (
               <p className="text-[10px] uppercase tracking-wider text-muted">
