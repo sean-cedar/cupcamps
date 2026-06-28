@@ -1,0 +1,770 @@
+[
+  {
+    "slug": "algeria",
+    "name": "Algeria",
+    "countryCode": "dz",
+    "confederation": "CAF",
+    "group": "J",
+    "tbc": {
+      "country": "USA",
+      "city": "Kansas City",
+      "trainingSite": "University of Kansas",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 38.9543, "lng": -95.2558 },
+      "nearestHostCitySlug": "kansas-city"
+    },
+    "groupStageHostCitySlugs": ["kansas-city", "san-francisco-bay-area"]
+  },
+  {
+    "slug": "argentina",
+    "name": "Argentina",
+    "countryCode": "ar",
+    "confederation": "CONMEBOL",
+    "group": "J",
+    "tbc": {
+      "country": "USA",
+      "city": "Kansas City",
+      "trainingSite": "Sporting KC Training Centre",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 39.0997, "lng": -94.7156 },
+      "nearestHostCitySlug": "kansas-city"
+    },
+    "groupStageHostCitySlugs": ["kansas-city", "dallas"]
+  },
+  {
+    "slug": "australia",
+    "name": "Australia",
+    "countryCode": "au",
+    "confederation": "AFC",
+    "group": "D",
+    "tbc": {
+      "country": "USA",
+      "city": "San Francisco Bay Area",
+      "trainingSite": "Oakland Roots/Soul Training Facility",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 37.8044, "lng": -122.2712 },
+      "nearestHostCitySlug": "san-francisco-bay-area"
+    },
+    "groupStageHostCitySlugs": ["vancouver", "seattle", "san-francisco-bay-area"]
+  },
+  {
+    "slug": "austria",
+    "name": "Austria",
+    "countryCode": "at",
+    "confederation": "UEFA",
+    "group": "J",
+    "tbc": {
+      "country": "USA",
+      "city": "Goleta",
+      "trainingSite": "UC Santa Barbara - Harder Stadium",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 34.4358, "lng": -119.8276 },
+      "nearestHostCitySlug": "los-angeles"
+    },
+    "groupStageHostCitySlugs": ["san-francisco-bay-area", "dallas", "kansas-city"]
+  },
+  {
+    "slug": "belgium",
+    "name": "Belgium",
+    "countryCode": "be",
+    "confederation": "UEFA",
+    "group": "G",
+    "tbc": {
+      "country": "USA",
+      "city": "Renton",
+      "trainingSite": "Seattle Sounders FC Performance Centre and Clubhouse",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 47.4829, "lng": -122.2171 },
+      "nearestHostCitySlug": "seattle"
+    },
+    "groupStageHostCitySlugs": ["seattle", "los-angeles", "vancouver"]
+  },
+  {
+    "slug": "bosnia-and-herzegovina",
+    "name": "Bosnia and Herzegovina",
+    "countryCode": "ba",
+    "confederation": "UEFA",
+    "group": "B",
+    "tbc": {
+      "country": "USA",
+      "city": "Sandy",
+      "trainingSite": "RSL Stadium",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 40.5649, "lng": -111.8988 },
+      "nearestHostCitySlug": "dallas"
+    },
+    "groupStageHostCitySlugs": ["toronto", "los-angeles", "seattle"]
+  },
+  {
+    "slug": "brazil",
+    "name": "Brazil",
+    "countryCode": "br",
+    "confederation": "CONMEBOL",
+    "group": "C",
+    "tbc": {
+      "country": "USA",
+      "city": "New York New Jersey",
+      "trainingSite": "Columbia Park Training Facility",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 40.8128, "lng": -74.0742 },
+      "nearestHostCitySlug": "new-york-new-jersey"
+    },
+    "groupStageHostCitySlugs": ["new-york-new-jersey", "philadelphia", "miami"]
+  },
+  {
+    "slug": "cabo-verde",
+    "name": "Cabo Verde",
+    "countryCode": "cv",
+    "confederation": "CAF",
+    "group": "H",
+    "tbc": {
+      "country": "USA",
+      "city": "Tampa",
+      "trainingSite": "Water's Sportsplex",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 27.9506, "lng": -82.4572 },
+      "nearestHostCitySlug": "miami"
+    },
+    "groupStageHostCitySlugs": ["atlanta", "houston"]
+  },
+  {
+    "slug": "canada",
+    "name": "Canada",
+    "countryCode": "ca",
+    "confederation": "CONCACAF",
+    "group": "B",
+    "tbc": {
+      "country": "Canada",
+      "city": "Vancouver",
+      "trainingSite": "National Soccer Development Centre",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 49.2827, "lng": -123.1207 },
+      "nearestHostCitySlug": "vancouver"
+    },
+    "groupStageHostCitySlugs": ["toronto", "vancouver"]
+  },
+  {
+    "slug": "colombia",
+    "name": "Colombia",
+    "countryCode": "co",
+    "confederation": "CONMEBOL",
+    "group": "K",
+    "tbc": {
+      "country": "Mexico",
+      "city": "Guadalajara",
+      "trainingSite": "Academia Atlas FC",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 20.6597, "lng": -103.3496 },
+      "nearestHostCitySlug": "guadalajara"
+    },
+    "groupStageHostCitySlugs": ["mexico-city", "miami", "guadalajara"]
+  },
+  {
+    "slug": "congo-dr",
+    "name": "Congo DR",
+    "countryCode": "cd",
+    "confederation": "CAF",
+    "group": "K",
+    "tbc": {
+      "country": "USA",
+      "city": "Houston",
+      "trainingSite": "Houston Training Centre",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 29.7604, "lng": -95.3698 },
+      "nearestHostCitySlug": "houston"
+    },
+    "groupStageHostCitySlugs": ["houston", "atlanta", "guadalajara"]
+  },
+  {
+    "slug": "ivory-coast",
+    "name": "Côte d'Ivoire",
+    "countryCode": "ci",
+    "confederation": "CAF",
+    "group": "E",
+    "tbc": {
+      "country": "USA",
+      "city": "Philadelphia",
+      "trainingSite": "Philadelphia Union",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 39.9526, "lng": -75.1652 },
+      "nearestHostCitySlug": "philadelphia"
+    },
+    "groupStageHostCitySlugs": ["philadelphia", "toronto"]
+  },
+  {
+    "slug": "croatia",
+    "name": "Croatia",
+    "countryCode": "hr",
+    "confederation": "UEFA",
+    "group": "L",
+    "tbc": {
+      "country": "USA",
+      "city": "Alexandria",
+      "trainingSite": "Episcopal High School",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 38.8048, "lng": -77.0469 },
+      "nearestHostCitySlug": "philadelphia"
+    },
+    "groupStageHostCitySlugs": ["dallas", "toronto", "philadelphia"]
+  },
+  {
+    "slug": "curacao",
+    "name": "Curaçao",
+    "countryCode": "cw",
+    "confederation": "CONCACAF",
+    "group": "E",
+    "tbc": {
+      "country": "USA",
+      "city": "Boca Raton",
+      "trainingSite": "Florida Atlantic University",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 26.3683, "lng": -80.1289 },
+      "nearestHostCitySlug": "miami"
+    },
+    "groupStageHostCitySlugs": ["houston", "kansas-city", "philadelphia"]
+  },
+  {
+    "slug": "czechia",
+    "name": "Czechia",
+    "countryCode": "cz",
+    "confederation": "UEFA",
+    "group": "A",
+    "tbc": {
+      "country": "USA",
+      "city": "Dallas",
+      "trainingSite": "Mansfield Multipurpose Stadium",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 32.5632, "lng": -97.1417 },
+      "nearestHostCitySlug": "dallas"
+    },
+    "groupStageHostCitySlugs": ["guadalajara", "atlanta", "mexico-city"]
+  },
+  {
+    "slug": "ecuador",
+    "name": "Ecuador",
+    "countryCode": "ec",
+    "confederation": "CONMEBOL",
+    "group": "E",
+    "tbc": {
+      "country": "USA",
+      "city": "Columbus",
+      "trainingSite": "Columbus Crew Performance Centre",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 39.9612, "lng": -82.9988 },
+      "nearestHostCitySlug": "kansas-city"
+    },
+    "groupStageHostCitySlugs": ["philadelphia", "kansas-city", "new-york-new-jersey"]
+  },
+  {
+    "slug": "england",
+    "name": "England",
+    "countryCode": "gb-eng",
+    "confederation": "UEFA",
+    "group": "L",
+    "tbc": {
+      "country": "USA",
+      "city": "Kansas City",
+      "trainingSite": "Swope Soccer Village",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 39.0997, "lng": -94.5786 },
+      "nearestHostCitySlug": "kansas-city"
+    },
+    "groupStageHostCitySlugs": ["dallas", "boston", "new-york-new-jersey"]
+  },
+  {
+    "slug": "egypt",
+    "name": "Egypt",
+    "countryCode": "eg",
+    "confederation": "CAF",
+    "group": "G",
+    "tbc": {
+      "country": "USA",
+      "city": "Spokane",
+      "trainingSite": "Gonzaga University",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 47.6588, "lng": -117.426 },
+      "nearestHostCitySlug": "seattle"
+    },
+    "groupStageHostCitySlugs": ["seattle", "vancouver"]
+  },
+  {
+    "slug": "france",
+    "name": "France",
+    "countryCode": "fr",
+    "confederation": "UEFA",
+    "group": "I",
+    "tbc": {
+      "country": "USA",
+      "city": "Boston",
+      "trainingSite": "Bentley University",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 42.3601, "lng": -71.0589 },
+      "nearestHostCitySlug": "boston"
+    },
+    "groupStageHostCitySlugs": ["new-york-new-jersey", "philadelphia", "boston"]
+  },
+  {
+    "slug": "germany",
+    "name": "Germany",
+    "countryCode": "de",
+    "confederation": "UEFA",
+    "group": "E",
+    "tbc": {
+      "country": "USA",
+      "city": "Winston-Salem",
+      "trainingSite": "Wake Forest University",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 36.0999, "lng": -80.2442 },
+      "nearestHostCitySlug": "atlanta"
+    },
+    "groupStageHostCitySlugs": ["houston", "toronto", "new-york-new-jersey"]
+  },
+  {
+    "slug": "ghana",
+    "name": "Ghana",
+    "countryCode": "gh",
+    "confederation": "CAF",
+    "group": "L",
+    "tbc": {
+      "country": "USA",
+      "city": "Boston",
+      "trainingSite": "Bryant University",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 42.3601, "lng": -71.0589 },
+      "nearestHostCitySlug": "boston"
+    },
+    "groupStageHostCitySlugs": ["toronto", "boston", "philadelphia"]
+  },
+  {
+    "slug": "haiti",
+    "name": "Haiti",
+    "countryCode": "ht",
+    "confederation": "CONCACAF",
+    "group": "C",
+    "tbc": {
+      "country": "USA",
+      "city": "New York New Jersey",
+      "trainingSite": "Stockton University",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 39.4936, "lng": -74.5343 },
+      "nearestHostCitySlug": "new-york-new-jersey"
+    },
+    "groupStageHostCitySlugs": ["boston", "philadelphia", "atlanta"]
+  },
+  {
+    "slug": "iran",
+    "name": "IR Iran",
+    "countryCode": "ir",
+    "confederation": "AFC",
+    "group": "G",
+    "tbc": {
+      "country": "Mexico",
+      "city": "Tijuana",
+      "trainingSite": "Centro Xoloitzcuintle",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 32.5149, "lng": -117.0382 },
+      "nearestHostCitySlug": "los-angeles"
+    },
+    "groupStageHostCitySlugs": ["los-angeles", "seattle"]
+  },
+  {
+    "slug": "iraq",
+    "name": "Iraq",
+    "countryCode": "iq",
+    "confederation": "AFC",
+    "group": "I",
+    "tbc": {
+      "country": "USA",
+      "city": "Greenbrier County",
+      "trainingSite": "The Greenbrier Sports Performance Centre",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 37.784, "lng": -80.445 },
+      "nearestHostCitySlug": "philadelphia"
+    },
+    "groupStageHostCitySlugs": ["boston", "philadelphia", "toronto"]
+  },
+  {
+    "slug": "japan",
+    "name": "Japan",
+    "countryCode": "jp",
+    "confederation": "AFC",
+    "group": "F",
+    "tbc": {
+      "country": "USA",
+      "city": "Nashville",
+      "trainingSite": "Nashville SC",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 36.1627, "lng": -86.7816 },
+      "nearestHostCitySlug": "atlanta"
+    },
+    "groupStageHostCitySlugs": ["dallas", "monterrey"]
+  },
+  {
+    "slug": "jordan",
+    "name": "Jordan",
+    "countryCode": "jo",
+    "confederation": "AFC",
+    "group": "J",
+    "tbc": {
+      "country": "USA",
+      "city": "Portland",
+      "trainingSite": "University of Portland",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 45.5152, "lng": -122.6784 },
+      "nearestHostCitySlug": "seattle"
+    },
+    "groupStageHostCitySlugs": ["san-francisco-bay-area", "dallas"]
+  },
+  {
+    "slug": "korea-republic",
+    "name": "Korea Republic",
+    "countryCode": "kr",
+    "confederation": "AFC",
+    "group": "A",
+    "tbc": {
+      "country": "Mexico",
+      "city": "Guadalajara",
+      "trainingSite": "Chivas Verde Valle",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 20.6597, "lng": -103.3496 },
+      "nearestHostCitySlug": "guadalajara"
+    },
+    "groupStageHostCitySlugs": ["guadalajara", "atlanta", "monterrey"]
+  },
+  {
+    "slug": "mexico",
+    "name": "Mexico",
+    "countryCode": "mx",
+    "confederation": "CONCACAF",
+    "group": "A",
+    "tbc": {
+      "country": "Mexico",
+      "city": "Mexico City",
+      "trainingSite": "Centro de Alto Rendimiento (CAR)",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 19.4326, "lng": -99.1332 },
+      "nearestHostCitySlug": "mexico-city"
+    },
+    "groupStageHostCitySlugs": ["mexico-city", "guadalajara", "monterrey"]
+  },
+  {
+    "slug": "morocco",
+    "name": "Morocco",
+    "countryCode": "ma",
+    "confederation": "CAF",
+    "group": "C",
+    "tbc": {
+      "country": "USA",
+      "city": "New York New Jersey",
+      "trainingSite": "The Pingry School",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 40.8128, "lng": -74.0742 },
+      "nearestHostCitySlug": "new-york-new-jersey"
+    },
+    "groupStageHostCitySlugs": ["new-york-new-jersey", "boston", "atlanta"]
+  },
+  {
+    "slug": "netherlands",
+    "name": "Netherlands",
+    "countryCode": "nl",
+    "confederation": "UEFA",
+    "group": "F",
+    "tbc": {
+      "country": "USA",
+      "city": "Kansas City",
+      "trainingSite": "KC Current Training Facility",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 39.0997, "lng": -94.5786 },
+      "nearestHostCitySlug": "kansas-city"
+    },
+    "groupStageHostCitySlugs": ["dallas", "houston", "kansas-city"]
+  },
+  {
+    "slug": "new-zealand",
+    "name": "New Zealand",
+    "countryCode": "nz",
+    "confederation": "OFC",
+    "group": "G",
+    "tbc": {
+      "country": "USA",
+      "city": "San Diego",
+      "trainingSite": "University of San Diego - Torero Stadium",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 32.7157, "lng": -117.1611 },
+      "nearestHostCitySlug": "los-angeles"
+    },
+    "groupStageHostCitySlugs": ["los-angeles", "vancouver"]
+  },
+  {
+    "slug": "norway",
+    "name": "Norway",
+    "countryCode": "no",
+    "confederation": "UEFA",
+    "group": "I",
+    "tbc": {
+      "country": "USA",
+      "city": "Greensboro",
+      "trainingSite": "UNC Greensboro",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 36.0726, "lng": -79.792 },
+      "nearestHostCitySlug": "atlanta"
+    },
+    "groupStageHostCitySlugs": ["boston", "new-york-new-jersey"]
+  },
+  {
+    "slug": "panama",
+    "name": "Panama",
+    "countryCode": "pa",
+    "confederation": "CONCACAF",
+    "group": "L",
+    "tbc": {
+      "country": "Canada",
+      "city": "New Tecumseth",
+      "trainingSite": "Nottawasaga Training Site",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 44.0834, "lng": -79.7829 },
+      "nearestHostCitySlug": "toronto"
+    },
+    "groupStageHostCitySlugs": ["toronto", "new-york-new-jersey"]
+  },
+  {
+    "slug": "paraguay",
+    "name": "Paraguay",
+    "countryCode": "py",
+    "confederation": "CONMEBOL",
+    "group": "D",
+    "tbc": {
+      "country": "USA",
+      "city": "San Francisco Bay Area",
+      "trainingSite": "Spartan Soccer Complex",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 37.3352, "lng": -121.8811 },
+      "nearestHostCitySlug": "san-francisco-bay-area"
+    },
+    "groupStageHostCitySlugs": ["los-angeles", "san-francisco-bay-area"]
+  },
+  {
+    "slug": "portugal",
+    "name": "Portugal",
+    "countryCode": "pt",
+    "confederation": "UEFA",
+    "group": "K",
+    "tbc": {
+      "country": "USA",
+      "city": "Palm Beach Gardens",
+      "trainingSite": "Gardens North County District Park",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 26.8234, "lng": -80.1386 },
+      "nearestHostCitySlug": "miami"
+    },
+    "groupStageHostCitySlugs": ["houston", "miami"]
+  },
+  {
+    "slug": "qatar",
+    "name": "Qatar",
+    "countryCode": "qa",
+    "confederation": "AFC",
+    "group": "B",
+    "tbc": {
+      "country": "USA",
+      "city": "Santa Barbara",
+      "trainingSite": "Westmont College",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 34.4208, "lng": -119.6982 },
+      "nearestHostCitySlug": "los-angeles"
+    },
+    "groupStageHostCitySlugs": ["san-francisco-bay-area", "vancouver", "seattle"]
+  },
+  {
+    "slug": "saudi-arabia",
+    "name": "Saudi Arabia",
+    "countryCode": "sa",
+    "confederation": "AFC",
+    "group": "H",
+    "tbc": {
+      "country": "USA",
+      "city": "Austin",
+      "trainingSite": "Austin FC Stadium",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 30.2672, "lng": -97.7431 },
+      "nearestHostCitySlug": "dallas"
+    },
+    "groupStageHostCitySlugs": ["miami", "atlanta", "houston"]
+  },
+  {
+    "slug": "scotland",
+    "name": "Scotland",
+    "countryCode": "gb-sct",
+    "confederation": "UEFA",
+    "group": "C",
+    "tbc": {
+      "country": "USA",
+      "city": "Charlotte",
+      "trainingSite": "Charlotte FC",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 35.2271, "lng": -80.8431 },
+      "nearestHostCitySlug": "atlanta"
+    },
+    "groupStageHostCitySlugs": ["boston", "philadelphia", "miami"]
+  },
+  {
+    "slug": "senegal",
+    "name": "Senegal",
+    "countryCode": "sn",
+    "confederation": "CAF",
+    "group": "I",
+    "tbc": {
+      "country": "USA",
+      "city": "New York New Jersey",
+      "trainingSite": "Rutgers University",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 40.8128, "lng": -74.0742 },
+      "nearestHostCitySlug": "new-york-new-jersey"
+    },
+    "groupStageHostCitySlugs": ["new-york-new-jersey", "toronto"]
+  },
+  {
+    "slug": "south-africa",
+    "name": "South Africa",
+    "countryCode": "za",
+    "confederation": "CAF",
+    "group": "A",
+    "tbc": {
+      "country": "Mexico",
+      "city": "Pachuca",
+      "trainingSite": "CF Pachuca - Universidad Del Futbol",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 20.1011, "lng": -98.7591 },
+      "nearestHostCitySlug": "mexico-city"
+    },
+    "groupStageHostCitySlugs": ["mexico-city", "atlanta", "monterrey"]
+  },
+  {
+    "slug": "spain",
+    "name": "Spain",
+    "countryCode": "es",
+    "confederation": "UEFA",
+    "group": "H",
+    "tbc": {
+      "country": "USA",
+      "city": "Chattanooga",
+      "trainingSite": "Baylor School",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 35.0456, "lng": -85.3097 },
+      "nearestHostCitySlug": "atlanta"
+    },
+    "groupStageHostCitySlugs": ["atlanta", "guadalajara"]
+  },
+  {
+    "slug": "sweden",
+    "name": "Sweden",
+    "countryCode": "se",
+    "confederation": "UEFA",
+    "group": "F",
+    "tbc": {
+      "country": "USA",
+      "city": "Dallas",
+      "trainingSite": "FC Dallas Stadium",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 32.7767, "lng": -96.797 },
+      "nearestHostCitySlug": "dallas"
+    },
+    "groupStageHostCitySlugs": ["monterrey", "houston", "dallas"]
+  },
+  {
+    "slug": "switzerland",
+    "name": "Switzerland",
+    "countryCode": "ch",
+    "confederation": "UEFA",
+    "group": "B",
+    "tbc": {
+      "country": "USA",
+      "city": "San Diego",
+      "trainingSite": "SDJA",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 32.7157, "lng": -117.1611 },
+      "nearestHostCitySlug": "los-angeles"
+    },
+    "groupStageHostCitySlugs": ["san-francisco-bay-area", "los-angeles", "vancouver"]
+  },
+  {
+    "slug": "tunisia",
+    "name": "Tunisia",
+    "countryCode": "tn",
+    "confederation": "CAF",
+    "group": "F",
+    "tbc": {
+      "country": "Mexico",
+      "city": "Monterrey",
+      "trainingSite": "Rayados Training Centre",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 25.6866, "lng": -100.3161 },
+      "nearestHostCitySlug": "monterrey"
+    },
+    "groupStageHostCitySlugs": ["monterrey", "kansas-city"]
+  },
+  {
+    "slug": "turkiye",
+    "name": "Türkiye",
+    "countryCode": "tr",
+    "confederation": "UEFA",
+    "group": "D",
+    "tbc": {
+      "country": "USA",
+      "city": "Mesa",
+      "trainingSite": "Arizona Athletic Grounds",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 33.4152, "lng": -111.8315 },
+      "nearestHostCitySlug": "los-angeles"
+    },
+    "groupStageHostCitySlugs": ["vancouver", "san-francisco-bay-area", "los-angeles"]
+  },
+  {
+    "slug": "united-states",
+    "name": "United States",
+    "countryCode": "us",
+    "confederation": "CONCACAF",
+    "group": "D",
+    "tbc": {
+      "country": "USA",
+      "city": "Irvine",
+      "trainingSite": "Great Park Sports Complex",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 33.6846, "lng": -117.8265 },
+      "nearestHostCitySlug": "los-angeles"
+    },
+    "groupStageHostCitySlugs": ["los-angeles", "seattle"]
+  },
+  {
+    "slug": "uruguay",
+    "name": "Uruguay",
+    "countryCode": "uy",
+    "confederation": "CONMEBOL",
+    "group": "H",
+    "tbc": {
+      "country": "Mexico",
+      "city": "Cancun",
+      "trainingSite": "Mayakoba Training Centre Cancun",
+      "isHostCityCommunity": false,
+      "coordinates": { "lat": 21.1619, "lng": -86.8515 },
+      "nearestHostCitySlug": "miami"
+    },
+    "groupStageHostCitySlugs": ["miami", "atlanta", "guadalajara"]
+  },
+  {
+    "slug": "uzbekistan",
+    "name": "Uzbekistan",
+    "countryCode": "uz",
+    "confederation": "AFC",
+    "group": "K",
+    "tbc": {
+      "country": "USA",
+      "city": "Atlanta",
+      "trainingSite": "Atlanta United Training Centre",
+      "isHostCityCommunity": true,
+      "coordinates": { "lat": 33.749, "lng": -84.388 },
+      "nearestHostCitySlug": "atlanta"
+    },
+    "groupStageHostCitySlugs": ["mexico-city", "atlanta"]
+  }
+]

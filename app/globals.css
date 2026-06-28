@@ -1,26 +1,82 @@
 @import "tailwindcss";
+@import "flag-icons/css/flag-icons.min.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #f5f0e8;
+  --gold: #c9a227;
+  --gold-light: #e8c547;
+  --cream: #f5f0e8;
+  --muted: #9a9488;
+  --card: #141414;
+  --card-border: #2a2a2a;
+  --accent-usa: #4b9cd3;
+  --accent-mexico: #006847;
+  --accent-canada: #ff0000;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-cream: var(--cream);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-accent-usa: var(--accent-usa);
+  --color-accent-mexico: var(--accent-mexico);
+  --color-accent-canada: var(--accent-canada);
+  --font-display: var(--font-bebas);
+  --font-sans: var(--font-noto);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-noto), system-ui, sans-serif;
 }
+
+.grid-26-bg {
+  background-image: url("/patterns/grid-26.svg");
+  background-size: 120px 120px;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+.leaflet-container {
+  font-family: var(--font-noto), system-ui, sans-serif;
+  background: #1a1a1a;
+}
+
+.tbc-marker {
+  background: var(--gold);
+  border: 2px solid var(--cream);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  width: 24px;
+  height: 24px;
+}
+
+.tbc-marker-usa { background: var(--accent-usa); }
+.tbc-marker-mexico { background: var(--accent-mexico); }
+.tbc-marker-canada { background: var(--accent-canada); }
