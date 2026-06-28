@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { CountryFlag } from "@/components/ui/CountryFlag";
 import { GroupBadge } from "@/components/ui/GroupBadge";
+import { TeamKit } from "@/components/ui/TeamKit";
+import { getTeamKit } from "@/lib/kits";
 import { getHostCity } from "@/lib/teams";
 import type { HostCity, Team } from "@/lib/types";
 
@@ -47,11 +49,14 @@ type TeamListItemProps = {
 };
 
 export function TeamListItem({ team }: TeamListItemProps) {
+  const kit = getTeamKit(team.slug);
+
   return (
     <Link
       href={`/teams/${team.slug}`}
       className="flex items-center gap-3 wc26-panel px-4 py-3 transition hover:border-gold/40"
     >
+      {kit && <TeamKit kit={kit} size="md" title={`${team.name} home kit`} />}
       <CountryFlag countryCode={team.countryCode} className="text-xl" />
       <span className="flex-1 font-display font-semibold uppercase tracking-wide text-cream">
         {team.name}

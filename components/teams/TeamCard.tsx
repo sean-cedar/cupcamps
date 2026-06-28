@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { getTeamKit } from "@/lib/kits";
 import { CountryFlag } from "@/components/ui/CountryFlag";
+import { TeamKit } from "@/components/ui/TeamKit";
 import { GroupBadge } from "@/components/ui/GroupBadge";
 import { getHostCity } from "@/lib/teams";
 import type { Team } from "@/lib/types";
@@ -16,6 +18,7 @@ const tbcCountryColors: Record<string, string> = {
 
 export function TeamCard({ team }: TeamCardProps) {
   const hostCity = getHostCity(team.tbc.nearestHostCitySlug);
+  const kit = getTeamKit(team.slug);
 
   return (
     <Link
@@ -24,6 +27,7 @@ export function TeamCard({ team }: TeamCardProps) {
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
+          {kit && <TeamKit kit={kit} size="lg" title={`${team.name} home kit`} />}
           <CountryFlag countryCode={team.countryCode} className="text-3xl" />
           <div>
             <h3 className="font-display text-xl font-bold uppercase tracking-[0.06em] text-cream group-hover:text-gold-light">

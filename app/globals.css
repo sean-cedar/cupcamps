@@ -160,6 +160,13 @@ body {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
 }
 
+.tbc-flag-marker svg {
+  border: 2px solid #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.92);
+}
+
 .tbc-flag-marker-dimmed {
   opacity: 0.45;
 }

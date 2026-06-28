@@ -1,0 +1,299 @@
+{
+  "algeria": {
+    "pattern": "solid",
+    "primary": "#F4EFE6",
+    "accent": "#006233",
+    "collar": "#006233",
+    "sleeves": "#006233"
+  },
+  "argentina": {
+    "pattern": "vertical-stripes",
+    "primary": "#75AADB",
+    "secondary": "#FFFFFF",
+    "accent": "#000000",
+    "collar": "#000000"
+  },
+  "australia": {
+    "pattern": "solid",
+    "primary": "#FFCD00",
+    "accent": "#00843D",
+    "collar": "#00843D",
+    "sleeves": "#00843D"
+  },
+  "austria": {
+    "pattern": "horizontal-stripes",
+    "primary": "#ED1C24",
+    "secondary": "#FFFFFF"
+  },
+  "belgium": {
+    "pattern": "side-panels",
+    "primary": "#EF3340",
+    "secondary": "#000000",
+    "accent": "#FDDA24",
+    "collar": "#000000"
+  },
+  "bosnia-and-herzegovina": {
+    "pattern": "solid",
+    "primary": "#002395",
+    "accent": "#FFCC00",
+    "collar": "#FFCC00"
+  },
+  "brazil": {
+    "pattern": "shoulder-yoke",
+    "primary": "#FFDF00",
+    "accent": "#009C3B",
+    "collar": "#009C3B",
+    "sleeves": "#009C3B"
+  },
+  "cabo-verde": {
+    "pattern": "solid",
+    "primary": "#003893",
+    "accent": "#FFFFFF",
+    "collar": "#CF2027"
+  },
+  "canada": {
+    "pattern": "solid",
+    "primary": "#FF0000",
+    "accent": "#FFFFFF",
+    "collar": "#FFFFFF"
+  },
+  "colombia": {
+    "pattern": "central-band",
+    "primary": "#FCD116",
+    "secondary": "#003893",
+    "accent": "#CE1126"
+  },
+  "congo-dr": {
+    "pattern": "solid",
+    "primary": "#C8102E",
+    "accent": "#F7D618",
+    "collar": "#F7D618"
+  },
+  "ivory-coast": {
+    "pattern": "solid",
+    "primary": "#FF8200",
+    "accent": "#009639",
+    "collar": "#009639"
+  },
+  "croatia": {
+    "pattern": "checker",
+    "primary": "#FF0000",
+    "secondary": "#FFFFFF"
+  },
+  "curacao": {
+    "pattern": "solid",
+    "primary": "#002B7F",
+    "accent": "#F9E814",
+    "collar": "#F9E814"
+  },
+  "czechia": {
+    "pattern": "side-panels",
+    "primary": "#D7141A",
+    "secondary": "#11457E",
+    "collar": "#11457E"
+  },
+  "ecuador": {
+    "pattern": "central-band",
+    "primary": "#FCD116",
+    "secondary": "#003893",
+    "accent": "#ED1C24"
+  },
+  "england": {
+    "pattern": "solid",
+    "primary": "#FFFFFF",
+    "accent": "#132257",
+    "collar": "#132257",
+    "sleeves": "#132257"
+  },
+  "egypt": {
+    "pattern": "solid",
+    "primary": "#C8102E",
+    "accent": "#FFFFFF",
+    "collar": "#FFFFFF"
+  },
+  "france": {
+    "pattern": "solid",
+    "primary": "#1B2A59",
+    "accent": "#FFFFFF",
+    "collar": "#FFFFFF"
+  },
+  "germany": {
+    "pattern": "chest-stripe",
+    "primary": "#FFFFFF",
+    "accent": "#000000",
+    "secondary": "#DD0000",
+    "collar": "#000000",
+    "sleeves": "#FFFFFF"
+  },
+  "ghana": {
+    "pattern": "central-band",
+    "primary": "#FFFFFF",
+    "secondary": "#000000",
+    "accent": "#CE1126"
+  },
+  "haiti": {
+    "pattern": "vertical-stripes",
+    "primary": "#00209F",
+    "secondary": "#D21034"
+  },
+  "iran": {
+    "pattern": "central-stripe",
+    "primary": "#FFFFFF",
+    "accent": "#239F40",
+    "collar": "#239F40"
+  },
+  "iraq": {
+    "pattern": "solid",
+    "primary": "#FFFFFF",
+    "accent": "#007A3D",
+    "collar": "#007A3D",
+    "sleeves": "#007A3D"
+  },
+  "japan": {
+    "pattern": "central-stripe",
+    "primary": "#0C1F77",
+    "accent": "#BC002D",
+    "collar": "#BC002D"
+  },
+  "jordan": {
+    "pattern": "solid",
+    "primary": "#CE1126",
+    "accent": "#007A3D",
+    "collar": "#000000"
+  },
+  "korea-republic": {
+    "pattern": "side-panels",
+    "primary": "#C8102E",
+    "secondary": "#003478",
+    "collar": "#003478"
+  },
+  "mexico": {
+    "pattern": "solid",
+    "primary": "#006847",
+    "accent": "#CE1126",
+    "collar": "#FFFFFF"
+  },
+  "morocco": {
+    "pattern": "solid",
+    "primary": "#C1272D",
+    "accent": "#006233",
+    "collar": "#006233"
+  },
+  "netherlands": {
+    "pattern": "shoulder-yoke",
+    "primary": "#FF6600",
+    "accent": "#21468B",
+    "collar": "#21468B",
+    "sleeves": "#FF6600"
+  },
+  "new-zealand": {
+    "pattern": "solid",
+    "primary": "#FFFFFF",
+    "accent": "#000000",
+    "collar": "#000000",
+    "sleeves": "#000000"
+  },
+  "norway": {
+    "pattern": "solid",
+    "primary": "#BA0C2F",
+    "accent": "#00205B",
+    "collar": "#00205B"
+  },
+  "panama": {
+    "pattern": "solid",
+    "primary": "#DA121A",
+    "accent": "#005293",
+    "collar": "#005293"
+  },
+  "paraguay": {
+    "pattern": "tricolor-vertical",
+    "primary": "#D52B1E",
+    "secondary": "#FFFFFF",
+    "accent": "#0038A8"
+  },
+  "portugal": {
+    "pattern": "side-panels",
+    "primary": "#B50926",
+    "secondary": "#006600",
+    "accent": "#FFD700",
+    "collar": "#FFD700"
+  },
+  "qatar": {
+    "pattern": "solid",
+    "primary": "#8A1538",
+    "accent": "#FFFFFF",
+    "collar": "#FFFFFF"
+  },
+  "saudi-arabia": {
+    "pattern": "solid",
+    "primary": "#006C35",
+    "accent": "#FFFFFF",
+    "collar": "#FFFFFF"
+  },
+  "scotland": {
+    "pattern": "solid",
+    "primary": "#003876",
+    "accent": "#FFFFFF",
+    "collar": "#FFFFFF"
+  },
+  "senegal": {
+    "pattern": "central-stripe",
+    "primary": "#FFFFFF",
+    "accent": "#00853F",
+    "collar": "#FDEF42"
+  },
+  "south-africa": {
+    "pattern": "solid",
+    "primary": "#FFB612",
+    "accent": "#007A4D",
+    "collar": "#007A4D"
+  },
+  "spain": {
+    "pattern": "shoulder-yoke",
+    "primary": "#C8102E",
+    "accent": "#FFB612",
+    "collar": "#003087",
+    "sleeves": "#C8102E"
+  },
+  "sweden": {
+    "pattern": "solid",
+    "primary": "#FFCD00",
+    "accent": "#005293",
+    "collar": "#005293"
+  },
+  "switzerland": {
+    "pattern": "cross",
+    "primary": "#FF0000",
+    "secondary": "#FFFFFF"
+  },
+  "tunisia": {
+    "pattern": "solid",
+    "primary": "#E70013",
+    "accent": "#FFFFFF",
+    "collar": "#FFFFFF"
+  },
+  "turkiye": {
+    "pattern": "solid",
+    "primary": "#E30A17",
+    "accent": "#FFFFFF",
+    "collar": "#FFFFFF"
+  },
+  "united-states": {
+    "pattern": "central-band",
+    "primary": "#FFFFFF",
+    "secondary": "#002868",
+    "accent": "#BF0A30"
+  },
+  "uruguay": {
+    "pattern": "solid",
+    "primary": "#7BCDE8",
+    "accent": "#FFFFFF",
+    "collar": "#FFFFFF"
+  },
+  "uzbekistan": {
+    "pattern": "central-stripe",
+    "primary": "#FFFFFF",
+    "accent": "#1EB53A",
+    "collar": "#0099B5"
+  }
+}

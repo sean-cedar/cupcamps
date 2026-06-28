@@ -4,6 +4,8 @@ import { HostNationStripe } from "@/components/brand/HostNationStripe";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
 import { CountryFlag } from "@/components/ui/CountryFlag";
+import { TeamKit } from "@/components/ui/TeamKit";
+import { getTeamKit } from "@/lib/kits";
 import { teams } from "@/lib/teams";
 
 export const metadata: Metadata = {
@@ -36,12 +38,17 @@ export default function MapPage() {
             {teams
               .slice()
               .sort((a, b) => a.name.localeCompare(b.name))
-              .map((team) => (
+              .map((team) => {
+                const kit = getTeamKit(team.slug);
+                return (
                 <li key={team.slug}>
                   <Link
                     href={`/teams/${team.slug}`}
                     className="flex items-center gap-3 px-4 py-3 transition hover:bg-background"
                   >
+                    {kit && (
+                      <TeamKit kit={kit} size="sm" title={`${team.name} home kit`} />
+                    )}
                     <CountryFlag
                       countryCode={team.countryCode}
                       className="text-lg"
@@ -56,7 +63,8 @@ export default function MapPage() {
                     </div>
                   </Link>
                 </li>
-              ))}
+                );
+              })}
           </ul>
         </div>
       </div>

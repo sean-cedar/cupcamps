@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-import { CountryFlag } from "@/components/ui/CountryFlag";
+import { MatchupTeams } from "@/components/ui/MatchupTeams";
 import { MatchHighlightsPanel } from "@/components/teams/MatchHighlightsPanel";
 import {
   formatFixtureScore,
@@ -15,30 +14,6 @@ import type { CityMatch } from "@/lib/schedule/types";
 type CityMatchScheduleRowProps = {
   match: CityMatch;
 };
-
-function TeamLink({
-  slug,
-  label,
-  countryCode,
-}: {
-  slug: string | null;
-  label: string;
-  countryCode: string | null;
-}) {
-  if (slug && countryCode) {
-    return (
-      <Link
-        href={`/teams/${slug}`}
-        className="flex min-w-0 items-center gap-2 text-cream hover:text-gold-light"
-      >
-        <CountryFlag countryCode={countryCode} className="text-base" />
-        <span className="truncate font-medium">{label}</span>
-      </Link>
-    );
-  }
-
-  return <span className="truncate text-sm text-muted">{label}</span>;
-}
 
 export function CityMatchScheduleRow({ match }: CityMatchScheduleRowProps) {
   const [expanded, setExpanded] = useState(false);
@@ -90,33 +65,16 @@ export function CityMatchScheduleRow({ match }: CityMatchScheduleRowProps) {
           <p className="text-[10px] text-muted">Match {match.matchNumber}</p>
         </div>
 
-        <div className="min-w-0 space-y-1">
-          <div
-            className="flex min-w-0 items-center gap-2"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <TeamLink
-              slug={home.slug}
-              label={home.label}
-              countryCode={home.countryCode}
-            />
-          </div>
-          <div
-            className="flex min-w-0 items-center gap-2 pl-4"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <span className="shrink-0 text-[10px] uppercase tracking-wider text-muted">
-              vs
-            </span>
-            <TeamLink
-              slug={away.slug}
-              label={away.label}
-              countryCode={away.countryCode}
-            />
-          </div>
-          <p className="hidden text-xs text-muted sm:block">{match.stadium}</p>
+        <div className="min-w-0">
+          <MatchupTeams
+            home={home}
+            away={away}
+            kitSize="sm"
+            onTeamClick={(event) => event.stopPropagation()}
+          />
+          <p className="mt-1 hidden text-xs text-muted sm:block">{match.stadium}</p>
           {canShowHighlights && (
-            <span className="text-[10px] uppercase tracking-wider text-gold">
+            <span className="mt-1 inline-block text-[10px] uppercase tracking-wider text-gold">
               {expanded ? "Hide highlights" : "Highlights"}
             </span>
           )}

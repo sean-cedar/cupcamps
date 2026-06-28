@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { HostCityLink } from "@/components/host-cities/HostCityCard";
-import { CountryFlag } from "@/components/ui/CountryFlag";
+import { TeamIdentity } from "@/components/ui/TeamIdentity";
 import { MatchHighlightsPanel } from "@/components/teams/MatchHighlightsPanel";
 import {
   formatMatchDate,
@@ -66,31 +65,25 @@ export function MatchScheduleRow({ match }: MatchScheduleRowProps) {
           <p className="text-[10px] text-muted">Match {match.matchNumber}</p>
         </div>
 
-        <div className="flex min-w-0 items-center gap-2">
-          <span className="shrink-0 text-[10px] uppercase tracking-wider text-muted">
-            {match.isHome ? "vs" : "@"}
-          </span>
-          {opponent.slug && opponent.countryCode ? (
-            <Link
-              href={`/teams/${opponent.slug}`}
-              className="flex min-w-0 items-center gap-2 text-cream hover:text-gold-light"
-              onClick={(event) => event.stopPropagation()}
-            >
-              <CountryFlag
-                countryCode={opponent.countryCode}
-                className="text-base"
-              />
-              <span className="truncate font-medium">{opponent.label}</span>
-            </Link>
-          ) : (
-            <span className="truncate text-sm text-muted">{opponent.label}</span>
-          )}
+        <div className="min-w-0 space-y-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="rounded border border-card-border bg-card/60 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted">
+              {match.isHome ? "Home" : "Away"}
+            </span>
+          </div>
+          <TeamIdentity
+            teamSlug={opponent.slug}
+            label={opponent.label}
+            countryCode={opponent.countryCode}
+            kitSize="sm"
+            onClick={(event) => event.stopPropagation()}
+          />
           <span className="hidden text-xs text-muted sm:inline">
-            · {match.stadium}
+            {match.stadium}
           </span>
           {canShowHighlights && (
-            <span className="ml-auto text-[10px] uppercase tracking-wider text-gold sm:ml-0">
-              {expanded ? "Hide" : "Highlights"}
+            <span className="text-[10px] uppercase tracking-wider text-gold">
+              {expanded ? "Hide highlights" : "Highlights"}
             </span>
           )}
         </div>

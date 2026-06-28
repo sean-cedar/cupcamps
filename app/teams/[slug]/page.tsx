@@ -7,7 +7,9 @@ import { HostCityLink } from "@/components/host-cities/HostCityCard";
 import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
 import { TeamSchedule } from "@/components/teams/TeamSchedule";
 import { CountryFlag } from "@/components/ui/CountryFlag";
+import { TeamKit } from "@/components/ui/TeamKit";
 import { GroupBadge } from "@/components/ui/GroupBadge";
+import { getTeamKit } from "@/lib/kits";
 import { getHostCity, getTeam, teams } from "@/lib/teams";
 
 type PageProps = {
@@ -35,6 +37,7 @@ export default async function TeamDetailPage({ params }: PageProps) {
   if (!team) notFound();
 
   const nearestHostCity = getHostCity(team.tbc.nearestHostCitySlug);
+  const kit = getTeamKit(team.slug);
   const groupStageCities = team.groupStageHostCitySlugs
     .map((s) => getHostCity(s))
     .filter(Boolean);
@@ -51,6 +54,9 @@ export default async function TeamDetailPage({ params }: PageProps) {
             ← All teams
           </Link>
           <div className="mt-6 flex flex-wrap items-center gap-6">
+            {kit && (
+              <TeamKit kit={kit} size="xl" title={`${team.name} home kit`} />
+            )}
             <CountryFlag countryCode={team.countryCode} className="text-6xl" />
             <div>
               <div className="flex flex-wrap items-center gap-3">
