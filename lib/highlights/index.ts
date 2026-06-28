@@ -1,6 +1,5 @@
 import {
-  fetchWorldCupDateFeed,
-  findVideosInDateFeed,
+  fetchHighlightsForMatch,
   getFeedCacheSeconds,
   getHighlightlyTeamName,
   isHighlightlyConfigured,
@@ -15,10 +14,16 @@ import {
 import type { HighlightVideo, MatchHighlightsResponse } from "@/lib/highlights/types";
 import { unstable_cache } from "next/cache";
 
-function getCachedWorldCupDateFeed(date: string) {
+function getCachedMatchHighlights(
+  date: string,
+  homeSlug: string,
+  awaySlug: string,
+  homeName: string,
+  awayName: string,
+) {
   return unstable_cache(
-    async () => fetchWorldCupDateFeed(date),
-    ["highlightly-wc-feed", date],
+    async () => fetchHighlightsForMatch(date, homeName, awayName),
+    ["highlightly-match", date, homeSlug, awaySlug],
     { revalidate: getFeedCacheSeconds() },
   )();
 }
@@ -35,8 +40,7 @@ async function getVideosForMatch(
     return [];
   }
 
-  const feed = await getCachedWorldCupDateFeed(date);
-  return findVideosInDateFeed(feed, homeName, awayName);
+  return getCachedMatchHighlights(date, homeSlug, awaySlug, homeName, awayName);
 }
 
 export async function getMatchHighlights(
@@ -109,7 +113,7 @@ export async function getMatchHighlights(
       fallbackUrl,
       cachedAt,
       message:
-        "Official highlights usually appear within a few hours of the match.",
+        "No embeddable highlights found yet. Try FIFA.com, or confirm your Highlightly key matches the API mode (direct vs RapidAPI).",
     };
   } catch {
     return {
