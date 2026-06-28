@@ -5,6 +5,7 @@ import { HostNationStripe } from "@/components/brand/HostNationStripe";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { HostCityLink } from "@/components/host-cities/HostCityCard";
 import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
+import { TeamSchedule } from "@/components/teams/TeamSchedule";
 import { CountryFlag } from "@/components/ui/CountryFlag";
 import { GroupBadge } from "@/components/ui/GroupBadge";
 import { getHostCity, getTeam, teams } from "@/lib/teams";
@@ -106,9 +107,9 @@ export default async function TeamDetailPage({ params }: PageProps) {
             </div>
 
             <section className="mt-10">
-              <SectionHeading title="On The Pitch" />
+              <SectionHeading title="Match Cities" />
               <p className="mt-2 text-sm text-muted">
-                Group-stage host cities where {team.name} plays
+                Host cities where {team.name} plays group-stage matches
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {groupStageCities.map(
@@ -138,6 +139,8 @@ export default async function TeamDetailPage({ params }: PageProps) {
               Location is approximate based on training facility or city center.
             </p>
           </section>
+
+          <TeamSchedule team={team} />
         </div>
       </div>
     </div>

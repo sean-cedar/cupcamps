@@ -1,46 +1,39 @@
-"use client";
-
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useTransition } from "react";
 import { getGroups, hostCities } from "@/lib/teams";
 import type { TbcCountry } from "@/lib/types";
 
-export function TeamFilters() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
+export type TeamFilterValues = {
+  search: string;
+  group: string;
+  tbcCountry: string;
+  hostCity: string;
+  sort: "name" | "group" | "tbcCity";
+};
 
-  const search = searchParams.get("search") ?? "";
-  const group = searchParams.get("group") ?? "";
-  const tbcCountry = searchParams.get("tbcCountry") ?? "";
-  const hostCity = searchParams.get("hostCity") ?? "";
-  const sort = searchParams.get("sort") ?? "name";
+type TeamFiltersProps = TeamFilterValues & {
+  onSearchChange: (value: string) => void;
+  onGroupChange: (value: string) => void;
+  onTbcCountryChange: (value: string) => void;
+  onHostCityChange: (value: string) => void;
+  onSortChange: (value: TeamFilterValues["sort"]) => void;
+};
 
-  const updateParams = useCallback(
-    (updates: Record<string, string>) => {
-      const params = new URLSearchParams(searchParams.toString());
-      for (const [key, value] of Object.entries(updates)) {
-        if (value) {
-          params.set(key, value);
-        } else {
-          params.delete(key);
-        }
-      }
-      startTransition(() => {
-        router.push(`/teams?${params.toString()}`);
-      });
-    },
-    [router, searchParams],
-  );
+const inputClass = "wc26-input w-full px-3 py-2.5 text-sm";
 
-  const inputClass =
-    "wc26-input w-full px-3 py-2.5 text-sm";
-
+export function TeamFilters({
+  search,
+  group,
+  tbcCountry,
+  hostCity,
+  sort,
+  onSearchChange,
+  onGroupChange,
+  onTbcCountryChange,
+  onHostCityChange,
+  onSortChange,
+}: TeamFiltersProps) {
   return (
-    <div
-      className={`wc26-panel space-y-4 p-4 ${isPending ? "opacity-70" : ""}`}
-    >
-      <div className="amplify-edge h-0.5 w-12" />
+    <div className="wc26-panel space-y-4 p-4">
+      <div className="section-accent" />
       <div>
         <label
           htmlFor="search"
@@ -51,10 +44,10 @@ export function TeamFilters() {
         <input
           id="search"
           type="search"
-          defaultValue={search}
+          value={search}
           placeholder="Country, city, or training site..."
           className={inputClass}
-          onChange={(e) => updateParams({ search: e.target.value })}
+          onChange={(e) => onSearchChange(e.target.value)}
         />
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -68,7 +61,7 @@ export function TeamFilters() {
           <select
             id="group"
             value={group}
-            onChange={(e) => updateParams({ group: e.target.value })}
+            onChange={(e) => onGroupChange(e.target.value)}
             className={inputClass}
           >
             <option value="">All groups</option>
@@ -89,7 +82,7 @@ export function TeamFilters() {
           <select
             id="tbcCountry"
             value={tbcCountry}
-            onChange={(e) => updateParams({ tbcCountry: e.target.value })}
+            onChange={(e) => onTbcCountryChange(e.target.value)}
             className={inputClass}
           >
             <option value="">All countries</option>
@@ -110,7 +103,7 @@ export function TeamFilters() {
           <select
             id="hostCity"
             value={hostCity}
-            onChange={(e) => updateParams({ hostCity: e.target.value })}
+            onChange={(e) => onHostCityChange(e.target.value)}
             className={inputClass}
           >
             <option value="">All host cities</option>
@@ -131,7 +124,9 @@ export function TeamFilters() {
           <select
             id="sort"
             value={sort}
-            onChange={(e) => updateParams({ sort: e.target.value })}
+            onChange={(e) =>
+              onSortChange(e.target.value as TeamFilterValues["sort"])
+            }
             className={inputClass}
           >
             <option value="name">Name</option>

@@ -22,7 +22,6 @@ export function TeamCard({ team }: TeamCardProps) {
       href={`/teams/${team.slug}`}
       className="group wc26-panel block p-5 transition hover:border-gold/40"
     >
-      <div className="amplify-edge mb-4 h-0.5 w-full opacity-40 transition group-hover:opacity-100" />
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
           <CountryFlag countryCode={team.countryCode} className="text-3xl" />

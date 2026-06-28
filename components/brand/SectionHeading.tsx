@@ -10,13 +10,13 @@ export function SectionHeading({
   className = "",
 }: SectionHeadingProps) {
   return (
-    <div className={`relative ${className}`}>
-      <div className="amplify-edge mb-3 h-1 w-16" />
-      <h2 className="font-display text-3xl font-black uppercase tracking-[0.06em] text-cream sm:text-4xl">
+    <div className={className}>
+      <div className="mb-2 h-px w-12 bg-gold" />
+      <h2 className="font-display text-2xl font-black uppercase tracking-[0.05em] text-cream sm:text-3xl">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-1 text-sm uppercase tracking-[0.15em] text-muted">
+        <p className="mt-1 text-xs uppercase tracking-[0.12em] text-muted">
           {subtitle}
         </p>
       )}
