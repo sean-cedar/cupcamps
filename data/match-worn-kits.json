@@ -1,0 +1,578 @@
+{
+  "1": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=mexico%20vs%20south-africa%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "mexico": "home",
+      "south-africa": "home"
+    }
+  },
+  "2": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=korea-republic%20vs%20czechia%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "korea-republic": "home",
+      "czechia": "away"
+    }
+  },
+  "3": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=canada%20vs%20bosnia-and-herzegovina%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "canada": "home",
+      "bosnia-and-herzegovina": "away"
+    }
+  },
+  "4": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=qatar%20vs%20switzerland%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "qatar": "home",
+      "switzerland": "away"
+    }
+  },
+  "5": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=haiti%20vs%20scotland%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "haiti": "home",
+      "scotland": "away"
+    }
+  },
+  "6": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.outlookindia.com/sports/football/brazil-vs-morocco-fifa-world-cup-2026",
+    "kits": {
+      "brazil": "home",
+      "morocco": "away"
+    }
+  },
+  "7": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=united-states%20vs%20paraguay%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "united-states": "home",
+      "paraguay": "away"
+    }
+  },
+  "8": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=australia%20vs%20turkiye%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "australia": "home",
+      "turkiye": "away"
+    }
+  },
+  "9": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=ivory-coast%20vs%20ecuador%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "ivory-coast": "home",
+      "ecuador": "away"
+    }
+  },
+  "10": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=germany%20vs%20curacao%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "germany": "home",
+      "curacao": "away"
+    }
+  },
+  "11": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=netherlands%20vs%20japan%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "netherlands": "home",
+      "japan": "away"
+    }
+  },
+  "12": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=sweden%20vs%20tunisia%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "sweden": "home",
+      "tunisia": "away"
+    }
+  },
+  "13": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=iran%20vs%20new-zealand%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "iran": "home",
+      "new-zealand": "away"
+    }
+  },
+  "14": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=belgium%20vs%20egypt%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "belgium": "home",
+      "egypt": "away"
+    }
+  },
+  "15": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=saudi-arabia%20vs%20uruguay%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "saudi-arabia": "home",
+      "uruguay": "away"
+    }
+  },
+  "16": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=spain%20vs%20cabo-verde%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "spain": "home",
+      "cabo-verde": "away"
+    }
+  },
+  "17": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021490",
+    "kits": {
+      "france": "home",
+      "senegal": "away"
+    }
+  },
+  "18": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021492",
+    "kits": {
+      "iraq": "home",
+      "norway": "away"
+    }
+  },
+  "19": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=argentina%20vs%20algeria%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "argentina": "home",
+      "algeria": "away"
+    }
+  },
+  "20": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=austria%20vs%20jordan%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "austria": "home",
+      "jordan": "away"
+    }
+  },
+  "21": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=portugal%20vs%20congo-dr%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "portugal": "home",
+      "congo-dr": "away"
+    }
+  },
+  "22": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=uzbekistan%20vs%20colombia%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "uzbekistan": "away",
+      "colombia": "away"
+    }
+  },
+  "23": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=ghana%20vs%20panama%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "ghana": "away",
+      "panama": "away"
+    }
+  },
+  "24": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=england%20vs%20croatia%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "england": "home",
+      "croatia": "away"
+    }
+  },
+  "25": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=czechia%20vs%20south-africa%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "czechia": "home",
+      "south-africa": "away"
+    }
+  },
+  "26": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=mexico%20vs%20korea-republic%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "mexico": "home",
+      "korea-republic": "away"
+    }
+  },
+  "27": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=switzerland%20vs%20bosnia-and-herzegovina%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "switzerland": "home",
+      "bosnia-and-herzegovina": "away"
+    }
+  },
+  "28": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=canada%20vs%20qatar%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "canada": "home",
+      "qatar": "away"
+    }
+  },
+  "29": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=brazil%20vs%20haiti%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "brazil": "home",
+      "haiti": "away"
+    }
+  },
+  "30": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=scotland%20vs%20morocco%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "scotland": "home",
+      "morocco": "away"
+    }
+  },
+  "31": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=turkiye%20vs%20paraguay%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "turkiye": "home",
+      "paraguay": "away"
+    }
+  },
+  "32": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=united-states%20vs%20australia%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "united-states": "home",
+      "australia": "away"
+    }
+  },
+  "33": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=germany%20vs%20ivory-coast%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "germany": "home",
+      "ivory-coast": "away"
+    }
+  },
+  "34": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=ecuador%20vs%20curacao%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "ecuador": "home",
+      "curacao": "away"
+    }
+  },
+  "35": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=netherlands%20vs%20sweden%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "netherlands": "home",
+      "sweden": "away"
+    }
+  },
+  "36": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=tunisia%20vs%20japan%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "tunisia": "home",
+      "japan": "away"
+    }
+  },
+  "37": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=egypt%20vs%20iran%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "egypt": "home",
+      "iran": "away"
+    }
+  },
+  "38": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=new-zealand%20vs%20belgium%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "new-zealand": "home",
+      "belgium": "away"
+    }
+  },
+  "39": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=uruguay%20vs%20cabo-verde%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "uruguay": "home",
+      "cabo-verde": "home"
+    }
+  },
+  "40": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=spain%20vs%20saudi-arabia%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "spain": "home",
+      "saudi-arabia": "away"
+    }
+  },
+  "41": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026) · FIFA match assignment · Bolavip Matchday 2 kit confirmation (22 Jun 2026)",
+    "photoUrl": "https://www.outlookindia.com/sports/football/norway-vs-senegal-fifa-world-cup-2026-group-i-nor-vs-sen-new-york-new-jersey-stadium-in-pics",
+    "kits": {
+      "norway": "away",
+      "senegal": "home"
+    }
+  },
+  "42": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=france%20vs%20iraq%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "france": "home",
+      "iraq": "away"
+    }
+  },
+  "43": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=argentina%20vs%20austria%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "argentina": "home",
+      "austria": "away"
+    }
+  },
+  "44": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=jordan%20vs%20algeria%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "jordan": "home",
+      "algeria": "away"
+    }
+  },
+  "45": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=portugal%20vs%20uzbekistan%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "portugal": "home",
+      "uzbekistan": "away"
+    }
+  },
+  "46": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=colombia%20vs%20congo-dr%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "colombia": "home",
+      "congo-dr": "away"
+    }
+  },
+  "47": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=england%20vs%20ghana%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "england": "home",
+      "ghana": "away"
+    }
+  },
+  "48": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=panama%20vs%20croatia%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "panama": "home",
+      "croatia": "away"
+    }
+  },
+  "49": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=south-africa%20vs%20korea-republic%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "south-africa": "home",
+      "korea-republic": "away"
+    }
+  },
+  "50": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=czechia%20vs%20mexico%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "czechia": "home",
+      "mexico": "away"
+    }
+  },
+  "51": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=switzerland%20vs%20canada%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "switzerland": "home",
+      "canada": "away"
+    }
+  },
+  "52": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=bosnia-and-herzegovina%20vs%20qatar%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "bosnia-and-herzegovina": "home",
+      "qatar": "away"
+    }
+  },
+  "53": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=scotland%20vs%20brazil%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "scotland": "home",
+      "brazil": "home"
+    }
+  },
+  "54": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=morocco%20vs%20haiti%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "morocco": "home",
+      "haiti": "away"
+    }
+  },
+  "55": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=turkiye%20vs%20united-states%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "turkiye": "home",
+      "united-states": "away"
+    }
+  },
+  "56": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=paraguay%20vs%20australia%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "paraguay": "home",
+      "australia": "away"
+    }
+  },
+  "57": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=curacao%20vs%20ivory-coast%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "curacao": "home",
+      "ivory-coast": "away"
+    }
+  },
+  "58": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=ecuador%20vs%20germany%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "ecuador": "home",
+      "germany": "away"
+    }
+  },
+  "59": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=japan%20vs%20sweden%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "japan": "home",
+      "sweden": "away"
+    }
+  },
+  "60": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=tunisia%20vs%20netherlands%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "tunisia": "home",
+      "netherlands": "away"
+    }
+  },
+  "61": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=egypt%20vs%20new-zealand%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "egypt": "home",
+      "new-zealand": "away"
+    }
+  },
+  "62": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=iran%20vs%20belgium%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "iran": "home",
+      "belgium": "away"
+    }
+  },
+  "63": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=cabo-verde%20vs%20saudi-arabia%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "cabo-verde": "home",
+      "saudi-arabia": "away"
+    }
+  },
+  "64": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=uruguay%20vs%20spain%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "uruguay": "home",
+      "spain": "away"
+    }
+  },
+  "65": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=norway%20vs%20france%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "norway": "home",
+      "france": "away"
+    }
+  },
+  "66": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=senegal%20vs%20iraq%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "senegal": "home",
+      "iraq": "away"
+    }
+  },
+  "67": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=algeria%20vs%20austria%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "algeria": "home",
+      "austria": "away"
+    }
+  },
+  "68": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=jordan%20vs%20argentina%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "jordan": "home",
+      "argentina": "away"
+    }
+  },
+  "69": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=colombia%20vs%20portugal%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "colombia": "home",
+      "portugal": "away"
+    }
+  },
+  "70": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=congo-dr%20vs%20uzbekistan%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "congo-dr": "home",
+      "uzbekistan": "away"
+    }
+  },
+  "71": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=panama%20vs%20england%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "panama": "home",
+      "england": "away"
+    }
+  },
+  "72": {
+    "source": "FIFA FWC2026 Match Colours Designation (inside.fifa.com, 3 Jun 2026)",
+    "photoUrl": "https://www.fifa.com/fifaplus/en/search?q=croatia%20vs%20ghana%20FIFA%20World%20Cup%202026%20match%20photos",
+    "kits": {
+      "croatia": "home",
+      "ghana": "away"
+    }
+  }
+}

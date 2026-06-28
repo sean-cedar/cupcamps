@@ -39,10 +39,9 @@ test.describe("mobile smoke", () => {
     await menuButton.click();
 
     await expect(page.getByRole("link", { name: "Countries" }).first()).toBeVisible();
-    await expect(page.getByRole("link", { name: "Groups" }).first()).toBeVisible();
-    await expect(
-      page.getByRole("button", { name: /Theme:/i }).first(),
-    ).toBeVisible();
+    await page.getByRole("button", { name: /Theme:/i }).click();
+    await expect(page.getByRole("menu", { name: "Choose theme" })).toBeVisible();
+    await expect(page.getByRole("menuitemradio", { name: /Light/i })).toBeVisible();
 
     await page.getByRole("button", { name: "Dismiss menu overlay" }).click();
     await expect(page.getByRole("button", { name: "Open menu" })).toBeVisible();

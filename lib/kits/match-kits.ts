@@ -1,20 +1,25 @@
-import matchKitOverrides from "@/data/match-kit-overrides.json";
+import matchWornKitsData from "@/data/match-worn-kits.json";
 import type { KitVariantId } from "@/lib/kits/types";
 
-type MatchKitOverrides = Record<string, Partial<Record<string, KitVariantId>>>;
+export type MatchWornKitsEntry = {
+  source: string;
+  photoUrl: string;
+  kits: Record<string, KitVariantId>;
+};
 
-const overrides = matchKitOverrides as MatchKitOverrides;
+const wornKitsByMatch = matchWornKitsData as Record<string, MatchWornKitsEntry>;
 
+export function getMatchWornKits(
+  matchNumber: number,
+): MatchWornKitsEntry | undefined {
+  return wornKitsByMatch[String(matchNumber)];
+}
+
+/** Returns the explicitly catalogued kit variant, or null when unknown. */
 export function getWornKitVariantId(
   matchNumber: number,
   teamSlug: string,
-  side: "home" | "away",
-): KitVariantId {
-  const matchOverride = overrides[String(matchNumber)];
-  const teamOverride = matchOverride?.[teamSlug];
-  if (teamOverride) {
-    return teamOverride;
-  }
-
-  return side === "home" ? "home" : "away";
+): KitVariantId | null {
+  const variant = getMatchWornKits(matchNumber)?.kits[teamSlug];
+  return variant ?? null;
 }

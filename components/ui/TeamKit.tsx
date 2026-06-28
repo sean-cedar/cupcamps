@@ -172,9 +172,10 @@ export function TeamKit({
   const shortsPatternId = useId().replace(/:/g, "");
   const px = sizes[size];
   const height = Math.round(px * outfitSvgHeightRatio);
-  const { sleeves } = kitColors(outfit.shirt);
+  const { collar, sleeves } = kitColors(outfit.shirt);
   const shirtFill = kitBodyFill(outfit.shirt, shirtPatternId);
   const shortsFill = shortsBodyFill(outfit.shorts, shortsPatternId);
+  const shirtBodyPath = "M8 9 L24 9 L24 33 L8 33 Z";
 
   const frameSizeClass =
     size === "sm" || size === "md"
@@ -197,7 +198,7 @@ export function TeamKit({
         <ShirtPatternFill shirt={outfit.shirt} id={shirtPatternId} />
         <ShortsPatternFill shorts={outfit.shorts} id={shortsPatternId} />
         <clipPath id={`${shirtPatternId}-shirt`}>
-          <path d="M8 9 L11 9 L12.5 6 L14.5 6 L16 9 L24 9 L24 33 L8 33 Z" />
+          <path d={shirtBodyPath} />
         </clipPath>
       </defs>
 
@@ -217,6 +218,7 @@ export function TeamKit({
       <g clipPath={`url(#${shirtPatternId}-shirt)`}>
         <rect x="6" y="5" width="20" height="30" fill={shirtFill} />
         <ShirtOverlay shirt={outfit.shirt} />
+        <rect x="8" y="9" width="16" height="2.2" fill={collar} />
       </g>
 
       <g>
@@ -233,7 +235,7 @@ export function TeamKit({
       </g>
 
       <path
-        d="M8 9 L11 9 L12.5 6 L14.5 6 L16 9 L24 9 L24 33 L8 33 Z M4 10 L8 9 L8 14 L4 16 Z M24 9 L28 10 L28 16 L24 14 Z M8 33 L24 33 L22.5 45 L9.5 45 Z"
+        d={`${shirtBodyPath} M4 10 L8 9 L8 14 L4 16 Z M24 9 L28 10 L28 16 L24 14 Z M8 33 L24 33 L22.5 45 L9.5 45 Z`}
         fill="none"
         stroke="#00000044"
         strokeWidth="0.85"
