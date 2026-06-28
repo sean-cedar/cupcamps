@@ -3,8 +3,6 @@ import Link from "next/link";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { KnockoutBracket } from "@/components/bracket/KnockoutBracket";
 import { CountryFlag } from "@/components/ui/CountryFlag";
-import { TeamKit } from "@/components/ui/TeamKit";
-import { getTeamKit } from "@/lib/kits";
 import {
   getKnockoutBracketRounds,
   getKnockoutProgress,
@@ -19,9 +17,6 @@ export const metadata: Metadata = {
 export default function BracketPage() {
   const rounds = getKnockoutBracketRounds();
   const progress = getKnockoutProgress();
-  const championKit = progress.champion
-    ? getTeamKit(progress.champion.slug)
-    : undefined;
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
@@ -52,13 +47,6 @@ export default function BracketPage() {
               href={`/teams/${progress.champion.slug}`}
               className="mt-2 inline-flex items-center gap-3 transition hover:text-gold-light"
             >
-              {championKit && (
-                <TeamKit
-                  kit={championKit}
-                  size="lg"
-                  title={`${progress.champion.label} home kit`}
-                />
-              )}
               {progress.champion.countryCode && (
                 <CountryFlag
                   countryCode={progress.champion.countryCode}

@@ -1,4 +1,4 @@
-/** Simplified home-kit render styles for WC26. */
+/** Simplified kit render styles for WC26. */
 export type KitPattern =
   | "solid"
   | "vertical-stripes"
@@ -13,11 +13,39 @@ export type KitPattern =
   | "central-stripe"
   | "side-panels";
 
-export type TeamKit = {
+export type ShortsPattern = "solid" | "vertical-stripes";
+
+export type KitShirt = {
+  pattern: KitPattern;
   primary: string;
   secondary?: string;
   accent?: string;
   collar?: string;
   sleeves?: string;
-  pattern: KitPattern;
 };
+
+export type KitShorts = {
+  pattern?: ShortsPattern;
+  primary: string;
+  secondary?: string;
+  accent?: string;
+};
+
+export type KitOutfit = {
+  shirt: KitShirt;
+  shorts: KitShorts;
+};
+
+export type KitVariantId = "home" | "away" | "third";
+
+export type KitVariant = KitOutfit & {
+  id: KitVariantId;
+  label: string;
+};
+
+export type TeamKitSet = {
+  variants: KitVariant[];
+};
+
+/** @deprecated Use KitShirt — kept for migration helpers. */
+export type TeamKit = KitShirt;

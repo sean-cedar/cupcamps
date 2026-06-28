@@ -75,7 +75,6 @@ export function MatchScheduleRow({ match }: MatchScheduleRowProps) {
             teamSlug={opponent.slug}
             label={opponent.label}
             countryCode={opponent.countryCode}
-            kitSize="sm"
             onClick={(event) => event.stopPropagation()}
           />
           <span className="hidden text-xs text-muted sm:inline">

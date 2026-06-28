@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import type { TeamScheduleMapMarker } from "@/lib/map/team-schedule-markers";
 import type { Team } from "@/lib/types";
 
 const TbcMap = dynamic(
@@ -21,6 +22,7 @@ type TbcMapWrapperProps = {
   zoom?: number;
   center?: [number, number];
   highlightSlug?: string;
+  matchMarkers?: TeamScheduleMapMarker[];
 };
 
 export function TbcMapWrapper(props: TbcMapWrapperProps) {

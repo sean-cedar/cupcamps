@@ -10,14 +10,12 @@ type MatchupParticipant = {
 type MatchupTeamsProps = {
   home: MatchupParticipant;
   away: MatchupParticipant;
-  kitSize?: "sm" | "md" | "lg";
   onTeamClick?: (event: MouseEvent) => void;
 };
 
 export function MatchupTeams({
   home,
   away,
-  kitSize = "sm",
   onTeamClick,
 }: MatchupTeamsProps) {
   return (
@@ -26,7 +24,6 @@ export function MatchupTeams({
         teamSlug={home.slug}
         label={home.label}
         countryCode={home.countryCode}
-        kitSize={kitSize}
         onClick={onTeamClick}
       />
 
@@ -45,7 +42,6 @@ export function MatchupTeams({
         teamSlug={away.slug}
         label={away.label}
         countryCode={away.countryCode}
-        kitSize={kitSize}
         onClick={onTeamClick}
       />
     </div>

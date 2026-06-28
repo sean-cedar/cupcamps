@@ -171,6 +171,30 @@ body {
   opacity: 0.45;
 }
 
+.tbc-match-icon {
+  background: transparent;
+  border: none;
+}
+
+.tbc-match-marker {
+  display: flex;
+  height: 28px;
+  width: 28px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  border-radius: 9999px;
+  background: var(--gold);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 2px 4px rgba(0, 0, 0, 0.45);
+  color: #111111;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+}
+
 .leaflet-popup-content .fi {
   width: 20px;
   height: 15px;

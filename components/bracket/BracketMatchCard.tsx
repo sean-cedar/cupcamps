@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { HostCityLink } from "@/components/host-cities/HostCityCard";
-import { getTeamKit } from "@/lib/kits";
-import { TeamKit, TeamKitPlaceholder } from "@/components/ui/TeamKit";
+import { CountryFlag } from "@/components/ui/CountryFlag";
 import { formatMatchDate } from "@/lib/schedule";
 import type { BracketMatchView } from "@/lib/schedule/bracket-board";
 
@@ -19,14 +18,12 @@ function ParticipantRow({
   score: number | null;
   align?: "left" | "right";
 }) {
-  const kit = participant.isPlaceholder ? undefined : getTeamKit(participant.slug);
-
   const content = (
     <>
       {participant.isPlaceholder ? (
-        <TeamKitPlaceholder size="sm" />
-      ) : kit ? (
-        <TeamKit kit={kit} size="sm" title={`${participant.label} home kit`} />
+        <span className="inline-block h-3.5 w-5 rounded-sm bg-card-border" />
+      ) : participant.countryCode ? (
+        <CountryFlag countryCode={participant.countryCode} className="text-sm" />
       ) : (
         <span className="inline-block h-3.5 w-5 rounded-sm bg-card-border" />
       )}

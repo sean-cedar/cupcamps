@@ -69,7 +69,6 @@ export function CityMatchScheduleRow({ match }: CityMatchScheduleRowProps) {
           <MatchupTeams
             home={home}
             away={away}
-            kitSize="sm"
             onTeamClick={(event) => event.stopPropagation()}
           />
           <p className="mt-1 hidden text-xs text-muted sm:block">{match.stadium}</p>

@@ -5,11 +5,12 @@ import { HostNationStripe } from "@/components/brand/HostNationStripe";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { HostCityLink } from "@/components/host-cities/HostCityCard";
 import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
+import { TeamKitGallery } from "@/components/teams/TeamKitGallery";
 import { TeamSchedule } from "@/components/teams/TeamSchedule";
 import { CountryFlag } from "@/components/ui/CountryFlag";
-import { TeamKit } from "@/components/ui/TeamKit";
 import { GroupBadge } from "@/components/ui/GroupBadge";
-import { getTeamKit } from "@/lib/kits";
+import { getTeamKitVariants } from "@/lib/kits";
+import { getTeamScheduleMapMarkers } from "@/lib/map/team-schedule-markers";
 import { getHostCity, getTeam, teams } from "@/lib/teams";
 
 type PageProps = {
@@ -37,10 +38,11 @@ export default async function TeamDetailPage({ params }: PageProps) {
   if (!team) notFound();
 
   const nearestHostCity = getHostCity(team.tbc.nearestHostCitySlug);
-  const kit = getTeamKit(team.slug);
+  const kitVariants = getTeamKitVariants(team.slug);
   const groupStageCities = team.groupStageHostCitySlugs
     .map((s) => getHostCity(s))
     .filter(Boolean);
+  const scheduleMapMarkers = getTeamScheduleMapMarkers(team.slug);
 
   return (
     <div>
@@ -54,9 +56,6 @@ export default async function TeamDetailPage({ params }: PageProps) {
             ← All teams
           </Link>
           <div className="mt-6 flex flex-wrap items-center gap-6">
-            {kit && (
-              <TeamKit kit={kit} size="xl" title={`${team.name} home kit`} />
-            )}
             <CountryFlag countryCode={team.countryCode} className="text-6xl" />
             <div>
               <div className="flex flex-wrap items-center gap-3">
@@ -124,6 +123,18 @@ export default async function TeamDetailPage({ params }: PageProps) {
                 )}
               </div>
             </section>
+
+            {kitVariants.length > 0 && (
+              <section className="mt-10">
+                <SectionHeading
+                  title="Tournament Kits"
+                  subtitle="Home and away shirt & shorts combinations"
+                />
+                <div className="mt-4">
+                  <TeamKitGallery teamName={team.name} variants={kitVariants} />
+                </div>
+              </section>
+            )}
           </section>
 
           <section>
@@ -133,16 +144,18 @@ export default async function TeamDetailPage({ params }: PageProps) {
               <TbcMapWrapper
                 teams={[team]}
                 height="400px"
-                zoom={8}
+                zoom={5}
                 center={[
                   team.tbc.coordinates.lat,
                   team.tbc.coordinates.lng,
                 ]}
                 highlightSlug={team.slug}
+                matchMarkers={scheduleMapMarkers}
               />
             </div>
             <p className="mt-2 text-xs text-muted">
-              Location is approximate based on training facility or city center.
+              Flag marks the base camp. Numbered pins follow this team&apos;s
+              tournament schedule in order (group stage through knockout rounds).
             </p>
           </section>
 

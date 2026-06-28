@@ -1,10 +1,23 @@
 import teamKitsData from "@/data/team-kits.json";
-import type { TeamKit } from "@/lib/kits/types";
+import type { KitOutfit, KitShirt, KitVariant, TeamKitSet } from "@/lib/kits/types";
 
-const kitsBySlug = teamKitsData as Record<string, TeamKit>;
+const kitsBySlug = teamKitsData as Record<string, TeamKitSet>;
 
-export function getTeamKit(teamSlug: string): TeamKit | undefined {
+export function getTeamKitSet(teamSlug: string): TeamKitSet | undefined {
   return kitsBySlug[teamSlug];
 }
 
-export type { KitPattern, TeamKit } from "@/lib/kits/types";
+export function getTeamKitVariants(teamSlug: string): KitVariant[] {
+  return getTeamKitSet(teamSlug)?.variants ?? [];
+}
+
+export type {
+  KitOutfit,
+  KitPattern,
+  KitShirt,
+  KitShorts,
+  KitVariant,
+  KitVariantId,
+  ShortsPattern,
+  TeamKitSet,
+} from "@/lib/kits/types";
