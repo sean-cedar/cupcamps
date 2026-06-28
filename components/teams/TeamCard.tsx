@@ -19,7 +19,7 @@ export function TeamCard({ team }: TeamCardProps) {
 
   return (
     <Link
-      href={`/teams/${team.slug}`}
+      href={`/countries/${team.slug}`}
       className="group wc26-panel block p-5 transition hover:border-gold/40"
     >
       <div className="flex items-start justify-between gap-3">

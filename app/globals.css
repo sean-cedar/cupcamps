@@ -87,10 +87,47 @@
   --font-sans: var(--font-noto);
 }
 
+html {
+  overflow-x: clip;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-noto), system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+.site-shell-inline {
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px))
+    max(1rem, env(safe-area-inset-right, 0px));
+}
+
+.touch-target {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+}
+
+.map-height-home {
+  height: clamp(280px, 42vh, 380px);
+}
+
+.map-height-page {
+  height: clamp(280px, 45vh, 650px);
+}
+
+.map-height-team {
+  height: clamp(260px, 40vh, 400px);
+}
+
+.map-list-panel {
+  max-height: min(50vh, 480px);
+}
+
+@media (min-width: 1024px) {
+  .map-list-panel {
+    max-height: 650px;
+  }
 }
 
 .wc26-bg {

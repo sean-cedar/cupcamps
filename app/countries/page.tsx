@@ -4,16 +4,16 @@ import { SectionHeading } from "@/components/brand/SectionHeading";
 import { TeamsDirectory } from "@/components/teams/TeamsDirectory";
 
 export const metadata: Metadata = {
-  title: "All Teams",
+  title: "All Countries",
   description:
     "Browse all 48 FIFA World Cup 26™ nations and their Team Base Camp training sites.",
 };
 
-export default function TeamsPage() {
+export default function CountriesPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <SectionHeading
-        title="All 48 Teams"
+        title="All 48 Countries"
         subtitle="Team base camps · group stage"
         className="mb-8"
       />

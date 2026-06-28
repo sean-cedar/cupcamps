@@ -12,7 +12,11 @@ export type KitPattern =
   | "chest-stripe"
   | "central-stripe"
   | "side-panels"
-  | "nordic-cross";
+  | "nordic-cross"
+  | "topographic"
+  | "small-checker"
+  | "vertical-pinstripes"
+  | "horizontal-fade";
 
 export type ShortsPattern = "solid" | "vertical-stripes";
 

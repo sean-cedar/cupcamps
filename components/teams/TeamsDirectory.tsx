@@ -28,7 +28,7 @@ function filtersToUrl(filters: TeamFilterValues): string {
   if (filters.hostCity) params.set("hostCity", filters.hostCity);
   if (filters.sort && filters.sort !== "name") params.set("sort", filters.sort);
   const qs = params.toString();
-  return qs ? `/teams?${qs}` : "/teams";
+  return qs ? `/countries?${qs}` : "/countries";
 }
 
 export function TeamsDirectory() {
@@ -85,12 +85,12 @@ export function TeamsDirectory() {
       />
 
       <p className="my-6 font-display text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-        Showing {filtered.length} team{filtered.length !== 1 ? "s" : ""}
+        Showing {filtered.length} countr{filtered.length !== 1 ? "ies" : "y"}
       </p>
 
       {filtered.length === 0 ? (
         <div className="wc26-panel p-12 text-center">
-          <p className="text-cream">No teams match your filters.</p>
+          <p className="text-cream">No countries match your filters.</p>
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

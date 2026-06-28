@@ -49,7 +49,7 @@ type TeamListItemProps = {
 export function TeamListItem({ team }: TeamListItemProps) {
   return (
     <Link
-      href={`/teams/${team.slug}`}
+      href={`/countries/${team.slug}`}
       className="flex items-center gap-3 wc26-panel px-4 py-3 transition hover:border-gold/40"
     >
       <CountryFlag countryCode={team.countryCode} className="text-xl" />

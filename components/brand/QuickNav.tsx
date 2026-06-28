@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const items = [
   {
-    href: "/teams",
+    href: "/countries",
     value: "48",
-    label: "Teams",
+    label: "Countries",
     hint: "Every nation & TBC",
   },
   {

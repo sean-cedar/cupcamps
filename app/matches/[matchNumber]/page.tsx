@@ -9,8 +9,6 @@ import { MatchAdvancementPanel } from "@/components/matches/MatchAdvancementPane
 import { MatchFeedersPanel } from "@/components/matches/MatchFeedersPanel";
 import { MatchHighlightsSection } from "@/components/matches/MatchHighlightsSection";
 import { MatchParticipantPanel } from "@/components/matches/MatchParticipantPanel";
-import { getMatchPhotoUrl } from "@/lib/highlights/fallback";
-import { getHighlightLookupSlugs, getMatchRecord } from "@/lib/highlights/match";
 import { formatMatchDate } from "@/lib/schedule";
 import {
   getAllMatchNumbers,
@@ -59,14 +57,6 @@ export default async function MatchDetailPage({ params }: PageProps) {
   }
 
   const hostCity = getHostCity(view.hostCitySlug);
-  const matchRecord = getMatchRecord(matchNumber);
-  const lookupSlugs = matchRecord ? getHighlightLookupSlugs(matchRecord) : null;
-  const matchPhotoUrl =
-    matchRecord && lookupSlugs
-      ? getMatchPhotoUrl(matchRecord, lookupSlugs.home, lookupSlugs.away)
-      : matchRecord
-        ? getMatchPhotoUrl(matchRecord, matchRecord.homeSlug, matchRecord.awaySlug)
-        : "#";
   const scoreLabel =
     view.isPlayed && view.homeScore !== null && view.awayScore !== null
       ? `${view.homeScore}–${view.awayScore}`
@@ -76,7 +66,7 @@ export default async function MatchDetailPage({ params }: PageProps) {
     <div>
       <section className="border-b border-card-border bg-card/50">
         <HostNationStripe height={3} />
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-12">
           <Link
             href="/bracket"
             className="font-display text-xs font-bold uppercase tracking-[0.15em] text-muted hover:text-gold-light"
@@ -91,7 +81,7 @@ export default async function MatchDetailPage({ params }: PageProps) {
                 {view.group ? ` · Group ${view.group}` : ""}
                 {view.matchday ? ` · MD ${view.matchday}` : ""}
               </p>
-              <h1 className="mt-2 font-display text-4xl font-black uppercase tracking-[0.04em] text-cream sm:text-5xl">
+              <h1 className="mt-2 font-display text-3xl font-black uppercase tracking-[0.04em] text-cream sm:text-4xl lg:text-5xl">
                 {view.title}
               </h1>
               <p className="mt-2 text-sm text-muted">
@@ -100,7 +90,7 @@ export default async function MatchDetailPage({ params }: PageProps) {
             </div>
 
             {scoreLabel ? (
-              <p className="font-display text-5xl font-black tabular-nums text-cream sm:text-6xl">
+              <p className="font-display text-4xl font-black tabular-nums text-cream sm:text-5xl lg:text-6xl">
                 {scoreLabel}
               </p>
             ) : (
@@ -117,12 +107,12 @@ export default async function MatchDetailPage({ params }: PageProps) {
           <MatchParticipantPanel
             participant={view.home}
             side="home"
-            matchPhotoUrl={matchPhotoUrl}
+            matchNumber={matchNumber}
           />
           <MatchParticipantPanel
             participant={view.away}
             side="away"
-            matchPhotoUrl={matchPhotoUrl}
+            matchNumber={matchNumber}
           />
         </div>
 

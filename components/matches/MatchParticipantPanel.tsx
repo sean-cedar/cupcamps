@@ -1,37 +1,26 @@
 import Link from "next/link";
-import { KitPhotoLink } from "@/components/kits/KitPhotoLink";
 import { TeamKit } from "@/components/ui/TeamKit";
 import { CountryFlag } from "@/components/ui/CountryFlag";
 import { getTeamKitSet } from "@/lib/kits";
-import type { KitVariantId } from "@/lib/kits/types";
+import { getWornKitVariantId } from "@/lib/kits/match-kits";
 import type { MatchParticipantView } from "@/lib/schedule/match-page";
 
 type MatchParticipantPanelProps = {
   participant: MatchParticipantView;
   side: "home" | "away";
-  matchPhotoUrl: string;
+  matchNumber: number;
 };
-
-function kitVariantForSide(side: "home" | "away"): KitVariantId {
-  return side === "home" ? "home" : "away";
-}
-
-function kitLabelForVariant(variantId: KitVariantId): string {
-  if (variantId === "away") {
-    return "Away kit";
-  }
-  if (variantId === "third") {
-    return "Third kit";
-  }
-  return "Home kit";
-}
 
 export function MatchParticipantPanel({
   participant,
   side,
-  matchPhotoUrl,
+  matchNumber,
 }: MatchParticipantPanelProps) {
-  const kitVariantId = kitVariantForSide(side);
+  const kitVariantId = participant.team
+    ? getWornKitVariantId(matchNumber, participant.team.slug, side)
+    : side === "home"
+      ? "home"
+      : "away";
   const wornKit = participant.team
     ? getTeamKitSet(participant.team.slug)?.variants.find(
         (variant) => variant.id === kitVariantId,
@@ -79,8 +68,8 @@ export function MatchParticipantPanel({
             }`}
           >
             {participant.team ? (
-              <Link
-                href={`/teams/${participant.team.slug}`}
+                <Link
+                  href={`/countries/${participant.team.slug}`}
                 className={`font-display text-xl font-black uppercase tracking-[0.04em] transition hover:text-gold-light sm:text-2xl ${
                   participant.isWinner ? "text-gold-light" : "text-cream"
                 }`}
@@ -94,23 +83,17 @@ export function MatchParticipantPanel({
             )}
 
             {wornKit && participant.team && (
-              <KitPhotoLink
-                href={matchPhotoUrl}
-                label={`${participant.team.name} at this match`}
-                showPhotoHint={false}
-                className={`mt-2 inline-flex items-center gap-2 ${
-                  side === "away" ? "flex-row-reverse" : ""
+              <div
+                className={`mt-2 inline-flex ${
+                  side === "away" ? "justify-end" : ""
                 }`}
               >
                 <TeamKit
                   outfit={{ shirt: wornKit.shirt, shorts: wornKit.shorts }}
                   size="md"
-                  title={`${participant.team.name} ${kitLabelForVariant(kitVariantId).toLowerCase()}`}
+                  title={`${participant.team.name} kit`}
                 />
-                <span className="font-display text-[10px] font-bold uppercase tracking-[0.12em] text-muted transition group-hover:text-gold">
-                  {kitLabelForVariant(kitVariantId)} · Match photo →
-                </span>
-              </KitPhotoLink>
+              </div>
             )}
           </div>
 
@@ -135,7 +118,7 @@ export function MatchParticipantPanel({
             {participant.potentialTeams.map((team) => (
               <li key={team.slug}>
                 <Link
-                  href={`/teams/${team.slug}`}
+                  href={`/countries/${team.slug}`}
                   className={`inline-flex items-center gap-2 rounded border border-card-border bg-card/40 px-2 py-1.5 text-sm text-cream transition hover:border-gold/40 hover:text-gold-light ${
                     side === "away" ? "flex-row-reverse" : ""
                   }`}

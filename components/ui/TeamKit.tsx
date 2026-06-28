@@ -73,6 +73,22 @@ function ShirtPatternFill({
           <rect x="4" width="2" height="4" fill={accent} />
         </pattern>
       );
+    case "small-checker":
+      return (
+        <pattern id={id} width="3" height="3" patternUnits="userSpaceOnUse">
+          <rect width="1.5" height="1.5" fill={shirt.primary} />
+          <rect x="1.5" width="1.5" height="1.5" fill={secondary} />
+          <rect y="1.5" width="1.5" height="1.5" fill={secondary} />
+          <rect x="1.5" y="1.5" width="1.5" height="1.5" fill={shirt.primary} />
+        </pattern>
+      );
+    case "vertical-pinstripes":
+      return (
+        <pattern id={id} width="3" height="4" patternUnits="userSpaceOnUse">
+          <rect width="1" height="4" fill={secondary} />
+          <rect x="1" width="2" height="4" fill={shirt.primary} />
+        </pattern>
+      );
     default:
       return null;
   }
@@ -156,7 +172,7 @@ export function TeamKit({
   const shortsPatternId = useId().replace(/:/g, "");
   const px = sizes[size];
   const height = Math.round(px * outfitSvgHeightRatio);
-  const { collar, sleeves } = kitColors(outfit.shirt);
+  const { sleeves } = kitColors(outfit.shirt);
   const shirtFill = kitBodyFill(outfit.shirt, shirtPatternId);
   const shortsFill = shortsBodyFill(outfit.shorts, shortsPatternId);
 
@@ -202,14 +218,6 @@ export function TeamKit({
         <rect x="6" y="5" width="20" height="30" fill={shirtFill} />
         <ShirtOverlay shirt={outfit.shirt} />
       </g>
-
-      <path
-        d="M11 9 Q16 12.5 21 9"
-        fill="none"
-        stroke={collar}
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
 
       <g>
         <path d="M8 33 L24 33 L22.5 45 L9.5 45 Z" fill={shortsFill} />

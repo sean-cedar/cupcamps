@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="mt-auto border-t border-card-border bg-card">
       <HostNationStripe height={2} />
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+      <div className="site-shell-inline mx-auto max-w-7xl py-8 sm:px-6">
         <div className="grid gap-8 md:grid-cols-[1.2fr_1fr]">
           <div>
             <SiteLogo />

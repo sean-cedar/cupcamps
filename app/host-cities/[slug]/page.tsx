@@ -49,7 +49,7 @@ export default async function HostCityDetailPage({ params }: PageProps) {
           className="h-1.5 w-full"
           style={{ backgroundColor: city.accentColor }}
         />
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-12">
           <Link
             href="/host-cities"
             className="font-display text-xs font-bold uppercase tracking-[0.15em] text-muted hover:text-gold-light"
@@ -62,7 +62,7 @@ export default async function HostCityDetailPage({ params }: PageProps) {
               style={{ backgroundColor: city.accentColor }}
             />
             <div>
-              <h1 className="font-display text-5xl font-black uppercase tracking-[0.04em] text-cream sm:text-6xl">
+              <h1 className="font-display text-4xl font-black uppercase tracking-[0.04em] text-cream sm:text-5xl lg:text-6xl">
                 {city.name}
               </h1>
               <p className="mt-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-muted">

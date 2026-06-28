@@ -48,19 +48,19 @@ export default async function TeamDetailPage({ params }: PageProps) {
     <div>
       <section className="border-b border-card-border bg-card/50">
         <HostNationStripe height={3} />
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-12">
           <Link
-            href="/teams"
+            href="/countries"
             className="font-display text-xs font-bold uppercase tracking-[0.15em] text-muted hover:text-gold-light"
           >
-            ← All teams
+            ← All countries
           </Link>
           <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex min-w-0 flex-wrap items-center gap-6">
-              <CountryFlag countryCode={team.countryCode} className="text-6xl" />
-              <div>
+            <div className="flex min-w-0 flex-wrap items-center gap-4 sm:gap-6">
+              <CountryFlag countryCode={team.countryCode} className="text-5xl sm:text-6xl" />
+              <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-3">
-                  <h1 className="font-display text-5xl font-black uppercase tracking-[0.04em] text-cream sm:text-6xl">
+                  <h1 className="font-display text-4xl font-black uppercase tracking-[0.04em] text-cream sm:text-5xl lg:text-6xl">
                     {team.name}
                   </h1>
                   <GroupBadge
@@ -148,7 +148,7 @@ export default async function TeamDetailPage({ params }: PageProps) {
               <HostNationStripe height={2} />
               <TbcMapWrapper
                 teams={[team]}
-                height="400px"
+                heightClassName="map-height-team"
                 zoom={5}
                 center={[
                   team.tbc.coordinates.lat,

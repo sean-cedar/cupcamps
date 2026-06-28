@@ -3,7 +3,7 @@
 import Link from "next/link";
 import L from "leaflet";
 import { MapContainer, Marker, Popup, useMap } from "react-leaflet";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapThemeTileLayer } from "@/components/map/MapThemeTileLayer";
 import type { TeamScheduleMapMarker } from "@/lib/map/team-schedule-markers";
@@ -83,6 +83,24 @@ function FitMapBounds({
   return null;
 }
 
+function useDesktopScrollWheelZoom(): boolean {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+
+    const update = () => {
+      setEnabled(mediaQuery.matches);
+    };
+
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
+  }, []);
+
+  return enabled;
+}
+
 export function TbcMap({
   teams,
   height = "600px",
@@ -105,6 +123,7 @@ export function TbcMap({
   }, [matchMarkers, teams]);
 
   const shouldFitBounds = matchMarkers.length > 0;
+  const scrollWheelZoom = useDesktopScrollWheelZoom();
   const mapLabel =
     matchMarkers.length > 0
       ? "Map of team base camp and scheduled match venues"
@@ -118,7 +137,7 @@ export function TbcMap({
       maxBounds={NORTH_AMERICA_BOUNDS}
       maxBoundsViscosity={1}
       style={{ height, width: "100%" }}
-      scrollWheelZoom={true}
+      scrollWheelZoom={scrollWheelZoom}
       aria-label={mapLabel}
     >
       <MapThemeTileLayer />
@@ -151,7 +170,7 @@ export function TbcMap({
                 <p className="map-popup-muted">{formatTeamTbcLocation(team)}</p>
                 <p className="map-popup-muted text-xs">{team.tbc.trainingSite}</p>
                 <Link
-                  href={`/teams/${team.slug}`}
+                  href={`/countries/${team.slug}`}
                   className="map-popup-link mt-2 inline-block text-xs font-medium hover:underline"
                 >
                   View team →

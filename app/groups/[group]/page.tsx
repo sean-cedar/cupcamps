@@ -57,17 +57,17 @@ export default async function GroupDetailPage({ params }: PageProps) {
     <div>
       <section className="border-b border-card-border bg-card/50">
         <HostNationStripe height={3} />
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-12">
           <Link
             href="/groups"
             className="font-display text-xs font-bold uppercase tracking-[0.15em] text-muted hover:text-gold-light"
           >
             ← All groups
           </Link>
-          <div className="mt-6 flex flex-wrap items-center gap-6">
+          <div className="mt-6 flex flex-wrap items-center gap-4 sm:gap-6">
             <GroupBadge group={view.group} size="lg" />
             <div>
-              <h1 className="font-display text-5xl font-black uppercase tracking-[0.04em] text-cream sm:text-6xl">
+              <h1 className="font-display text-4xl font-black uppercase tracking-[0.04em] text-cream sm:text-5xl lg:text-6xl">
                 Group {view.group}
               </h1>
               <p className="mt-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-muted">
@@ -81,7 +81,7 @@ export default async function GroupDetailPage({ params }: PageProps) {
 
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-[1fr_22rem]">
-          <section>
+          <section className="order-2 lg:order-1">
             <SectionHeading title="Standings" />
             <div className="mt-4">
               <GroupStandingsTable
@@ -92,7 +92,7 @@ export default async function GroupDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section>
+          <section className="order-1 lg:order-2">
             <SectionHeading title="Advanced" />
             <div className="mt-4">
               <GroupAdvancementPanel

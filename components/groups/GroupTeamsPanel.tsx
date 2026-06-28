@@ -26,7 +26,7 @@ export function GroupTeamsPanel({ teams }: GroupTeamsPanelProps) {
       {teams.map((team) => (
         <Link
           key={team.slug}
-          href={`/teams/${team.slug}`}
+          href={`/countries/${team.slug}`}
           className={`wc26-panel flex items-center gap-4 p-4 transition hover:border-gold/30 ${advancementClass(team.advancement)}`}
         >
           <CountryFlag countryCode={team.countryCode} className="text-3xl" />

@@ -21,7 +21,7 @@ export default function HomePage() {
               <p className="font-display text-xs font-bold uppercase tracking-[0.25em] text-gold">
                 FIFA World Cup 26™
               </p>
-              <h1 className="mt-2 font-display text-4xl font-black uppercase leading-[0.92] tracking-[0.03em] text-cream sm:text-5xl lg:text-6xl">
+              <h1 className="mt-2 font-display text-3xl font-black uppercase leading-[0.92] tracking-[0.03em] text-cream sm:text-5xl lg:text-6xl">
                 Where teams
                 <span className="text-gold"> call home</span>
               </h1>
@@ -31,10 +31,10 @@ export default function HomePage() {
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
-                  href="/teams"
+                  href="/countries"
                   className="wc26-btn-primary px-6 py-2.5 text-sm"
                 >
-                  Browse teams
+                  Browse countries
                 </Link>
                 <Link
                   href="/map"
@@ -64,19 +64,19 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="overflow-hidden border border-card-border">
-          <TbcMapWrapper teams={teams} height="380px" zoom={3} />
+          <TbcMapWrapper teams={teams} heightClassName="map-height-home" zoom={3} />
         </div>
       </section>
 
       <section className="border-y border-card-border bg-card/30 py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-5 flex items-end justify-between gap-4">
-            <SectionHeading title="Teams" subtitle="48 nations" />
+            <SectionHeading title="Countries" subtitle="48 nations" />
             <Link
-              href="/teams"
+              href="/countries"
               className="font-display text-xs font-bold uppercase tracking-[0.12em] text-gold hover:text-gold-light"
             >
-              All teams →
+              All countries →
             </Link>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

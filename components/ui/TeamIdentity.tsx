@@ -37,7 +37,7 @@ export function TeamIdentity({
   if (teamSlug && resolvedCountryCode) {
     return (
       <Link
-        href={`/teams/${teamSlug}`}
+        href={`/countries/${teamSlug}`}
         className={`${linkClassName} ${className}`}
         onClick={onClick}
       >

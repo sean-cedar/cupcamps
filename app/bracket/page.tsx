@@ -44,8 +44,8 @@ export default function BracketPage() {
           </p>
           {progress.champion ? (
             <Link
-              href={`/teams/${progress.champion.slug}`}
-              className="mt-2 inline-flex items-center gap-3 transition hover:text-gold-light"
+              href={`/countries/${progress.champion.slug}`}
+              className="mt-2 inline-flex flex-wrap items-center gap-3 transition hover:text-gold-light"
             >
               {progress.champion.countryCode && (
                 <CountryFlag

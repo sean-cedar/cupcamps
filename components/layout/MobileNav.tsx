@@ -1,0 +1,137 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useId, useRef, useState } from "react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
+
+const navLinks = [
+  { href: "/countries", label: "Countries" },
+  { href: "/groups", label: "Groups" },
+  { href: "/host-cities", label: "Cities" },
+  { href: "/map", label: "Map" },
+  { href: "/bracket", label: "Bracket" },
+];
+
+function isActivePath(pathname: string, href: string): boolean {
+  if (href === "/") {
+    return pathname === "/";
+  }
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+export function MobileNav() {
+  const pathname = usePathname();
+  const panelId = useId();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  return (
+    <div className="lg:hidden">
+      <button
+        ref={menuButtonRef}
+        type="button"
+        className="touch-target inline-flex items-center justify-center rounded border border-card-border bg-card/60 text-cream transition hover:border-gold/40 hover:text-gold-light"
+        aria-expanded={open}
+        aria-controls={panelId}
+        aria-label={open ? "Close menu" : "Open menu"}
+        onClick={() => setOpen((current) => !current)}
+      >
+        {open ? (
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            aria-hidden
+          >
+            <path d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        ) : (
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            aria-hidden
+          >
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        )}
+      </button>
+
+      {open && (
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 z-[1090] bg-black/50"
+            aria-label="Dismiss menu overlay"
+            onClick={() => setOpen(false)}
+          />
+          <nav
+            id={panelId}
+            className="fixed inset-x-0 top-[calc(2.625rem+2px)] z-[1095] max-h-[calc(100dvh-2.625rem-2px)] overflow-y-auto border-b border-card-border bg-background/98 px-4 py-4 shadow-lg backdrop-blur-sm site-shell-inline"
+            aria-label="Mobile navigation"
+          >
+            <ul className="space-y-1">
+              {navLinks.map((link) => {
+                const active = isActivePath(pathname, link.href);
+
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className={`flex min-h-11 items-center rounded px-3 font-display text-sm font-bold uppercase tracking-[0.12em] transition ${
+                        active
+                          ? "bg-gold/15 text-gold-light"
+                          : "text-cream hover:bg-card/60 hover:text-gold-light"
+                      }`}
+                      onClick={() => setOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <div className="mt-5 border-t border-card-border pt-4">
+              <p className="mb-3 font-display text-[10px] font-bold uppercase tracking-[0.16em] text-muted">
+                Theme
+              </p>
+              <ThemeToggle layout="menu" />
+            </div>
+          </nav>
+        </>
+      )}
+    </div>
+  );
+}

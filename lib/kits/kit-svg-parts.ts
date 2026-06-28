@@ -13,6 +13,10 @@ export function kitPatternDef(shirt: KitShirt, id: string): string | null {
       return `<pattern id="${id}" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="2" height="2" fill="${shirt.primary}"/><rect x="2" width="2" height="2" fill="${secondary}"/><rect y="2" width="2" height="2" fill="${secondary}"/><rect x="2" y="2" width="2" height="2" fill="${shirt.primary}"/></pattern>`;
     case "tricolor-vertical":
       return `<pattern id="${id}" width="6" height="4" patternUnits="userSpaceOnUse"><rect width="2" height="4" fill="${shirt.primary}"/><rect x="2" width="2" height="4" fill="${secondary}"/><rect x="4" width="2" height="4" fill="${accent}"/></pattern>`;
+    case "small-checker":
+      return `<pattern id="${id}" width="3" height="3" patternUnits="userSpaceOnUse"><rect width="1.5" height="1.5" fill="${shirt.primary}"/><rect x="1.5" width="1.5" height="1.5" fill="${secondary}"/><rect y="1.5" width="1.5" height="1.5" fill="${secondary}"/><rect x="1.5" y="1.5" width="1.5" height="1.5" fill="${shirt.primary}"/></pattern>`;
+    case "vertical-pinstripes":
+      return `<pattern id="${id}" width="3" height="4" patternUnits="userSpaceOnUse"><rect width="1" height="4" fill="${secondary}"/><rect x="1" width="2" height="4" fill="${shirt.primary}"/></pattern>`;
     default:
       return null;
   }
@@ -37,7 +41,9 @@ export function kitBodyFill(shirt: KitShirt, patternId: string): string {
     shirt.pattern === "split-diagonal" ||
     shirt.pattern === "chest-stripe" ||
     shirt.pattern === "central-stripe" ||
-    shirt.pattern === "side-panels"
+    shirt.pattern === "side-panels" ||
+    shirt.pattern === "topographic" ||
+    shirt.pattern === "horizontal-fade"
   ) {
     return shirt.primary;
   }
@@ -104,6 +110,22 @@ export function kitOverlayElements(shirt: KitShirt): Array<{
       return [
         { type: "rect", props: { x: 8, y: 9, width: 3.5, height: 24, fill: secondary } },
         { type: "rect", props: { x: 20.5, y: 9, width: 3.5, height: 24, fill: secondary } },
+      ];
+    case "topographic":
+      return [
+        { type: "rect", props: { x: 8, y: 12, width: 16, height: 0.7, fill: secondary } },
+        { type: "rect", props: { x: 9, y: 15.5, width: 14, height: 0.7, fill: secondary } },
+        { type: "rect", props: { x: 8.5, y: 19, width: 15, height: 0.7, fill: secondary } },
+        { type: "rect", props: { x: 9.5, y: 22.5, width: 13, height: 0.7, fill: secondary } },
+        { type: "rect", props: { x: 8, y: 26, width: 16, height: 0.7, fill: secondary } },
+        { type: "rect", props: { x: 9, y: 29.5, width: 14, height: 0.7, fill: secondary } },
+      ];
+    case "horizontal-fade":
+      return [
+        { type: "rect", props: { x: 8, y: 17, width: 16, height: 8, fill: secondary } },
+        ...(shirt.accent
+          ? [{ type: "rect" as const, props: { x: 8, y: 16, width: 16, height: 1.2, fill: accent } }]
+          : []),
       ];
     default:
       return [];

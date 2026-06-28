@@ -30,7 +30,7 @@ export function GroupAdvancementPanel({
           {advancedTeams.map((team) => (
             <li key={team.slug}>
               <Link
-                href={`/teams/${team.slug}`}
+                href={`/countries/${team.slug}`}
                 className="flex items-center justify-between gap-3 transition hover:text-gold-light"
               >
                 <span className="inline-flex items-center gap-3">

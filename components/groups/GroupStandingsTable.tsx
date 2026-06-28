@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GroupStandingCard } from "@/components/groups/GroupStandingCard";
 import { CountryFlag } from "@/components/ui/CountryFlag";
 import { getGroupAdvancementLabel } from "@/lib/schedule/groups";
 import type { GroupAdvancementStatus } from "@/lib/schedule/groups";
@@ -46,7 +47,22 @@ export function GroupStandingsTable({
   showAdvancement = false,
 }: GroupStandingsTableProps) {
   return (
-    <div className="overflow-x-auto wc26-panel">
+    <div>
+      <div className="space-y-3 md:hidden">
+        <p className="font-display text-xs font-bold uppercase tracking-[0.14em] text-gold">
+          Group {group} standings
+        </p>
+        {rows.map((row, index) => (
+          <GroupStandingCard
+            key={row.slug}
+            row={row}
+            rank={index + 1}
+            showAdvancement={showAdvancement}
+          />
+        ))}
+      </div>
+
+      <div className="hidden overflow-x-auto wc26-panel md:block">
       <table className="w-full min-w-[32rem] text-left text-sm">
         <caption className="px-4 py-3 text-left font-display text-xs font-bold uppercase tracking-[0.14em] text-gold">
           Group {group} standings
@@ -72,7 +88,7 @@ export function GroupStandingsTable({
             >
               <td className="px-4 py-2">
                 <Link
-                  href={`/teams/${row.slug}`}
+                  href={`/countries/${row.slug}`}
                   className="inline-flex items-center gap-2 text-cream transition hover:text-gold-light"
                 >
                   <span className="w-4 text-[10px] tabular-nums text-muted">
@@ -129,6 +145,7 @@ export function GroupStandingsTable({
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }
