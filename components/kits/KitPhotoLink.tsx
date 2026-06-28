@@ -6,6 +6,7 @@ type KitPhotoLinkProps = {
   children: ReactNode;
   className?: string;
   showPhotoHint?: boolean;
+  photoHintText?: string;
 };
 
 export function KitPhotoLink({
@@ -14,19 +15,20 @@ export function KitPhotoLink({
   children,
   className = "",
   showPhotoHint = true,
+  photoHintText = "Official kit photo →",
 }: KitPhotoLinkProps) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group block cursor-pointer transition hover:text-gold-light ${className}`}
-      aria-label={`View official ${label} World Cup 2026 kit photo`}
+      className={`group cursor-pointer transition hover:text-gold-light ${className}`}
+      aria-label={`View ${label}`}
     >
       {children}
       {showPhotoHint && (
-        <span className="mt-2 block font-display text-[10px] font-bold uppercase tracking-[0.12em] text-muted transition group-hover:text-gold">
-          Official kit photo →
+        <span className="mt-1 block font-display text-[10px] font-bold uppercase tracking-[0.12em] text-muted transition group-hover:text-gold">
+          {photoHintText}
         </span>
       )}
     </a>

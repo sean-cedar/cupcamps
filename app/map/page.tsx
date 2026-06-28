@@ -22,12 +22,12 @@ export default function MapPage() {
       />
 
       <div className="grid gap-8 lg:grid-cols-3">
-        <div className="overflow-hidden border border-gold/20 lg:col-span-2">
+        <div className="relative z-0 overflow-hidden border border-gold/20 lg:col-span-2">
           <HostNationStripe height={3} />
           <TbcMapWrapper teams={teams} height="650px" zoom={3} />
         </div>
-        <div className="max-h-[650px] overflow-y-auto wc26-panel">
-          <div className="sticky top-0 border-b border-card-border bg-card px-4 py-3">
+        <div className="relative z-10 max-h-[650px] overflow-y-auto wc26-panel">
+          <div className="sticky top-0 z-10 border-b border-card-border bg-card px-4 py-3">
             <p className="font-display text-xs font-bold uppercase tracking-[0.2em] text-muted">
               All teams ({teams.length})
             </p>

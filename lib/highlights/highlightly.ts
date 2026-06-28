@@ -515,6 +515,33 @@ export async function fetchHighlightsForMatch(
   homeName: string,
   awayName: string,
 ): Promise<HighlightVideo[]> {
+  const datesToTry = [date, shiftIsoDate(date, -1), shiftIsoDate(date, 1)];
+
+  for (const queryDate of datesToTry) {
+    const videos = await fetchHighlightsForMatchOnDate(
+      queryDate,
+      homeName,
+      awayName,
+    );
+    if (videos.length > 0) {
+      return videos;
+    }
+  }
+
+  return [];
+}
+
+function shiftIsoDate(isoDate: string, dayOffset: number): string {
+  const parsed = new Date(`${isoDate}T12:00:00Z`);
+  parsed.setUTCDate(parsed.getUTCDate() + dayOffset);
+  return parsed.toISOString().slice(0, 10);
+}
+
+async function fetchHighlightsForMatchOnDate(
+  date: string,
+  homeName: string,
+  awayName: string,
+): Promise<HighlightVideo[]> {
   const leagueId = getLeagueId();
 
   if (leagueId) {

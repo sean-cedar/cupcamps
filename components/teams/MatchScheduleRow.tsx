@@ -47,26 +47,26 @@ export function MatchScheduleRow({ match }: MatchScheduleRowProps) {
         <p className="text-[10px] text-muted">Match {match.matchNumber}</p>
       </div>
 
-      <div className="relative z-[1] min-w-0 space-y-1">
-        <div className="pointer-events-none flex flex-wrap items-center gap-2">
+      <div className="relative z-[1] min-w-0 space-y-1 pointer-events-none">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="rounded border border-card-border bg-card/60 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted">
             {match.isHome ? "Home" : "Away"}
           </span>
         </div>
-        <div className="pointer-events-auto">
+        <div className="pointer-events-auto w-fit max-w-full">
           <TeamIdentity
             teamSlug={opponent.slug}
             label={opponent.label}
             countryCode={opponent.countryCode}
           />
         </div>
-        <span className="pointer-events-none hidden text-xs text-muted sm:inline">
+        <span className="hidden text-xs text-muted sm:inline">
           {match.stadium}
         </span>
       </div>
 
-      <div className="relative z-[1] flex items-center justify-between gap-3 sm:flex-col sm:items-end">
-        <span className="pointer-events-none">
+      <div className="relative z-[1] flex items-center justify-between gap-3 pointer-events-none sm:flex-col sm:items-end">
+        <span>
           {score ? (
             <span
               className={`font-display text-lg font-black ${

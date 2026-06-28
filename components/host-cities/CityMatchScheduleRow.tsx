@@ -43,12 +43,12 @@ export function CityMatchScheduleRow({ match }: CityMatchScheduleRowProps) {
         <p className="text-[10px] text-muted">Match {match.matchNumber}</p>
       </div>
 
-      <div className="relative z-[1] min-w-0 pointer-events-auto">
-        <MatchupTeams home={home} away={away} />
+      <div className="relative z-[1] min-w-0 pointer-events-none">
+        <MatchupTeams home={home} away={away} linkPointerEvents />
         <p className="mt-1 hidden text-xs text-muted sm:block">{match.stadium}</p>
       </div>
 
-      <div className="relative z-[1] pointer-events-none flex items-center justify-end sm:flex-col sm:items-end">
+      <div className="relative z-[1] flex items-center justify-end pointer-events-none sm:flex-col sm:items-end">
         {score ? (
           <span className="font-display text-lg font-black text-cream">
             {score}

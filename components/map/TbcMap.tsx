@@ -35,7 +35,7 @@ const MIN_ZOOM = 3;
 function createFlagIcon(countryCode: string, dimmed = false) {
   return L.divIcon({
     className: "tbc-flag-icon",
-    html: `<div class="tbc-flag-marker${dimmed ? " tbc-flag-marker-dimmed" : ""}"><span class="fi fi-${countryCode}"></span></div>`,
+    html: `<div class="tbc-flag-marker${dimmed ? " tbc-flag-marker-dimmed" : ""}"><span class="country-flag-frame" style="font-size:28px;padding:2px"><span class="fi fi-${countryCode}"></span></span></div>`,
     iconSize: [32, 24],
     iconAnchor: [16, 24],
     popupAnchor: [0, -26],
@@ -140,7 +140,9 @@ export function TbcMap({
             <Popup>
               <div className="min-w-[180px] text-sm">
                 <p className="map-popup-text flex items-center gap-2 font-bold">
-                  <span className={`fi fi-${team.countryCode}`} />
+                  <span className="country-flag-frame shrink-0 text-xl">
+                    <span className={`fi fi-${team.countryCode}`} />
+                  </span>
                   {team.name}
                 </p>
                 <p className="map-popup-muted text-[10px] font-semibold uppercase tracking-wider">

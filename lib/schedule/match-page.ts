@@ -4,9 +4,13 @@ import {
   resolveMatch,
   type MatchOutcome,
 } from "@/lib/schedule/bracket";
-import { matches } from "@/lib/schedule/matches";
-import type { MatchRecord, MatchStage } from "@/lib/schedule/types";
 import { getStageLabel } from "@/lib/schedule";
+import {
+  loserAdvancesTo,
+  matches,
+  winnerAdvancesTo,
+} from "@/lib/schedule/matches";
+import type { MatchRecord, MatchStage } from "@/lib/schedule/types";
 import { getTeam } from "@/lib/teams";
 
 export type MatchTeamRef = {
@@ -47,6 +51,16 @@ export type FeederMatchView = {
   score: string | null;
 };
 
+export type AdvanceMatchView = {
+  matchNumber: number;
+  label: string;
+  stageLabel: string;
+  homeLabel: string;
+  awayLabel: string;
+  isPlayed: boolean;
+  score: string | null;
+};
+
 export type MatchPageView = {
   matchNumber: number;
   stage: MatchStage;
@@ -64,6 +78,7 @@ export type MatchPageView = {
   title: string;
   groupStandings: GroupStandingRow[] | null;
   feeders: FeederMatchView[];
+  advances: AdvanceMatchView[];
 };
 
 const matchByNumber = new Map(matches.map((match) => [match.matchNumber, match]));
@@ -272,6 +287,71 @@ function buildFeeders(
   return feeders;
 }
 
+function buildAdvanceMatchView(
+  targetMatchNumber: number,
+  relationship: "winner" | "loser",
+  outcomes: Map<number, MatchOutcome>,
+): AdvanceMatchView | null {
+  const target = matchByNumber.get(targetMatchNumber);
+  if (!target) {
+    return null;
+  }
+
+  const resolved = resolveMatch(targetMatchNumber, outcomes);
+  const homeLabel = resolveSlugLabel(
+    resolved?.resolvedHomeSlug ?? target.homeSlug,
+  );
+  const awayLabel = resolveSlugLabel(
+    resolved?.resolvedAwaySlug ?? target.awaySlug,
+  );
+  const isPlayed =
+    target.homeScore !== null && target.awayScore !== null;
+  const score =
+    isPlayed && target.homeScore !== null && target.awayScore !== null
+      ? `${target.homeScore}–${target.awayScore}`
+      : null;
+
+  const label =
+    relationship === "winner"
+      ? `Winner advances to Match ${targetMatchNumber}`
+      : `Loser plays Match ${targetMatchNumber}`;
+
+  return {
+    matchNumber: targetMatchNumber,
+    label,
+    stageLabel: getStageLabel(target.stage),
+    homeLabel,
+    awayLabel,
+    isPlayed,
+    score,
+  };
+}
+
+function buildAdvances(
+  matchNumber: number,
+  outcomes: Map<number, MatchOutcome>,
+): AdvanceMatchView[] {
+  const advances: AdvanceMatchView[] = [];
+
+  const winnerNext = winnerAdvancesTo[matchNumber];
+  if (winnerNext) {
+    const view = buildAdvanceMatchView(winnerNext, "winner", outcomes);
+    if (view) {
+      advances.push(view);
+    }
+  }
+
+  const loserNext = loserAdvancesTo[matchNumber];
+  if (loserNext) {
+    const view = buildAdvanceMatchView(loserNext, "loser", outcomes);
+    if (view) {
+      advances.push(view);
+    }
+  }
+
+  return advances;
+}
+
 function buildGroupStandings(
   match: MatchRecord,
   resolvedHome: string | null,
@@ -372,6 +452,7 @@ export function getMatchPageView(matchNumber: number): MatchPageView | undefined
     title: buildTitle(home, away, match.matchNumber),
     groupStandings: buildGroupStandings(match, resolvedHome, resolvedAway),
     feeders: buildFeeders(match, outcomes),
+    advances: buildAdvances(match.matchNumber, outcomes),
   };
 }
 

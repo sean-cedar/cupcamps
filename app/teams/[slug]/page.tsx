@@ -8,7 +8,7 @@ import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
 import { TeamKitGallery } from "@/components/teams/TeamKitGallery";
 import { TeamSchedule } from "@/components/teams/TeamSchedule";
 import { CountryFlag } from "@/components/ui/CountryFlag";
-import { GroupBadge } from "@/components/ui/GroupBadge";
+import { GroupBadge, groupPageHref } from "@/components/ui/GroupBadge";
 import { getTeamKitVariants } from "@/lib/kits";
 import { getTeamScheduleMapMarkers } from "@/lib/map/team-schedule-markers";
 import { formatTeamTbcLocation, getHostCity, getTeam, teams } from "@/lib/teams";
@@ -55,15 +55,19 @@ export default async function TeamDetailPage({ params }: PageProps) {
           >
             ← All teams
           </Link>
-          <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div className="flex flex-wrap items-center gap-6">
+          <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex min-w-0 flex-wrap items-center gap-6">
               <CountryFlag countryCode={team.countryCode} className="text-6xl" />
               <div>
                 <div className="flex flex-wrap items-center gap-3">
                   <h1 className="font-display text-5xl font-black uppercase tracking-[0.04em] text-cream sm:text-6xl">
                     {team.name}
                   </h1>
-                  <GroupBadge group={team.group} size="lg" />
+                  <GroupBadge
+                    group={team.group}
+                    size="lg"
+                    href={groupPageHref(team.group)}
+                  />
                 </div>
                 <p className="mt-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-muted">
                   {team.confederation} · Group {team.group}
@@ -72,7 +76,7 @@ export default async function TeamDetailPage({ params }: PageProps) {
             </div>
 
             {kitVariants.length > 0 && (
-              <div className="hidden lg:block">
+              <div className="w-full lg:w-auto lg:max-w-md">
                 <TeamKitGallery
                   teamName={team.name}
                   variants={kitVariants}
@@ -81,16 +85,6 @@ export default async function TeamDetailPage({ params }: PageProps) {
               </div>
             )}
           </div>
-
-          {kitVariants.length > 0 && (
-            <div className="mt-6 lg:hidden">
-              <TeamKitGallery
-                teamName={team.name}
-                variants={kitVariants}
-                layout="hero"
-              />
-            </div>
-          )}
         </div>
       </section>
 

@@ -2,20 +2,40 @@ import Link from "next/link";
 import { KitPhotoLink } from "@/components/kits/KitPhotoLink";
 import { TeamKit } from "@/components/ui/TeamKit";
 import { CountryFlag } from "@/components/ui/CountryFlag";
-import { getKitPhotoUrl, getTeamKitSet } from "@/lib/kits";
+import { getTeamKitSet } from "@/lib/kits";
+import type { KitVariantId } from "@/lib/kits/types";
 import type { MatchParticipantView } from "@/lib/schedule/match-page";
 
 type MatchParticipantPanelProps = {
   participant: MatchParticipantView;
   side: "home" | "away";
+  matchPhotoUrl: string;
 };
+
+function kitVariantForSide(side: "home" | "away"): KitVariantId {
+  return side === "home" ? "home" : "away";
+}
+
+function kitLabelForVariant(variantId: KitVariantId): string {
+  if (variantId === "away") {
+    return "Away kit";
+  }
+  if (variantId === "third") {
+    return "Third kit";
+  }
+  return "Home kit";
+}
 
 export function MatchParticipantPanel({
   participant,
   side,
+  matchPhotoUrl,
 }: MatchParticipantPanelProps) {
-  const homeKit = participant.team
-    ? getTeamKitSet(participant.team.slug)?.variants.find((v) => v.id === "home")
+  const kitVariantId = kitVariantForSide(side);
+  const wornKit = participant.team
+    ? getTeamKitSet(participant.team.slug)?.variants.find(
+        (variant) => variant.id === kitVariantId,
+      )
     : null;
   const showPotential =
     participant.isPlaceholder &&
@@ -24,81 +44,93 @@ export function MatchParticipantPanel({
 
   return (
     <div
-      className={`wc26-panel flex flex-col p-5 ${
+      className={`wc26-panel p-4 sm:p-5 ${
         participant.isWinner ? "border-gold/40 bg-gold/5" : ""
-      } ${side === "away" ? "text-right sm:items-end" : ""}`}
+      }`}
     >
-      <p className="font-display text-[10px] font-bold uppercase tracking-[0.14em] text-gold">
+      <p
+        className={`font-display text-[10px] font-bold uppercase tracking-[0.14em] text-gold ${
+          side === "away" ? "text-right" : ""
+        }`}
+      >
         {side === "home" ? "Home" : "Away"}
       </p>
 
-      {participant.team ? (
-        <Link
-          href={`/teams/${participant.team.slug}`}
-          className={`mt-3 flex items-center gap-3 transition hover:text-gold-light ${
+      <div
+        className={`mt-3 flex items-center gap-3 sm:gap-4 ${
+          side === "away" ? "flex-row-reverse" : ""
+        }`}
+      >
+        {participant.team ? (
+          <CountryFlag
+            countryCode={participant.team.countryCode}
+            className="shrink-0 text-3xl sm:text-4xl"
+          />
+        ) : null}
+
+        <div
+          className={`flex min-w-0 flex-1 items-center gap-3 sm:gap-4 ${
             side === "away" ? "flex-row-reverse" : ""
           }`}
         >
-          <CountryFlag
-            countryCode={participant.team.countryCode}
-            className="text-4xl"
-          />
-          <div className={side === "away" ? "text-right" : ""}>
-            <p
-              className={`font-display text-2xl font-black uppercase tracking-[0.04em] ${
-                participant.isWinner ? "text-gold-light" : "text-cream"
-              }`}
-            >
-              {participant.team.name}
-            </p>
-            {participant.score !== null && (
-              <p className="font-display text-4xl font-black tabular-nums text-cream">
-                {participant.score}
+          <div
+            className={`min-w-0 flex-1 ${
+              side === "away" ? "text-right" : "text-left"
+            }`}
+          >
+            {participant.team ? (
+              <Link
+                href={`/teams/${participant.team.slug}`}
+                className={`font-display text-xl font-black uppercase tracking-[0.04em] transition hover:text-gold-light sm:text-2xl ${
+                  participant.isWinner ? "text-gold-light" : "text-cream"
+                }`}
+              >
+                {participant.team.name}
+              </Link>
+            ) : (
+              <p className="font-display text-lg font-black uppercase tracking-[0.04em] text-muted sm:text-xl">
+                {participant.label}
               </p>
             )}
+
+            {wornKit && participant.team && (
+              <KitPhotoLink
+                href={matchPhotoUrl}
+                label={`${participant.team.name} at this match`}
+                showPhotoHint={false}
+                className={`mt-2 inline-flex items-center gap-2 ${
+                  side === "away" ? "flex-row-reverse" : ""
+                }`}
+              >
+                <TeamKit
+                  outfit={{ shirt: wornKit.shirt, shorts: wornKit.shorts }}
+                  size="md"
+                  title={`${participant.team.name} ${kitLabelForVariant(kitVariantId).toLowerCase()}`}
+                />
+                <span className="font-display text-[10px] font-bold uppercase tracking-[0.12em] text-muted transition group-hover:text-gold">
+                  {kitLabelForVariant(kitVariantId)} · Match photo →
+                </span>
+              </KitPhotoLink>
+            )}
           </div>
-        </Link>
-      ) : (
-        <div className={`mt-3 ${side === "away" ? "text-right" : ""}`}>
-          <p className="font-display text-xl font-black uppercase tracking-[0.04em] text-muted">
-            {participant.label}
-          </p>
+
           {participant.score !== null && (
-            <p className="font-display text-4xl font-black tabular-nums text-cream">
+            <p className="shrink-0 font-display text-4xl font-black tabular-nums text-cream sm:text-5xl">
               {participant.score}
             </p>
           )}
         </div>
-      )}
-
-      {homeKit && participant.team && (
-        <figure className="mt-4 flex flex-col items-center">
-          <KitPhotoLink
-            href={homeKit.photoUrl ?? getKitPhotoUrl(participant.team.slug, "home")}
-            label={`${participant.team.name} home`}
-            className="flex flex-col items-center text-center"
-          >
-            <TeamKit
-              outfit={{ shirt: homeKit.shirt, shorts: homeKit.shorts }}
-              size="lg"
-              title={`${participant.team.name} home kit`}
-            />
-            <figcaption className="mt-2 font-display text-[10px] font-bold uppercase tracking-[0.14em] text-muted">
-              Home kit
-            </figcaption>
-          </KitPhotoLink>
-        </figure>
-      )}
+      </div>
 
       {showPotential && (
-        <div className={`mt-5 w-full ${side === "away" ? "text-right" : ""}`}>
+        <div className={`mt-4 w-full ${side === "away" ? "text-right" : ""}`}>
           <p className="font-display text-[10px] font-bold uppercase tracking-[0.14em] text-muted">
             Potential teams
           </p>
           <ul
-            className={`mt-2 space-y-2 ${
+            className={`mt-2 flex flex-col space-y-2 ${
               side === "away" ? "items-end" : "items-start"
-            } flex flex-col`}
+            }`}
           >
             {participant.potentialTeams.map((team) => (
               <li key={team.slug}>

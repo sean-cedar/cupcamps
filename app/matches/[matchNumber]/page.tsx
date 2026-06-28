@@ -5,9 +5,12 @@ import { HostNationStripe } from "@/components/brand/HostNationStripe";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { HostCityLink } from "@/components/host-cities/HostCityCard";
 import { GroupStandingsTable } from "@/components/groups/GroupStandingsTable";
+import { MatchAdvancementPanel } from "@/components/matches/MatchAdvancementPanel";
 import { MatchFeedersPanel } from "@/components/matches/MatchFeedersPanel";
 import { MatchHighlightsSection } from "@/components/matches/MatchHighlightsSection";
 import { MatchParticipantPanel } from "@/components/matches/MatchParticipantPanel";
+import { getMatchPhotoUrl } from "@/lib/highlights/fallback";
+import { getHighlightLookupSlugs, getMatchRecord } from "@/lib/highlights/match";
 import { formatMatchDate } from "@/lib/schedule";
 import {
   getAllMatchNumbers,
@@ -56,6 +59,14 @@ export default async function MatchDetailPage({ params }: PageProps) {
   }
 
   const hostCity = getHostCity(view.hostCitySlug);
+  const matchRecord = getMatchRecord(matchNumber);
+  const lookupSlugs = matchRecord ? getHighlightLookupSlugs(matchRecord) : null;
+  const matchPhotoUrl =
+    matchRecord && lookupSlugs
+      ? getMatchPhotoUrl(matchRecord, lookupSlugs.home, lookupSlugs.away)
+      : matchRecord
+        ? getMatchPhotoUrl(matchRecord, matchRecord.homeSlug, matchRecord.awaySlug)
+        : "#";
   const scoreLabel =
     view.isPlayed && view.homeScore !== null && view.awayScore !== null
       ? `${view.homeScore}–${view.awayScore}`
@@ -102,9 +113,17 @@ export default async function MatchDetailPage({ params }: PageProps) {
       </section>
 
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-        <div className="grid gap-6 lg:grid-cols-2">
-          <MatchParticipantPanel participant={view.home} side="home" />
-          <MatchParticipantPanel participant={view.away} side="away" />
+        <div className="grid gap-4 lg:grid-cols-2 lg:gap-6">
+          <MatchParticipantPanel
+            participant={view.home}
+            side="home"
+            matchPhotoUrl={matchPhotoUrl}
+          />
+          <MatchParticipantPanel
+            participant={view.away}
+            side="away"
+            matchPhotoUrl={matchPhotoUrl}
+          />
         </div>
 
         <section className="mt-10">
@@ -122,14 +141,33 @@ export default async function MatchDetailPage({ params }: PageProps) {
           </div>
         </section>
 
-        {view.feeders.length > 0 && (
+        {(view.feeders.length > 0 || view.advances.length > 0) && (
           <section className="mt-10">
             <SectionHeading
               title="Bracket path"
-              subtitle="Feeder matches for this fixture"
+              subtitle="Previous and next knockout fixtures"
             />
-            <div className="mt-4">
-              <MatchFeedersPanel feeders={view.feeders} />
+            <div className="mt-4 space-y-6">
+              {view.feeders.length > 0 && (
+                <div>
+                  {view.advances.length > 0 && (
+                    <p className="mb-3 font-display text-[10px] font-bold uppercase tracking-[0.14em] text-muted">
+                      Feeds into this match
+                    </p>
+                  )}
+                  <MatchFeedersPanel feeders={view.feeders} />
+                </div>
+              )}
+              {view.advances.length > 0 && (
+                <div>
+                  {view.feeders.length > 0 && (
+                    <p className="mb-3 font-display text-[10px] font-bold uppercase tracking-[0.14em] text-muted">
+                      Next in the bracket
+                    </p>
+                  )}
+                  <MatchAdvancementPanel advances={view.advances} />
+                </div>
+              )}
             </div>
           </section>
         )}

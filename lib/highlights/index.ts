@@ -6,8 +6,11 @@ import {
   isHighlightlyConfigured,
 } from "@/lib/highlights/highlightly";
 import {
+  getFallbackHighlightVideos,
+  getFifaMatchHighlightsUrl,
+} from "@/lib/highlights/fallback";
+import {
   getCacheTtlSeconds,
-  getFifaHighlightsFallbackUrl,
   getHighlightLookupSlugs,
   getMatchRecord,
   isMatchPlayed,
@@ -52,7 +55,8 @@ export async function getMatchHighlights(
     return null;
   }
 
-  const fallbackUrl = getFifaHighlightsFallbackUrl();
+  const lookupSlugs = getHighlightLookupSlugs(match);
+  const fallbackUrl = getFifaMatchHighlightsUrl(match);
   const cachedAt = new Date().toISOString();
 
   if (!isMatchPlayed(match)) {
@@ -66,7 +70,6 @@ export async function getMatchHighlights(
     };
   }
 
-  const lookupSlugs = getHighlightLookupSlugs(match);
   if (!lookupSlugs) {
     return {
       matchNumber,
@@ -78,54 +81,49 @@ export async function getMatchHighlights(
     };
   }
 
-  if (!isHighlightlyConfigured()) {
-    return {
-      matchNumber,
-      status: "not_configured",
-      videos: [],
-      fallbackUrl,
-      cachedAt,
-      message:
-        "Add HIGHLIGHTLY_API_KEY to enable embedded highlights. Watch on FIFA.com in the meantime.",
-    };
-  }
+  let highlightlyVideos: HighlightVideo[] = [];
 
-  try {
-    const videos = await getVideosForMatch(
-      match.date,
-      lookupSlugs.home,
-      lookupSlugs.away,
-    );
-
-    if (videos.length > 0) {
-      return {
-        matchNumber,
-        status: "available",
-        videos,
-        fallbackUrl,
-        cachedAt,
-      };
+  if (isHighlightlyConfigured()) {
+    try {
+      highlightlyVideos = await getVideosForMatch(
+        match.date,
+        lookupSlugs.home,
+        lookupSlugs.away,
+      );
+    } catch {
+      highlightlyVideos = [];
     }
+  }
 
+  if (highlightlyVideos.length > 0) {
     return {
       matchNumber,
-      status: "pending",
-      videos: [],
+      status: "available",
+      videos: highlightlyVideos,
       fallbackUrl,
       cachedAt,
-      message:
-        "No highlights for this match in Highlightly yet. Clips often appear hours after the final whistle — try FIFA.com meanwhile.",
-    };
-  } catch {
-    return {
-      matchNumber,
-      status: "pending",
-      videos: [],
-      fallbackUrl,
-      cachedAt,
-      message: "Could not load highlights right now. Try FIFA.com instead.",
     };
   }
+
+  const fallbackVideos = getFallbackHighlightVideos(
+    match,
+    lookupSlugs.home,
+    lookupSlugs.away,
+  );
+  const hasEmbed = fallbackVideos.some((video) => video.embedHtml);
+
+  return {
+    matchNumber,
+    status: "available",
+    videos: fallbackVideos,
+    fallbackUrl,
+    cachedAt,
+    message: hasEmbed
+      ? undefined
+      : isHighlightlyConfigured()
+        ? "No embedded clips in Highlightly yet — try FIFA.com or YouTube below."
+        : "Add HIGHLIGHTLY_API_KEY for auto-embedded clips, or use the links below.",
+  };
 }
 
 export { getCacheTtlSeconds };

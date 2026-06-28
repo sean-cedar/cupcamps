@@ -78,7 +78,7 @@ export function MatchHighlightsPanel({
 
       {!loading && !error && data && (
         <div className="mt-4 space-y-4">
-          {data.message && data.status !== "available" && (
+          {data.message && (
             <p className="text-sm text-muted">{data.message}</p>
           )}
 
@@ -100,17 +100,17 @@ export function MatchHighlightsPanel({
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded border border-card-border bg-card px-3 py-2 text-sm text-cream transition hover:border-gold/40 hover:text-gold-light"
                   >
-                    Watch highlight →
+                    {video.id.startsWith("youtube-search-")
+                      ? "Search highlights on YouTube →"
+                      : "Watch highlight →"}
                   </a>
                 ) : null}
               </div>
             ))
           ) : (
-            !data.message && (
-              <p className="text-sm text-muted">
-                No embedded highlights yet for this match.
-              </p>
-            )
+            <p className="text-sm text-muted">
+              No highlights found for this match yet.
+            </p>
           )}
         </div>
       )}

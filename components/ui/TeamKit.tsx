@@ -15,9 +15,11 @@ const outfitViewBox = "0 0 32 50";
 
 type TeamKitProps = {
   outfit: KitOutfit;
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: "sm" | "md" | "lg" | "xl" | "2xl";
   className?: string;
   title?: string;
+  /** Adds a light frame so dark kit colors stay visible on dark backgrounds. */
+  framed?: boolean;
 };
 
 const sizes = {
@@ -25,6 +27,7 @@ const sizes = {
   md: 20,
   lg: 32,
   xl: 48,
+  "2xl": 72,
 } as const;
 
 function ShirtPatternFill({
@@ -147,6 +150,7 @@ export function TeamKit({
   size = "md",
   className = "",
   title,
+  framed = true,
 }: TeamKitProps) {
   const shirtPatternId = useId().replace(/:/g, "");
   const shortsPatternId = useId().replace(/:/g, "");
@@ -156,12 +160,19 @@ export function TeamKit({
   const shirtFill = kitBodyFill(outfit.shirt, shirtPatternId);
   const shortsFill = shortsBodyFill(outfit.shorts, shortsPatternId);
 
-  return (
+  const frameSizeClass =
+    size === "sm" || size === "md"
+      ? "kit-display-frame--sm"
+      : size === "lg" || size === "xl" || size === "2xl"
+        ? "kit-display-frame--lg"
+        : "";
+
+  const svg = (
     <svg
       viewBox={outfitViewBox}
       width={px}
       height={height}
-      className={`inline-block shrink-0 drop-shadow-sm ${className}`}
+      className={`inline-block shrink-0 ${className}`}
       aria-hidden={title ? undefined : true}
       role={title ? "img" : undefined}
     >
@@ -216,10 +227,18 @@ export function TeamKit({
       <path
         d="M8 9 L11 9 L12.5 6 L14.5 6 L16 9 L24 9 L24 33 L8 33 Z M4 10 L8 9 L8 14 L4 16 Z M24 9 L28 10 L28 16 L24 14 Z M8 33 L24 33 L22.5 45 L9.5 45 Z"
         fill="none"
-        stroke="#00000033"
-        strokeWidth="0.75"
+        stroke="#00000044"
+        strokeWidth="0.85"
         strokeLinejoin="round"
       />
     </svg>
+  );
+
+  if (!framed) {
+    return svg;
+  }
+
+  return (
+    <span className={`kit-display-frame ${frameSizeClass}`}>{svg}</span>
   );
 }
