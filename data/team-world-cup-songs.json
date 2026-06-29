@@ -1,0 +1,196 @@
+[
+  {
+    "teamSlug": "algeria",
+    "goalSong": { "title": "One, Two, Three, Viva l'Algérie!", "artist": "Medi Meyz" }
+  },
+  {
+    "teamSlug": "argentina",
+    "goalSong": { "title": "La Cumbia de los Trapos", "artist": "Yerba Brava" }
+  },
+  {
+    "teamSlug": "australia",
+    "goalSong": { "title": "Thunderstruck", "artist": "AC/DC" }
+  },
+  {
+    "teamSlug": "austria",
+    "goalSong": { "title": "Maria (I Like It Loud)", "artist": "Scooter" }
+  },
+  {
+    "teamSlug": "belgium",
+    "goalSong": { "title": "Kiss The Grass (Allez Allez)", "artist": "Roméo Elvis & Sylvie Kreusch" }
+  },
+  {
+    "teamSlug": "bosnia-and-herzegovina",
+    "goalSong": { "title": "Take Me To America", "artist": "Dubioza Kollektiv" }
+  },
+  {
+    "teamSlug": "brazil",
+    "goalSong": { "title": "Esquentando O Couro", "artist": "Escola de Samba Nocidade Independente de Padre Miguel" }
+  },
+  {
+    "teamSlug": "cabo-verde",
+    "goalSong": { "title": "SIKI SIKI (Remix)", "artist": "Lisandro Cuxi & Loony Johnson" }
+  },
+  {
+    "teamSlug": "canada",
+    "goalSong": { "title": "Goals", "artist": "LISA, Anitta & Rema" }
+  },
+  {
+    "teamSlug": "colombia",
+    "goalSong": { "title": "EL RITMO QUE NOS UNE", "artist": "Ryan Castro & SOG" }
+  },
+  {
+    "teamSlug": "congo-dr",
+    "goalSong": { "title": "Congo Elonga", "artist": "Donat Mwanza" }
+  },
+  {
+    "teamSlug": "ivory-coast",
+    "goalSong": { "title": "Coup du marteau", "artist": "Tam Sir" }
+  },
+  {
+    "teamSlug": "croatia",
+    "goalSong": { "title": "Moja domovina", "artist": "Hrvatski Band Aid" }
+  },
+  {
+    "teamSlug": "curacao",
+    "goalSong": { "title": "Bluewave", "artist": "Jeon Arvani" }
+  },
+  {
+    "teamSlug": "czechia",
+    "goalSong": { "title": "Národní tým", "artist": "DJ Nassi" }
+  },
+  {
+    "teamSlug": "ecuador",
+    "goalSong": { "title": "Ecuador, Si Se Puede", "artist": "Damiano" }
+  },
+  {
+    "teamSlug": "egypt",
+    "goalSong": { "title": "Bilady, Bilady, Bilady", "artist": "Sayed Darwish & Yunis El Qadi" }
+  },
+  {
+    "teamSlug": "england",
+    "goalSong": { "title": "Chase the Sun", "artist": "Planet Funk" }
+  },
+  {
+    "teamSlug": "france",
+    "goalSong": { "title": "One More Time", "artist": "Daft Punk" },
+    "victorySong": { "title": "Song 2", "artist": "Blur" }
+  },
+  {
+    "teamSlug": "germany",
+    "goalSong": { "title": "Major Tom", "artist": "Peter Schilling" },
+    "victorySong": { "title": "An Tagen wie diesen", "artist": "Die Toten Hosen" }
+  },
+  {
+    "teamSlug": "ghana",
+    "goalSong": { "title": "We Shall Score", "artist": "Cj Biggerman & Big Ivy" }
+  },
+  {
+    "teamSlug": "haiti",
+    "goalSong": { "title": "Ann Ale", "artist": "Prophète & Jessica Antoine" }
+  },
+  {
+    "teamSlug": "iran",
+    "goalSong": { "title": "Iran Football Song", "artist": "Kimiagar" }
+  },
+  {
+    "teamSlug": "iraq",
+    "goalSong": { "title": "Aja El Iraq", "artist": "Mahmoud Al Turki" }
+  },
+  {
+    "teamSlug": "japan",
+    "goalSong": { "title": "Ao No Hokori", "artist": "Poet" }
+  },
+  {
+    "teamSlug": "jordan",
+    "goalSong": { "title": "Al Nashama", "artist": "RedOne, Al Salman & Yara Mustafa" }
+  },
+  {
+    "teamSlug": "korea-republic",
+    "goalSong": { "title": "JUMP", "artist": "BLACKPINK" }
+  },
+  {
+    "teamSlug": "mexico",
+    "goalSong": { "title": "La Hija del Mariachi", "artist": "La Negra" }
+  },
+  {
+    "teamSlug": "morocco",
+    "goalSong": { "title": "Dima Maghrib", "artist": "Maher Zain" }
+  },
+  {
+    "teamSlug": "netherlands",
+    "goalSong": { "title": "Wij houden van Oranje", "artist": "André Hazes" }
+  },
+  {
+    "teamSlug": "new-zealand",
+    "goalSong": { "title": "Slice of Heaven", "artist": "Dave Dobbyn" }
+  },
+  {
+    "teamSlug": "norway",
+    "goalSong": { "title": "Vi er Norge", "artist": "JORN" }
+  },
+  {
+    "teamSlug": "panama",
+    "goalSong": { "title": "Sube la marea (Remix)", "artist": "Los Gaitanes" }
+  },
+  {
+    "teamSlug": "paraguay",
+    "goalSong": { "title": "Albirockja", "artist": "Rolando Chaparro" }
+  },
+  {
+    "teamSlug": "portugal",
+    "goalSong": { "title": "A Minha Casinha", "artist": "Xutos & Pontapés" }
+  },
+  {
+    "teamSlug": "qatar",
+    "goalSong": { "title": "Freed From Desire", "artist": "Gala" }
+  },
+  {
+    "teamSlug": "saudi-arabia",
+    "goalSong": { "title": "Green Falcons Anthem", "artist": "Jean Michael Paul" }
+  },
+  {
+    "teamSlug": "scotland",
+    "goalSong": { "title": "I'm Gonna Be (500 Miles)", "artist": "The Proclaimers" }
+  },
+  {
+    "teamSlug": "senegal",
+    "goalSong": { "title": "Teranga Rek", "artist": "Football Poet" }
+  },
+  {
+    "teamSlug": "south-africa",
+    "goalSong": { "title": "THIS IS BAFANA", "artist": "Shabz" }
+  },
+  {
+    "teamSlug": "spain",
+    "goalSong": { "title": "Once Corazones", "artist": "DPG" }
+  },
+  {
+    "teamSlug": "sweden",
+    "goalSong": { "title": "När vi gräver guld i USA", "artist": "GES" }
+  },
+  {
+    "teamSlug": "switzerland",
+    "goalSong": { "title": "Freed From Desire", "artist": "Gala" }
+  },
+  {
+    "teamSlug": "tunisia",
+    "goalSong": { "title": "Sidi Mansour", "artist": "Saber Rebaï" }
+  },
+  {
+    "teamSlug": "turkiye",
+    "goalSong": { "title": "Çalhanoglu Çalhanoglu", "artist": "Abul Media Production" }
+  },
+  {
+    "teamSlug": "united-states",
+    "goalSong": { "title": "Free Bird", "artist": "Lynyrd Skynyrd" }
+  },
+  {
+    "teamSlug": "uruguay",
+    "goalSong": { "title": "Cielo de un solo color", "artist": "No Te Va Gustar" }
+  },
+  {
+    "teamSlug": "uzbekistan",
+    "goalSong": { "title": "Olg'a O'zbekiston", "artist": "Jahon Sari" }
+  }
+]

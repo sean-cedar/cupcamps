@@ -134,9 +134,10 @@ export function ThemeToggle({ layout = "compact" }: ThemeToggleProps) {
       <button
         type="button"
         onClick={() => setOpen((current) => !current)}
-        className={`inline-flex cursor-pointer items-center justify-center rounded border border-card-border bg-card/60 text-cream transition hover:border-gold/40 hover:text-gold-light ${
+        className={`interaction-press ui-focus-ring inline-flex cursor-pointer items-center justify-center rounded border border-card-border bg-card/60 text-cream transition hover:border-gold/40 hover:text-gold-light ${
           isMenu ? "h-11 w-11" : "h-8 w-8"
         }`}
+        data-haptic="selection"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={menuId}
@@ -174,11 +175,12 @@ export function ThemeToggle({ layout = "compact" }: ThemeToggleProps) {
                       setTheme(option.value);
                       setOpen(false);
                     }}
-                    className={`flex w-full cursor-pointer items-center gap-3 rounded px-3 py-2 text-left transition ${
+                    className={`interaction-press ui-focus-ring flex w-full cursor-pointer items-center gap-3 rounded px-3 py-2 text-left transition ${
                       selected
                         ? "bg-gold/15 text-gold-light"
                         : "text-cream hover:bg-card/60 hover:text-gold-light"
                     }`}
+                    data-haptic="selection"
                   >
                     <span className="inline-flex h-7 w-7 items-center justify-center rounded border border-card-border bg-card/40">
                       <ThemeIcon theme={option.value} />

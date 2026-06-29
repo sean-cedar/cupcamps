@@ -36,6 +36,7 @@ export type CityMatch = {
   awaySlug: string;
   homeScore: number | null;
   awayScore: number | null;
+  hostCitySlug: string;
   stadium: string;
   isPlayed: boolean;
 };

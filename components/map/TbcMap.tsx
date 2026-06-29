@@ -215,8 +215,22 @@ export function TbcMap({
                   {marker.score}
                 </p>
               )}
-              <p className="map-popup-muted mt-1">{marker.hostCityName}</p>
-              <p className="map-popup-muted text-xs">{marker.stadium}</p>
+              <p className="map-popup-muted mt-1">
+                <Link
+                  href={`/host-cities/${marker.hostCitySlug}`}
+                  className="map-popup-link font-medium hover:underline"
+                >
+                  {marker.hostCityName}
+                </Link>
+              </p>
+              <p className="map-popup-muted text-xs">
+                <Link
+                  href={`/host-cities/${marker.hostCitySlug}`}
+                  className="map-popup-link hover:underline"
+                >
+                  {marker.stadium}
+                </Link>
+              </p>
               <p className="map-popup-muted mt-1 text-xs">
                 {formatMapMarkerDate(
                   marker.matchNumber,

@@ -1,10 +1,9 @@
 import Link from "next/link";
+import { MatchLocationLink } from "@/components/host-cities/MatchLocationLink";
 import { ScheduleMatchCard } from "@/components/schedule/ScheduleMatchCard";
-import { HostCityLink } from "@/components/host-cities/HostCityCard";
-import { TeamIdentity } from "@/components/ui/TeamIdentity";
+import { MatchupTeams } from "@/components/ui/MatchupTeams";
 import {
   formatMatchSchedule,
-  formatScore,
   getOpponentDisplay,
   getStageLabel,
 } from "@/lib/schedule";
@@ -15,8 +14,8 @@ type MatchScheduleRowProps = {
 };
 
 export function MatchScheduleRow({ match }: MatchScheduleRowProps) {
-  const opponent = getOpponentDisplay(match.opponentSlug);
-  const score = formatScore(match);
+  const home = getOpponentDisplay(match.homeSlug);
+  const away = getOpponentDisplay(match.awaySlug);
 
   return (
     <>
@@ -27,16 +26,16 @@ export function MatchScheduleRow({ match }: MatchScheduleRowProps) {
         group={match.group}
         stage={match.stage}
         stadium={match.stadium}
-        score={score}
-        isElimination={match.isElimination}
-        variant="team"
-        isHome={match.isHome}
-        opponent={opponent}
         hostCitySlug={match.hostCitySlug}
+        home={home}
+        away={away}
+        homeScore={match.homeScore}
+        awayScore={match.awayScore}
+        isElimination={match.isElimination}
       />
 
       <div
-        className={`relative hidden gap-3 border-b border-card-border px-4 py-3 last:border-b-0 hover:bg-card/40 sm:grid sm:grid-cols-[7rem_6rem_1fr_auto] sm:items-center ${
+        className={`relative hidden gap-3 border-b border-card-border px-4 py-3 last:border-b-0 hover:bg-card/40 sm:grid sm:grid-cols-[7rem_6rem_1fr] sm:items-center ${
           match.isElimination ? "bg-red-950/20" : ""
         }`}
       >
@@ -68,40 +67,20 @@ export function MatchScheduleRow({ match }: MatchScheduleRowProps) {
           <p className="text-[10px] text-muted">Match {match.matchNumber}</p>
         </div>
 
-        <div className="relative z-[1] min-w-0 space-y-1 pointer-events-none">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="rounded border border-card-border bg-card/60 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted">
-              {match.isHome ? "Home" : "Away"}
-            </span>
-          </div>
-          <div className="pointer-events-auto w-fit max-w-full">
-            <TeamIdentity
-              teamSlug={opponent.slug}
-              label={opponent.label}
-              countryCode={opponent.countryCode}
-            />
-          </div>
-          <span className="text-xs text-muted">{match.stadium}</span>
-        </div>
-
-        <div className="relative z-[1] flex items-center justify-between gap-3 pointer-events-none sm:flex-col sm:items-end">
-          <span>
-            {score ? (
-              <span
-                className={`font-display text-lg font-black ${
-                  match.isElimination ? "text-red-300" : "text-cream"
-                }`}
-              >
-                {score}
-              </span>
-            ) : (
-              <span className="text-xs uppercase tracking-wider text-muted">
-                TBD
-              </span>
-            )}
-          </span>
+        <div className="relative z-[1] min-w-0 space-y-2 pointer-events-none">
+          <MatchupTeams
+            home={home}
+            away={away}
+            homeScore={match.homeScore}
+            awayScore={match.awayScore}
+            isElimination={match.isElimination}
+            linkPointerEvents
+          />
           <div className="pointer-events-auto">
-            <HostCityLink slug={match.hostCitySlug} />
+            <MatchLocationLink
+              hostCitySlug={match.hostCitySlug}
+              stadium={match.stadium}
+            />
           </div>
         </div>
       </div>

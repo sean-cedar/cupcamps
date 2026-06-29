@@ -14,7 +14,8 @@ export function HostCityCard({ city, tbcCount, playingCount }: HostCityCardProps
   return (
     <Link
       href={`/host-cities/${city.slug}`}
-      className="group wc26-panel block overflow-hidden transition hover:border-gold/40"
+      className="group wc26-panel interaction-lift interaction-press ui-focus-ring block overflow-hidden transition hover:border-gold/40"
+      data-haptic="light"
     >
       <div className="h-1.5" style={{ backgroundColor: city.accentColor }} />
       <div className="p-5">
@@ -50,7 +51,8 @@ export function TeamListItem({ team }: TeamListItemProps) {
   return (
     <Link
       href={`/countries/${team.slug}`}
-      className="flex items-center gap-3 wc26-panel px-4 py-3 transition hover:border-gold/40"
+      className="interaction-press ui-focus-ring flex items-center gap-3 wc26-panel px-4 py-3 transition hover:border-gold/40"
+      data-haptic="light"
     >
       <CountryFlag countryCode={team.countryCode} className="text-xl" />
       <span className="flex-1 font-display font-semibold uppercase tracking-wide text-cream">

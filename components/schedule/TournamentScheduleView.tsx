@@ -26,11 +26,9 @@ type LiveScheduleApiResponse = {
 
 const POLL_INTERVAL_MS = 30_000;
 
-const STATUS_LABELS: Record<Exclude<ScheduleMatchStatus, "played" | "upcoming">, string> =
-  {
-    live: "Live",
-    next: "Next",
-  };
+const STATUS_LABELS: Record<"live", string> = {
+  live: "Live",
+};
 
 function formatUpdatedAt(iso: string): string {
   return new Intl.DateTimeFormat("en-US", {
@@ -46,20 +44,14 @@ function ScheduleStatusBadge({
   status: ScheduleMatchStatus;
   liveStatusLabel?: string | null;
 }) {
-  if (status !== "live" && status !== "next") {
+  if (status !== "live") {
     return null;
   }
 
-  const label = status === "live" && liveStatusLabel ? liveStatusLabel : STATUS_LABELS[status];
+  const label = liveStatusLabel ?? STATUS_LABELS.live;
 
   return (
-    <span
-      className={`inline-flex shrink-0 items-center rounded px-2 py-0.5 font-display text-[10px] font-bold uppercase tracking-[0.14em] ${
-        status === "live"
-          ? "bg-red-600/20 text-red-300 ring-1 ring-red-500/40"
-          : "bg-gold/15 text-gold ring-1 ring-gold/35"
-      }`}
-    >
+    <span className="inline-flex shrink-0 items-center rounded bg-red-600/20 px-2 py-0.5 font-display text-[10px] font-bold uppercase tracking-[0.14em] text-red-300 ring-1 ring-red-500/40">
       {label}
     </span>
   );
@@ -204,24 +196,26 @@ export function TournamentScheduleView({
             <div className="wc26-panel overflow-hidden">
               {group.matches.map((match) => {
                 const status = statuses.get(match.matchNumber) ?? "upcoming";
-                const isFocused = status === "live" || status === "next";
+                const isLive = status === "live";
+                const isNext = status === "next";
+                const isFocused = isLive || isNext;
 
                 return (
                   <div
                     key={match.matchNumber}
                     id={`schedule-match-${match.matchNumber}`}
                     className={`relative scroll-mt-[calc(var(--site-chrome-height,5.5rem)+4.5rem)] ${
-                      isFocused ? "bg-gold/[0.04]" : ""
+                      isFocused ? (isLive ? "schedule-live-row bg-gold/[0.04]" : "bg-gold/[0.04]") : ""
                     }`}
                   >
                     {isFocused && (
                       <div
                         className={`pointer-events-none absolute inset-y-0 left-0 z-[2] w-1 ${
-                          status === "live" ? "bg-red-500/80" : "bg-gold/70"
+                          isLive ? "bg-red-500/80" : "bg-gold/70"
                         }`}
                       />
                     )}
-                    {(status === "live" || status === "next") && (
+                    {isLive && (
                       <div className="pointer-events-none absolute right-3 top-3 z-[2] sm:right-4 sm:top-1/2 sm:-translate-y-1/2">
                         <ScheduleStatusBadge
                           status={status}
@@ -242,7 +236,8 @@ export function TournamentScheduleView({
         <button
           type="button"
           onClick={() => scrollToAnchor("smooth")}
-          className="fixed bottom-6 right-4 z-[1000] rounded-full border border-gold/40 bg-background/95 px-4 py-2 font-display text-xs font-bold uppercase tracking-[0.12em] text-gold shadow-lg backdrop-blur-sm transition hover:border-gold hover:text-gold-light sm:right-6"
+          className="interaction-press-strong ui-focus-ring fixed bottom-6 right-4 z-[1000] rounded-full border border-gold/40 bg-background/95 px-4 py-2 font-display text-xs font-bold uppercase tracking-[0.12em] text-gold shadow-lg backdrop-blur-sm transition hover:border-gold hover:text-gold-light sm:right-6"
+          data-haptic="medium"
         >
           Jump to now
         </button>

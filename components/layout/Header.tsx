@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const navLinks = [
   { href: "/countries", label: "Countries" },
+  { href: "/champions", label: "Champions" },
   { href: "/groups", label: "Groups" },
   { href: "/schedule", label: "Schedule" },
   { href: "/host-cities", label: "Cities" },

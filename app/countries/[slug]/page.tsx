@@ -7,6 +7,8 @@ import { ContextBackLink } from "@/components/navigation/ContextBackLink";
 import { TbcMapWrapper } from "@/components/map/TbcMapWrapper";
 import { TeamKitGallery } from "@/components/teams/TeamKitGallery";
 import { TeamSchedule } from "@/components/teams/TeamSchedule";
+import { TeamWorldCupSong } from "@/components/teams/TeamWorldCupSong";
+import { WorldCupTitles } from "@/components/world-cup/WorldCupTitles";
 import { CountryFlag } from "@/components/ui/CountryFlag";
 import { GroupBadge, groupPageHref } from "@/components/ui/GroupBadge";
 import { getTeamKitVariants } from "@/lib/kits";
@@ -73,6 +75,13 @@ export default async function TeamDetailPage({ params, searchParams }: PageProps
                 <p className="mt-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-muted">
                   {team.confederation} · Group {team.group}
                 </p>
+                <div className="mt-4">
+                  <WorldCupTitles
+                    teamSlug={team.slug}
+                    teamName={team.name}
+                    size="lg"
+                  />
+                </div>
               </div>
             </div>
 
@@ -140,6 +149,7 @@ export default async function TeamDetailPage({ params, searchParams }: PageProps
               </div>
             </section>
 
+            <TeamWorldCupSong teamSlug={team.slug} teamName={team.name} />
           </section>
 
           <section>

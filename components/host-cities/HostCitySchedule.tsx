@@ -20,7 +20,7 @@ export function HostCitySchedule({ city }: HostCityScheduleProps) {
     <section className="mt-12">
       <SectionHeading
         title="Match Schedule"
-        subtitle={`${schedule.length} fixtures at ${city.stadium} · tap finished matches for highlights`}
+        subtitle={`${schedule.length} fixtures at ${city.stadium}`}
       />
 
       {groupMatches.length > 0 && (

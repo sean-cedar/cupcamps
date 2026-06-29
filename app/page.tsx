@@ -17,7 +17,7 @@ export default function HomePage() {
       <section className="border-b border-card-border">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <div>
+            <div className="animate-fade-up">
               <p className="font-display text-xs font-bold uppercase tracking-[0.25em] text-gold">
                 FIFA World Cup 26™
               </p>
@@ -32,19 +32,23 @@ export default function HomePage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   href="/countries"
-                  className="wc26-btn-primary px-6 py-2.5 text-sm"
+                  className="wc26-btn-primary interaction-press-strong ui-focus-ring px-6 py-2.5 text-sm"
+                  data-haptic="medium"
                 >
                   Browse countries
                 </Link>
                 <Link
                   href="/map"
-                  className="wc26-btn-secondary px-6 py-2.5 text-sm"
+                  className="wc26-btn-secondary interaction-press-strong ui-focus-ring px-6 py-2.5 text-sm"
+                  data-haptic="light"
                 >
                   Open map
                 </Link>
               </div>
             </div>
-            <QuickNav />
+            <div className="animate-fade-up stagger-2">
+              <QuickNav />
+            </div>
           </div>
         </div>
       </section>

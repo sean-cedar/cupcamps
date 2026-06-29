@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { HostNationStripe } from "@/components/brand/HostNationStripe";
+import { MatchLocationLink } from "@/components/host-cities/MatchLocationLink";
 import { SectionHeading } from "@/components/brand/SectionHeading";
-import { HostCityLink } from "@/components/host-cities/HostCityCard";
 import { GroupStandingsTable } from "@/components/groups/GroupStandingsTable";
 import { MatchAdvancementPanel } from "@/components/matches/MatchAdvancementPanel";
 import { MatchFeedersPanel } from "@/components/matches/MatchFeedersPanel";
@@ -14,7 +14,6 @@ import {
   getAllMatchNumbers,
   getMatchPageView,
 } from "@/lib/schedule/match-page";
-import { getHostCity } from "@/lib/teams";
 
 type PageProps = {
   params: Promise<{ matchNumber: string }>;
@@ -56,7 +55,6 @@ export default async function MatchDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const hostCity = getHostCity(view.hostCitySlug);
   const scoreLabel =
     view.isPlayed && view.homeScore !== null && view.awayScore !== null
       ? `${view.homeScore}–${view.awayScore}`
@@ -94,14 +92,10 @@ export default async function MatchDetailPage({ params }: PageProps) {
               </p>
             </div>
 
-            {scoreLabel ? (
+            {scoreLabel && (
               <p className="font-display text-4xl font-black tabular-nums text-cream sm:text-5xl lg:text-6xl">
                 {scoreLabel}
               </p>
-            ) : (
-              <span className="rounded border border-card-border px-3 py-1 font-display text-sm font-bold uppercase tracking-[0.14em] text-muted">
-                TBD
-              </span>
             )}
           </div>
         </div>
@@ -123,16 +117,12 @@ export default async function MatchDetailPage({ params }: PageProps) {
 
         <section className="mt-10">
           <SectionHeading title="Location" />
-          <div className="mt-4 wc26-panel p-6">
-            <p className="font-display text-xl font-black uppercase tracking-[0.04em] text-cream">
-              {view.stadium}
-            </p>
-            {hostCity && (
-              <div className="mt-3 flex flex-wrap items-center gap-3">
-                <HostCityLink slug={view.hostCitySlug} />
-                <span className="text-sm text-muted">{hostCity.country}</span>
-              </div>
-            )}
+          <div className="mt-4 wc26-panel p-6 transition hover:border-gold/40">
+            <MatchLocationLink
+              hostCitySlug={view.hostCitySlug}
+              stadium={view.stadium}
+              variant="panel"
+            />
           </div>
         </section>
 

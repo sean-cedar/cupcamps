@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const navLinks = [
   { href: "/countries", label: "Countries" },
+  { href: "/champions", label: "Champions" },
   { href: "/groups", label: "Groups" },
   { href: "/schedule", label: "Schedule" },
   { href: "/host-cities", label: "Cities" },
@@ -67,7 +68,7 @@ export function MobileNav() {
       >
         <nav
           id={panelId}
-          className="relative z-[1201] shrink-0 overflow-y-auto border-b border-card-border bg-background/98 px-4 py-4 shadow-lg backdrop-blur-sm site-shell-inline"
+          className="animate-panel-enter relative z-[1201] shrink-0 overflow-y-auto border-b border-card-border bg-background/98 px-4 py-4 shadow-lg backdrop-blur-sm site-shell-inline"
           aria-label="Mobile navigation"
         >
           <ul className="space-y-1">
@@ -78,11 +79,12 @@ export function MobileNav() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`flex min-h-11 items-center rounded px-3 font-display text-sm font-bold uppercase tracking-[0.12em] transition ${
+                    className={`interaction-press ui-focus-ring flex min-h-11 items-center rounded px-3 font-display text-sm font-bold uppercase tracking-[0.12em] transition ${
                       active
                         ? "bg-gold/15 text-gold-light"
                         : "text-cream hover:bg-card/60 hover:text-gold-light"
                     }`}
+                    data-haptic="light"
                     onClick={() => setOpen(false)}
                   >
                     {link.label}
@@ -101,8 +103,9 @@ export function MobileNav() {
         </nav>
         <button
           type="button"
-          className="min-h-0 flex-1 bg-black/50"
+          className="animate-overlay-enter min-h-0 flex-1 bg-black/50"
           aria-label="Dismiss menu overlay"
+          data-haptic="light"
           onClick={() => setOpen(false)}
         />
       </div>
@@ -113,10 +116,11 @@ export function MobileNav() {
       <button
         ref={menuButtonRef}
         type="button"
-        className="touch-target inline-flex items-center justify-center rounded border border-card-border bg-card/60 text-cream transition hover:border-gold/40 hover:text-gold-light"
+        className="touch-target interaction-press ui-focus-ring inline-flex items-center justify-center rounded border border-card-border bg-card/60 text-cream transition hover:border-gold/40 hover:text-gold-light"
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={open ? "Close menu" : "Open menu"}
+        data-haptic="light"
         onClick={() => {
           setOpen((current) => {
             const next = !current;

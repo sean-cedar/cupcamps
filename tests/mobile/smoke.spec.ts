@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 const routes = [
   "/",
   "/countries",
+  "/champions",
   "/countries/argentina",
   "/groups",
   "/groups/j",

@@ -37,7 +37,8 @@ export function QuickNav() {
         <Link
           key={item.href}
           href={item.href}
-          className="wc26-panel group flex flex-col px-3 py-3 transition hover:border-gold/40 sm:px-4 sm:py-4"
+          className="wc26-panel group interaction-lift interaction-press ui-focus-ring flex flex-col px-3 py-3 transition hover:border-gold/40 sm:px-4 sm:py-4"
+          data-haptic="light"
         >
           <span className="font-display text-2xl font-black leading-none text-gold sm:text-3xl">
             {item.value}

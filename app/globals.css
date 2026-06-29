@@ -93,11 +93,101 @@ html {
   overflow-x: clip;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-noto), system-ui, sans-serif;
   overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Press, lift, and focus polish — kept subtle for a sports broadcast feel. */
+.interaction-press {
+  transition:
+    transform 0.16s cubic-bezier(0.2, 0, 0, 1),
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    color 0.16s ease,
+    box-shadow 0.16s ease,
+    filter 0.16s ease;
+}
+
+.interaction-lift {
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .interaction-press:active {
+    transform: scale(0.985);
+  }
+
+  .interaction-press-strong:active {
+    transform: scale(0.97);
+  }
+
+  .interaction-lift:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.ui-focus-ring:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--gold) 75%, white);
+  outline-offset: 2px;
+}
+
+@keyframes panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes overlay-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-panel-enter {
+    animation: panel-enter 0.22s ease-out both;
+  }
+
+  .animate-overlay-enter {
+    animation: overlay-enter 0.18s ease-out both;
+  }
+
+  .schedule-live-row {
+    animation: schedule-live-glow 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes schedule-live-glow {
+  0%,
+  100% {
+    background-color: rgb(239 68 68 / 0.035);
+  }
+  50% {
+    background-color: rgb(239 68 68 / 0.07);
+  }
 }
 
 .site-shell-inline {
@@ -173,11 +263,17 @@ body {
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  transition: filter 0.2s, transform 0.2s;
+  transition: filter 0.2s, transform 0.16s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .wc26-btn-primary:hover {
   filter: brightness(1.1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wc26-btn-primary:active {
+    transform: scale(0.98);
+  }
 }
 
 .wc26-btn-secondary {
@@ -187,7 +283,10 @@ body {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    transform 0.16s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .dark .wc26-btn-secondary {
@@ -197,6 +296,18 @@ body {
 .wc26-btn-secondary:hover {
   background: rgba(181, 152, 90, 0.12);
   color: var(--cream);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wc26-btn-secondary:active {
+    transform: scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wc26-btn-secondary:active {
+    transform: scale(0.98);
+  }
 }
 
 @keyframes fade-up {
@@ -395,6 +506,11 @@ body {
   border-color: var(--gold);
   outline: none;
   box-shadow: 0 0 0 1px var(--gold);
+}
+
+.wc26-input:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--gold) 75%, white);
+  outline-offset: 2px;
 }
 
 .group-badge {

@@ -6,6 +6,7 @@ const ALLOWED_FROM_PREFIXES = [
   "/bracket",
   "/map",
   "/countries",
+  "/champions",
 ] as const;
 
 function isSafeFromPath(from: string | undefined): from is string {
@@ -69,6 +70,10 @@ export function resolveBackLink(from: string | undefined): BackLink | null {
 
   if (from === "/map") {
     return { href: from, label: "← Map" };
+  }
+
+  if (from === "/champions") {
+    return { href: from, label: "← Champions" };
   }
 
   if (from === "/countries") {

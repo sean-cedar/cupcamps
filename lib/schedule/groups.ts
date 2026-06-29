@@ -153,6 +153,7 @@ function buildGroupFixtures(group: string): CityMatch[] {
       awaySlug: match.awaySlug,
       homeScore: match.homeScore,
       awayScore: match.awayScore,
+      hostCitySlug: match.hostCitySlug,
       stadium: match.stadium,
       isPlayed: match.homeScore !== null && match.awayScore !== null,
     }));

@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { triggerHaptic } from "@/lib/haptics";
 import { TeamCard } from "@/components/teams/TeamCard";
 import {
   TeamFilters,
@@ -74,14 +75,22 @@ export function TeamsDirectory() {
       <TeamFilters
         {...filters}
         onSearchChange={(search) => setFilters((current) => ({ ...current, search }))}
-        onGroupChange={(group) => setFilters((current) => ({ ...current, group }))}
-        onTbcCountryChange={(tbcCountry) =>
-          setFilters((current) => ({ ...current, tbcCountry }))
-        }
-        onHostCityChange={(hostCity) =>
-          setFilters((current) => ({ ...current, hostCity }))
-        }
-        onSortChange={(sort) => setFilters((current) => ({ ...current, sort }))}
+        onGroupChange={(group) => {
+          triggerHaptic("selection");
+          setFilters((current) => ({ ...current, group }));
+        }}
+        onTbcCountryChange={(tbcCountry) => {
+          triggerHaptic("selection");
+          setFilters((current) => ({ ...current, tbcCountry }));
+        }}
+        onHostCityChange={(hostCity) => {
+          triggerHaptic("selection");
+          setFilters((current) => ({ ...current, hostCity }));
+        }}
+        onSortChange={(sort) => {
+          triggerHaptic("selection");
+          setFilters((current) => ({ ...current, sort }));
+        }}
       />
 
       <p className="my-6 font-display text-xs font-semibold uppercase tracking-[0.2em] text-muted">

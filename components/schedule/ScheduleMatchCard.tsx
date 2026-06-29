@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { HostCityLink } from "@/components/host-cities/HostCityCard";
+import { MatchLocationLink } from "@/components/host-cities/MatchLocationLink";
 import { MatchupTeams } from "@/components/ui/MatchupTeams";
-import { TeamIdentity } from "@/components/ui/TeamIdentity";
 import { formatMatchSchedule, getStageLabel } from "@/lib/schedule";
 import type { MatchStage } from "@/lib/schedule/types";
 
@@ -11,39 +10,27 @@ type ScheduleParticipant = {
   countryCode: string | null;
 };
 
-type ScheduleMatchCardBase = {
+type ScheduleMatchCardProps = {
   matchNumber: number;
   date: string;
   matchday?: number;
   group?: string;
   stage: MatchStage;
   stadium: string;
-  score: string | null;
-  hideStadium?: boolean;
-};
-
-type ScheduleMatchCardProps = ScheduleMatchCardBase & {
-  isElimination?: boolean;
-  variant: "team";
-  isHome: boolean;
-  opponent: ScheduleParticipant;
   hostCitySlug: string;
-};
-
-type ScheduleFixtureCardProps = ScheduleMatchCardBase & {
-  variant: "fixture";
   home: ScheduleParticipant;
   away: ScheduleParticipant;
+  homeScore: number | null;
+  awayScore: number | null;
+  hideStadium?: boolean;
+  isElimination?: boolean;
 };
 
-export function ScheduleMatchCard(
-  props: ScheduleMatchCardProps | ScheduleFixtureCardProps,
-) {
+export function ScheduleMatchCard(props: ScheduleMatchCardProps) {
   const stageLabel = props.group
     ? `Group ${props.group}`
     : getStageLabel(props.stage);
-  const isElimination =
-    props.variant === "team" ? Boolean(props.isElimination) : false;
+  const isElimination = Boolean(props.isElimination);
 
   return (
     <div
@@ -64,7 +51,7 @@ export function ScheduleMatchCard(
               {formatMatchSchedule(
                 props.matchNumber,
                 props.date,
-                props.variant === "team" ? props.hostCitySlug : undefined,
+                props.hostCitySlug,
               )}
             </p>
             {props.matchday && (
@@ -81,57 +68,23 @@ export function ScheduleMatchCard(
           </div>
         </div>
 
-        {props.variant === "team" ? (
-          <div className="space-y-2">
-            <span className="inline-flex rounded border border-card-border bg-card/60 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted">
-              {props.isHome ? "Home" : "Away"}
-            </span>
-            <div className="pointer-events-auto w-fit max-w-full">
-              <TeamIdentity
-                teamSlug={props.opponent.slug}
-                label={props.opponent.label}
-                countryCode={props.opponent.countryCode}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="pointer-events-auto">
-            <MatchupTeams
-              home={props.home}
-              away={props.away}
-              linkPointerEvents
-            />
-          </div>
-        )}
-
-        <div
-          className={`flex flex-wrap items-center gap-3 ${
-            props.hideStadium ? "justify-end" : "justify-between"
-          }`}
-        >
-          {!props.hideStadium && (
-            <p className="min-w-0 flex-1 text-xs text-muted">{props.stadium}</p>
-          )}
-          {props.score ? (
-            <span
-              className={`shrink-0 font-display text-lg font-black ${
-                isElimination ? "text-red-300" : "text-cream"
-              }`}
-            >
-              {props.score}
-            </span>
-          ) : (
-            <span className="shrink-0 text-xs uppercase tracking-wider text-muted">
-              TBD
-            </span>
-          )}
+        <div className="pointer-events-auto">
+          <MatchupTeams
+            home={props.home}
+            away={props.away}
+            homeScore={props.homeScore}
+            awayScore={props.awayScore}
+            isElimination={isElimination}
+            linkPointerEvents
+          />
         </div>
 
-        {props.variant === "team" && (
-          <div className="pointer-events-auto">
-            <HostCityLink slug={props.hostCitySlug} />
-          </div>
-        )}
+        <div className="pointer-events-auto">
+          <MatchLocationLink
+            hostCitySlug={props.hostCitySlug}
+            stadium={props.stadium}
+          />
+        </div>
       </div>
     </div>
   );

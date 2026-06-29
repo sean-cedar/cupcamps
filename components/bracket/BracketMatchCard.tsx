@@ -1,8 +1,8 @@
 import Link from "next/link";
+import { MatchLocationLink } from "@/components/host-cities/MatchLocationLink";
 import { CountryFlag } from "@/components/ui/CountryFlag";
 import { formatMatchSchedule } from "@/lib/schedule";
 import type { BracketMatchView } from "@/lib/schedule/bracket-board";
-import { getHostCity } from "@/lib/teams";
 
 type BracketMatchCardProps = {
   match: BracketMatchView;
@@ -61,29 +61,24 @@ export function BracketMatchCard({
 }: BracketMatchCardProps) {
   const stageLabel =
     match.stage === "third-place" ? "Third place" : undefined;
-  const hostCity = getHostCity(match.hostCitySlug);
 
   return (
-    <Link
-      href={`/matches/${match.matchNumber}`}
-      className={`block transition hover:scale-[1.01] ${
-        emphasized ? "ring-1 ring-gold/30" : ""
-      }`}
+    <article
+      className={`relative wc26-panel p-3 transition hover:scale-[1.01] ${
+        emphasized ? "border-gold/40 bg-gold/5 ring-1 ring-gold/30" : ""
+      } ${match.isPlayed ? "" : "opacity-90"}`}
     >
-      <article
-        className={`wc26-panel p-3 ${
-          emphasized ? "border-gold/40 bg-gold/5" : ""
-        } ${match.isPlayed ? "" : "opacity-90"}`}
-      >
+      <Link
+        href={`/matches/${match.matchNumber}`}
+        className="absolute inset-0 z-0"
+        aria-label={`View match ${match.matchNumber}`}
+      />
+
+      <div className="relative z-[1] pointer-events-none">
         <div className="flex items-center justify-between gap-2">
           <p className="font-display text-[10px] font-bold uppercase tracking-[0.14em] text-gold">
             {stageLabel ?? `Match ${match.matchNumber}`}
           </p>
-          {!match.isPlayed && (
-            <span className="text-[10px] uppercase tracking-wider text-muted">
-              TBD
-            </span>
-          )}
         </div>
 
         <div className="mt-2 space-y-0.5">
@@ -103,11 +98,11 @@ export function BracketMatchCard({
               match.hostCitySlug,
             )}
           </p>
-          {hostCity && (
-            <p className="text-[10px] font-medium text-muted">{hostCity.name}</p>
-          )}
+          <div className="pointer-events-auto">
+            <MatchLocationLink hostCitySlug={match.hostCitySlug} />
+          </div>
         </div>
-      </article>
-    </Link>
+      </div>
+    </article>
   );
 }
