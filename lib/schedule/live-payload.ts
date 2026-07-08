@@ -10,13 +10,12 @@ import { getAllGroups, getGroupPageView, getGroupSummaries } from "@/lib/schedul
 import {
   countLiveMatches,
   countPlayedMatches,
-  mergeLiveUpdatesIntoGroups,
   mergeLiveUpdatesIntoSchedule,
 } from "@/lib/schedule/live-schedule";
 import { mergeLiveUpdatesIntoMatchRecords } from "@/lib/schedule/merged-matches";
 import {
   getTournamentSchedule,
-  getTournamentScheduleView,
+  groupTournamentSchedule,
   type TournamentScheduleGroup,
 } from "@/lib/schedule/tournament-schedule";
 
@@ -35,19 +34,15 @@ export type LiveSitePayload = {
 export async function buildLiveSitePayload(
   now = new Date(),
 ): Promise<LiveSitePayload> {
-  const base = getTournamentScheduleView();
   const live = await getLiveSchedulePayload(now);
   const mergedMatches = mergeLiveUpdatesIntoMatchRecords(live.updates);
-  const groups = mergeLiveUpdatesIntoGroups(
-    base.groups,
-    live.updates,
-    live.fetchedAt,
-  );
+  const baseSchedule = getTournamentSchedule(mergedMatches);
   const mergedSchedule = mergeLiveUpdatesIntoSchedule(
-    getTournamentSchedule(),
+    baseSchedule,
     live.updates,
     live.fetchedAt,
   );
+  const groups = groupTournamentSchedule(mergedSchedule);
 
   const groupPages: Record<string, GroupPageView> = {};
   for (const group of getAllGroups()) {

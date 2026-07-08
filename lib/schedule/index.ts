@@ -6,6 +6,7 @@ import {
   getTeamEliminationStage,
   isTeamQualifiedForKnockout,
   resolveMatch,
+  resolveParticipantSlug,
 } from "@/lib/schedule/bracket";
 import { matches, roundOf32Entry } from "@/lib/schedule/matches";
 import type { CityMatch, MatchRecord, MatchStage, TeamMatch } from "@/lib/schedule/types";
@@ -151,16 +152,25 @@ export function getTeamEliminationMessage(teamSlug: string): string | null {
 
 export function getOpponentDisplay(
   opponentSlug: string,
+  matchSource: MatchRecord[] = matches,
 ): { slug: string | null; label: string; countryCode: string | null } {
-  if (isTeamSlug(opponentSlug)) {
-    const team = getTeam(opponentSlug);
+  const outcomes = buildMatchOutcomes(matchSource);
+  const resolvedSlug =
+    resolveParticipantSlug(opponentSlug, outcomes) ?? opponentSlug;
+
+  if (isTeamSlug(resolvedSlug)) {
+    const team = getTeam(resolvedSlug);
     return {
-      slug: opponentSlug,
-      label: team?.name ?? opponentSlug,
+      slug: resolvedSlug,
+      label: team?.name ?? resolvedSlug,
       countryCode: team?.countryCode ?? null,
     };
   }
-  return { slug: null, label: resolveSlugLabel(opponentSlug), countryCode: null };
+  return {
+    slug: null,
+    label: resolveSlugLabel(resolvedSlug),
+    countryCode: null,
+  };
 }
 
 export function formatMatchDate(date: string): string {
@@ -196,17 +206,20 @@ export function formatFixtureScore(match: CityMatch): string | null {
   return `${match.homeScore}–${match.awayScore}`;
 }
 
-export function getHostCitySchedule(hostCitySlug: string): CityMatch[] {
-  const outcomes = buildMatchOutcomes();
+export function getHostCitySchedule(
+  hostCitySlug: string,
+  matchSource: MatchRecord[] = matches,
+): CityMatch[] {
+  const outcomes = buildMatchOutcomes(matchSource);
 
-  return matches
+  return matchSource
     .filter((match) => match.hostCitySlug === hostCitySlug)
     .sort(
       (a, b) =>
         a.date.localeCompare(b.date) || a.matchNumber - b.matchNumber,
     )
     .map((match) => {
-      const resolved = resolveMatch(match.matchNumber, outcomes);
+      const resolved = resolveMatch(match.matchNumber, outcomes, matchSource);
 
       return {
         matchNumber: match.matchNumber,

@@ -47,10 +47,12 @@ function toScheduleMatch(
   };
 }
 
-export function getTournamentSchedule(): TournamentScheduleMatch[] {
-  const outcomes = buildMatchOutcomes();
+export function getTournamentSchedule(
+  matchSource: MatchRecord[] = matches,
+): TournamentScheduleMatch[] {
+  const outcomes = buildMatchOutcomes(matchSource);
 
-  return matches
+  return matchSource
     .map((match) => toScheduleMatch(match, outcomes))
     .sort((a, b) => {
       if (a.kickoffMs != null && b.kickoffMs != null) {
@@ -185,12 +187,14 @@ export function groupTournamentSchedule(
   return groups;
 }
 
-export function getTournamentScheduleView(): {
+export function getTournamentScheduleView(
+  matchSource: MatchRecord[] = matches,
+): {
   groups: TournamentScheduleGroup[];
   totalMatches: number;
   playedMatches: number;
 } {
-  const schedule = getTournamentSchedule();
+  const schedule = getTournamentSchedule(matchSource);
   const groups = groupTournamentSchedule(schedule);
 
   return {

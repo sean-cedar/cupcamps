@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { HostNationStripe } from "@/components/brand/HostNationStripe";
 import { SiteLogo } from "@/components/brand/SiteLogo";
-import { EspnScoreTicker } from "@/components/layout/EspnScoreTicker";
+import { MatchScoreTicker } from "@/components/layout/MatchScoreTicker";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { StickySiteChrome } from "@/components/layout/StickySiteChrome";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
@@ -43,7 +43,7 @@ export function Header() {
           <MobileNav />
         </div>
       </header>
-      <EspnScoreTicker />
+      <MatchScoreTicker />
     </StickySiteChrome>
   );
 }

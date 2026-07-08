@@ -80,6 +80,13 @@ function resolveParticipant(
   return placeholder.kind === "winner" ? outcome.winner : outcome.loser;
 }
 
+export function resolveParticipantSlug(
+  slug: string,
+  outcomes: Map<number, MatchOutcome>,
+): string | null {
+  return resolveParticipant(slug, outcomes);
+}
+
 function getMatchOutcome(
   match: MatchRecord,
   resolvedHome: string | null,

@@ -2,6 +2,8 @@ import {
   getAdvancingThirdPlaceSlugs,
   getGroupStandings,
   isGroupComplete,
+  resolveMatch,
+  buildMatchOutcomes,
 } from "@/lib/schedule/bracket";
 import { matches } from "@/lib/schedule/matches";
 import type { CityMatch, MatchRecord } from "@/lib/schedule/types";
@@ -139,6 +141,8 @@ function buildGroupFixtures(
   group: string,
   matchSource: MatchRecord[] = matches,
 ): CityMatch[] {
+  const outcomes = buildMatchOutcomes(matchSource);
+
   return matchSource
     .filter((match) => match.group === group)
     .sort(
@@ -147,20 +151,24 @@ function buildGroupFixtures(
         a.date.localeCompare(b.date) ||
         a.matchNumber - b.matchNumber,
     )
-    .map((match) => ({
-      matchNumber: match.matchNumber,
-      stage: match.stage,
-      date: match.date,
-      matchday: match.matchday,
-      group: match.group,
-      homeSlug: match.homeSlug,
-      awaySlug: match.awaySlug,
-      homeScore: match.homeScore,
-      awayScore: match.awayScore,
-      hostCitySlug: match.hostCitySlug,
-      stadium: match.stadium,
-      isPlayed: match.homeScore !== null && match.awayScore !== null,
-    }));
+    .map((match) => {
+      const resolved = resolveMatch(match.matchNumber, outcomes, matchSource);
+
+      return {
+        matchNumber: match.matchNumber,
+        stage: match.stage,
+        date: match.date,
+        matchday: match.matchday,
+        group: match.group,
+        homeSlug: resolved?.resolvedHomeSlug ?? match.homeSlug,
+        awaySlug: resolved?.resolvedAwaySlug ?? match.awaySlug,
+        homeScore: match.homeScore,
+        awayScore: match.awayScore,
+        hostCitySlug: match.hostCitySlug,
+        stadium: match.stadium,
+        isPlayed: match.homeScore !== null && match.awayScore !== null,
+      };
+    });
 }
 
 function buildGroupSummary(
