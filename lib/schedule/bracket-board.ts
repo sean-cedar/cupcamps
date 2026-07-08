@@ -4,6 +4,7 @@ import {
 } from "@/lib/schedule/bracket";
 import { matches } from "@/lib/schedule/matches";
 import type { MatchRecord, MatchStage } from "@/lib/schedule/types";
+import type { LiveMatchUpdate } from "@/lib/schedule/live-updates";
 import { getStageLabel } from "@/lib/schedule";
 import { getTeam } from "@/lib/teams";
 
@@ -98,8 +99,14 @@ function getBracketMatchView(
   matchNumber: number,
   outcomes: ReturnType<typeof buildMatchOutcomes>,
   matchSource: MatchRecord[] = matches,
+  liveUpdates: LiveMatchUpdate[] = [],
 ): BracketMatchView | null {
-  const resolved = resolveMatch(matchNumber, outcomes, matchSource);
+  const resolved = resolveMatch(
+    matchNumber,
+    outcomes,
+    matchSource,
+    liveUpdates,
+  );
   if (!resolved) {
     return null;
   }
@@ -136,13 +143,14 @@ function getBracketMatchView(
 
 export function getKnockoutBracketRounds(
   matchSource: MatchRecord[] = matches,
+  liveUpdates: LiveMatchUpdate[] = [],
 ): BracketRoundView[] {
-  const outcomes = buildMatchOutcomes(matchSource);
+  const outcomes = buildMatchOutcomes(matchSource, liveUpdates);
 
   return ROUND_DEFINITIONS.map(({ stage, matchNumbers }) => {
     const roundMatches = matchNumbers
       .map((matchNumber) =>
-        getBracketMatchView(matchNumber, outcomes, matchSource),
+        getBracketMatchView(matchNumber, outcomes, matchSource, liveUpdates),
       )
       .filter((match): match is BracketMatchView => Boolean(match));
 
@@ -161,18 +169,19 @@ export function getKnockoutBracketRounds(
 
 export function getKnockoutProgress(
   matchSource: MatchRecord[] = matches,
+  liveUpdates: LiveMatchUpdate[] = [],
 ): {
   played: number;
   total: number;
   champion: BracketParticipantView | null;
 } {
-  const outcomes = buildMatchOutcomes(matchSource);
+  const outcomes = buildMatchOutcomes(matchSource, liveUpdates);
   const knockoutMatches = matchSource.filter((match) => match.stage !== "group");
   const played = knockoutMatches.filter(
     (match) => match.homeScore !== null && match.awayScore !== null,
   ).length;
 
-  const final = getBracketMatchView(104, outcomes, matchSource);
+  const final = getBracketMatchView(104, outcomes, matchSource, liveUpdates);
   const champion =
     final?.isPlayed && final.home.isWinner
       ? final.home

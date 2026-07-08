@@ -6,23 +6,48 @@ import { useLiveScores } from "@/components/live/LiveScoresProvider";
 import { getOpponentDisplay } from "@/lib/schedule";
 import type { TournamentScheduleMatch } from "@/lib/schedule/tournament-schedule";
 
+const FIFA_TICKER_CODES: Record<string, string> = {
+  "united-states": "USA",
+  "korea-republic": "KOR",
+  "south-africa": "RSA",
+  "ivory-coast": "CIV",
+  "congo-dr": "COD",
+  "bosnia-and-herzegovina": "BIH",
+  "cabo-verde": "CPV",
+  "saudi-arabia": "KSA",
+  "costa-rica": "CRC",
+  "new-zealand": "NZL",
+};
+
+function getLocalDateKey(date = new Date()): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 function shortTeamLabel(
   display: ReturnType<typeof getOpponentDisplay>,
 ): string {
+  if (display.slug) {
+    const fifaCode = FIFA_TICKER_CODES[display.slug];
+    if (fifaCode) {
+      return fifaCode;
+    }
+  }
+
   if (display.countryCode) {
-    return display.countryCode;
+    return display.countryCode.toUpperCase();
   }
 
-  if (display.label.length <= 4) {
-    return display.label.toUpperCase();
+  if (
+    display.label.startsWith("Winner") ||
+    display.label.startsWith("Loser")
+  ) {
+    return "TBD";
   }
 
-  return display.label
-    .split(/\s+/)
-    .map((word) => word[0] ?? "")
-    .join("")
-    .slice(0, 3)
-    .toUpperCase();
+  return display.label.slice(0, 3).toUpperCase();
 }
 
 function ScorePill({ match }: { match: TournamentScheduleMatch }) {
@@ -71,13 +96,30 @@ export function MatchScoreTicker() {
     }
 
     const schedule = groups.flatMap((group) => group.matches);
+    const todayKey = getLocalDateKey();
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowKey = getLocalDateKey(tomorrow);
+
+    const todayLive = schedule.filter(
+      (match) => match.date === todayKey && match.isLive,
+    );
+    const todayCompleted = schedule.filter(
+      (match) =>
+        match.date === todayKey && match.isPlayed && !match.isLive,
+    );
+    const tomorrowScheduled = schedule.filter(
+      (match) =>
+        match.date === tomorrowKey && !match.isPlayed && !match.isLive,
+    );
+
     const seen = new Set<number>();
     const ordered: TournamentScheduleMatch[] = [];
 
     for (const match of [
-      ...schedule.filter((item) => item.isLive),
-      ...schedule.filter((item) => item.isPlayed && !item.isLive).reverse(),
-      ...schedule.filter((item) => !item.isPlayed && !item.isLive),
+      ...todayLive,
+      ...todayCompleted,
+      ...tomorrowScheduled,
     ]) {
       if (seen.has(match.matchNumber)) {
         continue;
@@ -86,7 +128,7 @@ export function MatchScoreTicker() {
       ordered.push(match);
     }
 
-    return ordered.slice(0, 16);
+    return ordered;
   }, [groups]);
 
   return (
@@ -100,7 +142,7 @@ export function MatchScoreTicker() {
               ))
             ) : (
               <span className="text-xs text-muted">
-                {feedError ?? "Loading World Cup scores…"}
+                {feedError ?? "No matches today or tomorrow"}
               </span>
             )}
           </div>

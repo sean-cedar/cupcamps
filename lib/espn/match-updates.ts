@@ -4,24 +4,15 @@ import {
 } from "@/lib/espn/scoreboard";
 import type { EspnScoreboardGame } from "@/lib/espn/types";
 import { teamNamesMatch, teamsMatchByName } from "@/lib/highlights/team-names";
+import type {
+  LiveMatchUpdate,
+  LiveSchedulePayload,
+} from "@/lib/schedule/live-updates";
 import type { TournamentScheduleMatch } from "@/lib/schedule/tournament-schedule";
 import { getTournamentSchedule } from "@/lib/schedule/tournament-schedule";
-import { getTeam } from "@/lib/teams";
+import { getTeam, teams } from "@/lib/teams";
 
-export type LiveMatchUpdate = {
-  matchNumber: number;
-  homeScore: number | null;
-  awayScore: number | null;
-  isLive: boolean;
-  isFinal: boolean;
-  statusLabel: string;
-  espnUrl: string;
-};
-
-export type LiveSchedulePayload = {
-  fetchedAt: string;
-  updates: LiveMatchUpdate[];
-};
+export type { LiveMatchUpdate, LiveSchedulePayload } from "@/lib/schedule/live-updates";
 
 const KICKOFF_MATCH_TOLERANCE_MS = 2 * 60 * 60 * 1000;
 
@@ -38,6 +29,15 @@ function parseScore(value: string | null | undefined): number | null {
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+function findTeamSlugByEspnName(name: string | undefined): string | null {
+  if (!name) {
+    return null;
+  }
+
+  const team = teams.find((entry) => teamNamesMatch(name, entry.name));
+  return team?.slug ?? null;
+}
+
 function toLiveMatchUpdate(
   matchNumber: number,
   game: EspnScoreboardGame,
@@ -46,6 +46,8 @@ function toLiveMatchUpdate(
     matchNumber,
     homeScore: parseScore(game.home.score),
     awayScore: parseScore(game.away.score),
+    homeTeamSlug: findTeamSlugByEspnName(game.home.name),
+    awayTeamSlug: findTeamSlugByEspnName(game.away.name),
     isLive: game.isLive,
     isFinal: game.status === "final",
     statusLabel: game.statusLabel,
@@ -112,6 +114,24 @@ function sharesKnownTeam(
   return false;
 }
 
+function teamsMatchPlaceholderFixture(
+  game: EspnScoreboardGame,
+  match: TournamentScheduleMatch,
+): boolean {
+  if (isRealTeamSlug(match.homeSlug) && isRealTeamSlug(match.awaySlug)) {
+    return false;
+  }
+
+  if (!kickoffMatches(game, match)) {
+    return false;
+  }
+
+  return Boolean(
+    findTeamSlugByEspnName(game.home.name) &&
+      findTeamSlugByEspnName(game.away.name),
+  );
+}
+
 function findMatchNumberForEspnGame(
   game: EspnScoreboardGame,
   schedule: TournamentScheduleMatch[],
@@ -119,6 +139,13 @@ function findMatchNumberForEspnGame(
   const byTeams = schedule.find((match) => teamsMatchFixture(game, match));
   if (byTeams) {
     return byTeams.matchNumber;
+  }
+
+  const byPlaceholderTeams = schedule.filter((match) =>
+    teamsMatchPlaceholderFixture(game, match),
+  );
+  if (byPlaceholderTeams.length === 1) {
+    return byPlaceholderTeams[0]!.matchNumber;
   }
 
   const byKickoffAndTeam = schedule.filter(
@@ -158,7 +185,7 @@ export async function getLiveSchedulePayload(
   now = new Date(),
 ): Promise<LiveSchedulePayload> {
   const schedule = getTournamentSchedule();
-  const events = await fetchEspnGamesWindow(now, 4, 4);
+  const events = await fetchEspnGamesWindow(now, 14, 4);
   const games = events
     .map(parseEspnGameFromEvent)
     .filter((game): game is EspnScoreboardGame => game != null);

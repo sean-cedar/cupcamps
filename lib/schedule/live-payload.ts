@@ -1,5 +1,5 @@
 import { getLiveSchedulePayload } from "@/lib/espn/match-updates";
-import type { LiveMatchUpdate } from "@/lib/espn/match-updates";
+import type { LiveMatchUpdate } from "@/lib/schedule/live-updates";
 import {
   getKnockoutBracketRounds,
   getKnockoutProgress,
@@ -36,7 +36,7 @@ export async function buildLiveSitePayload(
 ): Promise<LiveSitePayload> {
   const live = await getLiveSchedulePayload(now);
   const mergedMatches = mergeLiveUpdatesIntoMatchRecords(live.updates);
-  const baseSchedule = getTournamentSchedule(mergedMatches);
+  const baseSchedule = getTournamentSchedule(mergedMatches, live.updates);
   const mergedSchedule = mergeLiveUpdatesIntoSchedule(
     baseSchedule,
     live.updates,
@@ -46,7 +46,7 @@ export async function buildLiveSitePayload(
 
   const groupPages: Record<string, GroupPageView> = {};
   for (const group of getAllGroups()) {
-    const page = getGroupPageView(group, mergedMatches);
+    const page = getGroupPageView(group, mergedMatches, live.updates);
     if (page) {
       groupPages[group] = page;
     }
@@ -56,10 +56,10 @@ export async function buildLiveSitePayload(
     fetchedAt: live.fetchedAt,
     updates: live.updates,
     groups,
-    groupSummaries: getGroupSummaries(mergedMatches),
+    groupSummaries: getGroupSummaries(mergedMatches, live.updates),
     groupPages,
-    bracketRounds: getKnockoutBracketRounds(mergedMatches),
-    knockoutProgress: getKnockoutProgress(mergedMatches),
+    bracketRounds: getKnockoutBracketRounds(mergedMatches, live.updates),
+    knockoutProgress: getKnockoutProgress(mergedMatches, live.updates),
     playedMatches: countPlayedMatches(mergedSchedule),
     liveMatches: countLiveMatches(mergedSchedule),
   };

@@ -7,6 +7,7 @@ import {
 } from "@/lib/schedule/bracket";
 import { matches } from "@/lib/schedule/matches";
 import type { CityMatch, MatchRecord } from "@/lib/schedule/types";
+import type { LiveMatchUpdate } from "@/lib/schedule/live-updates";
 import { getTeam, getTeamsByGroup, teams } from "@/lib/teams";
 
 export type GroupAdvancementStatus =
@@ -140,8 +141,9 @@ function buildAdvancedTeams(standings: GroupStandingView[]): GroupAdvancedTeamVi
 function buildGroupFixtures(
   group: string,
   matchSource: MatchRecord[] = matches,
+  liveUpdates: LiveMatchUpdate[] = [],
 ): CityMatch[] {
-  const outcomes = buildMatchOutcomes(matchSource);
+  const outcomes = buildMatchOutcomes(matchSource, liveUpdates);
 
   return matchSource
     .filter((match) => match.group === group)
@@ -152,7 +154,12 @@ function buildGroupFixtures(
         a.matchNumber - b.matchNumber,
     )
     .map((match) => {
-      const resolved = resolveMatch(match.matchNumber, outcomes, matchSource);
+      const resolved = resolveMatch(
+        match.matchNumber,
+        outcomes,
+        matchSource,
+        liveUpdates,
+      );
 
       return {
         matchNumber: match.matchNumber,
@@ -174,11 +181,12 @@ function buildGroupFixtures(
 function buildGroupSummary(
   group: string,
   matchSource: MatchRecord[] = matches,
+  liveUpdates: LiveMatchUpdate[] = [],
 ): GroupSummaryView {
   const isComplete = isGroupComplete(group, matchSource);
   const advancingThirds = getAdvancingThirdPlaceSlugs(matchSource);
   const standings = buildStandings(group, isComplete, advancingThirds, matchSource);
-  const fixtures = buildGroupFixtures(group, matchSource);
+  const fixtures = buildGroupFixtures(group, matchSource, liveUpdates);
 
   return {
     group,
@@ -196,20 +204,22 @@ export function getAllGroups(): string[] {
 
 export function getGroupSummaries(
   matchSource: MatchRecord[] = matches,
+  liveUpdates: LiveMatchUpdate[] = [],
 ): GroupSummaryView[] {
-  return GROUPS.map((group) => buildGroupSummary(group, matchSource));
+  return GROUPS.map((group) => buildGroupSummary(group, matchSource, liveUpdates));
 }
 
 export function getGroupPageView(
   group: string,
   matchSource: MatchRecord[] = matches,
+  liveUpdates: LiveMatchUpdate[] = [],
 ): GroupPageView | undefined {
   if (!GROUPS.includes(group)) {
     return undefined;
   }
 
-  const summary = buildGroupSummary(group, matchSource);
-  const fixtures = buildGroupFixtures(group, matchSource);
+  const summary = buildGroupSummary(group, matchSource, liveUpdates);
+  const fixtures = buildGroupFixtures(group, matchSource, liveUpdates);
   const matchdays = [...new Set(fixtures.map((match) => match.matchday ?? 0))].sort(
     (a, b) => a - b,
   );

@@ -1,4 +1,5 @@
 import { buildMatchOutcomes, resolveMatch } from "@/lib/schedule/bracket";
+import type { LiveMatchUpdate } from "@/lib/schedule/live-updates";
 import { formatMatchDate } from "@/lib/schedule/index";
 import { getMatchKickoffInstant } from "@/lib/schedule/kickoffs";
 import { matches } from "@/lib/schedule/matches";
@@ -25,9 +26,16 @@ export type TournamentScheduleGroup = {
 
 function toScheduleMatch(
   match: MatchRecord,
+  matchSource: MatchRecord[],
   outcomes: ReturnType<typeof buildMatchOutcomes>,
+  liveUpdates: LiveMatchUpdate[] = [],
 ): TournamentScheduleMatch {
-  const resolved = resolveMatch(match.matchNumber, outcomes);
+  const resolved = resolveMatch(
+    match.matchNumber,
+    outcomes,
+    matchSource,
+    liveUpdates,
+  );
   const kickoff = getMatchKickoffInstant(match.matchNumber);
 
   return {
@@ -49,11 +57,12 @@ function toScheduleMatch(
 
 export function getTournamentSchedule(
   matchSource: MatchRecord[] = matches,
+  liveUpdates: LiveMatchUpdate[] = [],
 ): TournamentScheduleMatch[] {
-  const outcomes = buildMatchOutcomes(matchSource);
+  const outcomes = buildMatchOutcomes(matchSource, liveUpdates);
 
   return matchSource
-    .map((match) => toScheduleMatch(match, outcomes))
+    .map((match) => toScheduleMatch(match, matchSource, outcomes, liveUpdates))
     .sort((a, b) => {
       if (a.kickoffMs != null && b.kickoffMs != null) {
         return a.kickoffMs - b.kickoffMs || a.matchNumber - b.matchNumber;
@@ -189,12 +198,13 @@ export function groupTournamentSchedule(
 
 export function getTournamentScheduleView(
   matchSource: MatchRecord[] = matches,
+  liveUpdates: LiveMatchUpdate[] = [],
 ): {
   groups: TournamentScheduleGroup[];
   totalMatches: number;
   playedMatches: number;
 } {
-  const schedule = getTournamentSchedule(matchSource);
+  const schedule = getTournamentSchedule(matchSource, liveUpdates);
   const groups = groupTournamentSchedule(schedule);
 
   return {

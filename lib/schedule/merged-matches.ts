@@ -1,4 +1,4 @@
-import type { LiveMatchUpdate } from "@/lib/espn/match-updates";
+import type { LiveMatchUpdate } from "@/lib/schedule/live-updates";
 import { matches } from "@/lib/schedule/matches";
 import type { MatchRecord } from "@/lib/schedule/types";
 

@@ -5,6 +5,7 @@ import {
   winnerAdvancesTo,
 } from "@/lib/schedule/matches";
 import type { MatchRecord } from "@/lib/schedule/types";
+import type { LiveMatchUpdate } from "@/lib/schedule/live-updates";
 import { teams } from "@/lib/teams";
 
 export type MatchOutcome = {
@@ -110,18 +111,88 @@ function getMatchOutcome(
   return null;
 }
 
-export function buildMatchOutcomes(
-  matchSource: MatchRecord[] = matches,
-): Map<number, MatchOutcome> {
-  const outcomes = new Map<number, MatchOutcome>();
+function isTeamSlug(slug: string): boolean {
+  return !isPlaceholderSlug(slug);
+}
 
+function resolveParticipantsForMatch(
+  match: MatchRecord,
+  outcomes: Map<number, MatchOutcome>,
+  update?: LiveMatchUpdate,
+): { home: string | null; away: string | null } {
+  let home = resolveParticipant(match.homeSlug, outcomes);
+  let away = resolveParticipant(match.awaySlug, outcomes);
+
+  if (update?.homeTeamSlug && isTeamSlug(update.homeTeamSlug)) {
+    home = update.homeTeamSlug;
+  }
+  if (update?.awayTeamSlug && isTeamSlug(update.awayTeamSlug)) {
+    away = update.awayTeamSlug;
+  }
+
+  return { home, away };
+}
+
+function backfillFeederOutcomes(
+  match: MatchRecord,
+  resolvedHome: string,
+  resolvedAway: string,
+  outcomes: Map<number, MatchOutcome>,
+): void {
+  const homePlaceholder = parsePlaceholder(match.homeSlug);
+  const awayPlaceholder = parsePlaceholder(match.awaySlug);
+
+  if (
+    homePlaceholder?.kind === "winner" &&
+    !outcomes.has(homePlaceholder.matchNumber)
+  ) {
+    outcomes.set(homePlaceholder.matchNumber, {
+      winner: resolvedHome,
+      loser: resolvedAway,
+    });
+  }
+
+  if (
+    awayPlaceholder?.kind === "winner" &&
+    !outcomes.has(awayPlaceholder.matchNumber)
+  ) {
+    outcomes.set(awayPlaceholder.matchNumber, {
+      winner: resolvedAway,
+      loser: resolvedHome,
+    });
+  }
+}
+
+function applyMatchOutcomes(
+  matchSource: MatchRecord[],
+  outcomes: Map<number, MatchOutcome>,
+  updateMap: Map<number, LiveMatchUpdate>,
+): void {
   for (const match of matchSource) {
-    const resolvedHome = resolveParticipant(match.homeSlug, outcomes);
-    const resolvedAway = resolveParticipant(match.awaySlug, outcomes);
-    const outcome = getMatchOutcome(match, resolvedHome, resolvedAway);
+    const update = updateMap.get(match.matchNumber);
+    const { home, away } = resolveParticipantsForMatch(match, outcomes, update);
+    const outcome = getMatchOutcome(match, home, away);
+
     if (outcome) {
       outcomes.set(match.matchNumber, outcome);
+      backfillFeederOutcomes(match, home!, away!, outcomes);
     }
+  }
+}
+
+export function buildMatchOutcomes(
+  matchSource: MatchRecord[] = matches,
+  liveUpdates: LiveMatchUpdate[] = [],
+): Map<number, MatchOutcome> {
+  const outcomes = new Map<number, MatchOutcome>();
+  const updateMap = new Map(
+    liveUpdates.map((update) => [update.matchNumber, update]),
+  );
+
+  applyMatchOutcomes(matchSource, outcomes, updateMap);
+
+  if (liveUpdates.length > 0) {
+    applyMatchOutcomes(matchSource, outcomes, updateMap);
   }
 
   return outcomes;
@@ -131,16 +202,20 @@ export function resolveMatch(
   matchNumber: number,
   outcomes: Map<number, MatchOutcome>,
   matchSource: MatchRecord[] = matches,
+  liveUpdates: LiveMatchUpdate[] = [],
 ): ResolvedMatch | undefined {
   const match = getMatchByNumberMap(matchSource).get(matchNumber);
   if (!match) {
     return undefined;
   }
 
+  const update = liveUpdates.find((entry) => entry.matchNumber === matchNumber);
+  const { home, away } = resolveParticipantsForMatch(match, outcomes, update);
+
   return {
     ...match,
-    resolvedHomeSlug: resolveParticipant(match.homeSlug, outcomes),
-    resolvedAwaySlug: resolveParticipant(match.awaySlug, outcomes),
+    resolvedHomeSlug: home,
+    resolvedAwaySlug: away,
   };
 }
 

@@ -1,4 +1,4 @@
-import type { LiveMatchUpdate } from "@/lib/espn/match-updates";
+import type { LiveMatchUpdate } from "@/lib/schedule/live-updates";
 import type {
   TournamentScheduleGroup,
   TournamentScheduleMatch,
@@ -28,6 +28,8 @@ export function applyLiveMatchUpdate(
     ...match,
     homeScore,
     awayScore,
+    homeSlug: update.homeTeamSlug ?? match.homeSlug,
+    awaySlug: update.awayTeamSlug ?? match.awaySlug,
     isPlayed: update.isFinal
       ? true
       : update.isLive
