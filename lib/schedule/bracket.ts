@@ -26,13 +26,23 @@ type GroupStanding = {
   gd: number;
 };
 
-const matchByNumber = new Map(matches.map((m) => [m.matchNumber, m]));
+const defaultMatchByNumber = new Map(matches.map((m) => [m.matchNumber, m]));
 const teamsByGroup = new Map<string, string[]>();
 
 for (const team of teams) {
   const groupTeams = teamsByGroup.get(team.group) ?? [];
   groupTeams.push(team.slug);
   teamsByGroup.set(team.group, groupTeams);
+}
+
+function getMatchByNumberMap(
+  matchSource: MatchRecord[],
+): Map<number, MatchRecord> {
+  if (matchSource === matches) {
+    return defaultMatchByNumber;
+  }
+
+  return new Map(matchSource.map((match) => [match.matchNumber, match]));
 }
 
 function isPlaceholderSlug(slug: string): boolean {
@@ -93,10 +103,12 @@ function getMatchOutcome(
   return null;
 }
 
-export function buildMatchOutcomes(): Map<number, MatchOutcome> {
+export function buildMatchOutcomes(
+  matchSource: MatchRecord[] = matches,
+): Map<number, MatchOutcome> {
   const outcomes = new Map<number, MatchOutcome>();
 
-  for (const match of matches) {
+  for (const match of matchSource) {
     const resolvedHome = resolveParticipant(match.homeSlug, outcomes);
     const resolvedAway = resolveParticipant(match.awaySlug, outcomes);
     const outcome = getMatchOutcome(match, resolvedHome, resolvedAway);
@@ -111,8 +123,9 @@ export function buildMatchOutcomes(): Map<number, MatchOutcome> {
 export function resolveMatch(
   matchNumber: number,
   outcomes: Map<number, MatchOutcome>,
+  matchSource: MatchRecord[] = matches,
 ): ResolvedMatch | undefined {
-  const match = matchByNumber.get(matchNumber);
+  const match = getMatchByNumberMap(matchSource).get(matchNumber);
   if (!match) {
     return undefined;
   }
@@ -133,7 +146,10 @@ function compareStandings(a: GroupStanding, b: GroupStanding): number {
   );
 }
 
-export function getGroupStandings(group: string): GroupStanding[] {
+export function getGroupStandings(
+  group: string,
+  matchSource: MatchRecord[] = matches,
+): GroupStanding[] {
   const groupTeams = teamsByGroup.get(group) ?? [];
   const standings = new Map<string, GroupStanding>(
     groupTeams.map((slug) => [
@@ -142,7 +158,7 @@ export function getGroupStandings(group: string): GroupStanding[] {
     ]),
   );
 
-  for (const match of matches) {
+  for (const match of matchSource) {
     if (match.group !== group || match.homeScore === null || match.awayScore === null) {
       continue;
     }
@@ -175,18 +191,20 @@ export function getGroupStandings(group: string): GroupStanding[] {
   return [...standings.values()].sort(compareStandings);
 }
 
-function isGroupStageComplete(): boolean {
-  return matches
+function isGroupStageComplete(matchSource: MatchRecord[] = matches): boolean {
+  return matchSource
     .filter((match) => match.stage === "group")
     .every((match) => match.homeScore !== null && match.awayScore !== null);
 }
 
-function getThirdPlaceCandidates(): GroupStanding[] {
+function getThirdPlaceCandidates(
+  matchSource: MatchRecord[] = matches,
+): GroupStanding[] {
   const groups = [...teamsByGroup.keys()].sort();
   const candidates: GroupStanding[] = [];
 
   for (const group of groups) {
-    const standings = getGroupStandings(group);
+    const standings = getGroupStandings(group, matchSource);
     const third = standings[2];
     if (third && third.played === 3) {
       candidates.push(third);
@@ -196,31 +214,40 @@ function getThirdPlaceCandidates(): GroupStanding[] {
   return candidates.sort(compareStandings);
 }
 
-export function getAdvancingThirdPlaceSlugs(): Set<string> | null {
-  if (!isGroupStageComplete()) {
+export function getAdvancingThirdPlaceSlugs(
+  matchSource: MatchRecord[] = matches,
+): Set<string> | null {
+  if (!isGroupStageComplete(matchSource)) {
     return null;
   }
 
-  return new Set(getThirdPlaceCandidates().slice(0, 8).map((team) => team.slug));
+  return new Set(
+    getThirdPlaceCandidates(matchSource).slice(0, 8).map((team) => team.slug),
+  );
 }
 
-export function isGroupComplete(group: string): boolean {
-  return matches
+export function isGroupComplete(
+  group: string,
+  matchSource: MatchRecord[] = matches,
+): boolean {
+  return matchSource
     .filter((match) => match.group === group)
     .every(
       (match) => match.homeScore !== null && match.awayScore !== null,
     );
 }
 
-export function getQualifiedTeams(): Set<string> | null {
-  if (!isGroupStageComplete()) {
+export function getQualifiedTeams(
+  matchSource: MatchRecord[] = matches,
+): Set<string> | null {
+  if (!isGroupStageComplete(matchSource)) {
     return null;
   }
 
   const qualified = new Set<string>();
 
   for (const group of teamsByGroup.keys()) {
-    const standings = getGroupStandings(group);
+    const standings = getGroupStandings(group, matchSource);
     qualified.add(standings[0].slug);
     qualified.add(standings[1].slug);
   }
@@ -289,7 +316,7 @@ export function getProjectedSide(
   entry: number,
 ): "home" | "away" | null {
   if (matchNumber === entry) {
-    const match = matchByNumber.get(entry);
+    const match = defaultMatchByNumber.get(entry);
     if (!match) {
       return null;
     }
@@ -306,7 +333,7 @@ export function getProjectedSide(
   let current = winnerAdvancesTo[entry];
 
   while (current) {
-    const match = matchByNumber.get(current);
+    const match = defaultMatchByNumber.get(current);
     if (!match) {
       return null;
     }

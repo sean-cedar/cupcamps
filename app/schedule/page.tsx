@@ -2,17 +2,8 @@ import type { Metadata } from "next";
 import { HostNationStripe } from "@/components/brand/HostNationStripe";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { TournamentScheduleView } from "@/components/schedule/TournamentScheduleView";
-import { getLiveSchedulePayload } from "@/lib/espn/match-updates";
-import {
-  countLiveMatches,
-  countPlayedMatches,
-  mergeLiveUpdatesIntoGroups,
-  mergeLiveUpdatesIntoSchedule,
-} from "@/lib/schedule/live-schedule";
-import {
-  getTournamentSchedule,
-  getTournamentScheduleView,
-} from "@/lib/schedule/tournament-schedule";
+import { buildLiveSitePayload } from "@/lib/schedule/live-payload";
+import { getTournamentScheduleView } from "@/lib/schedule/tournament-schedule";
 
 export const dynamic = "force-dynamic";
 
@@ -30,20 +21,11 @@ export default async function SchedulePage() {
   let liveMatches = 0;
 
   try {
-    const live = await getLiveSchedulePayload();
+    const live = await buildLiveSitePayload();
     fetchedAt = live.fetchedAt;
-    liveUpdates = mergeLiveUpdatesIntoGroups(
-      base.groups,
-      live.updates,
-      live.fetchedAt,
-    );
-    const mergedSchedule = mergeLiveUpdatesIntoSchedule(
-      getTournamentSchedule(),
-      live.updates,
-      live.fetchedAt,
-    );
-    playedMatches = countPlayedMatches(mergedSchedule);
-    liveMatches = countLiveMatches(mergedSchedule);
+    liveUpdates = live.groups;
+    playedMatches = live.playedMatches;
+    liveMatches = live.liveMatches;
   } catch {
     liveUpdates = base.groups;
   }
@@ -59,8 +41,8 @@ export default async function SchedulePage() {
           />
           <p className="mt-4 max-w-2xl text-sm text-muted">
             Opens on the current or next kickoff. Scroll up for earlier fixtures
-            and down for what&apos;s coming next. Scores refresh from ESPN on
-            load and every 30 seconds.
+            and down for what&apos;s coming next. Scores refresh from ESPN every
+            8–15 seconds across the site.
           </p>
           <div className="mt-6 flex flex-wrap gap-6">
             <div>
@@ -95,7 +77,6 @@ export default async function SchedulePage() {
 
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
         <TournamentScheduleView
-          baseGroups={base.groups}
           initialGroups={liveUpdates}
           initialFetchedAt={fetchedAt}
         />

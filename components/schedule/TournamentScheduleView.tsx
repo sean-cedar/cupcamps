@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CityMatchScheduleRow } from "@/components/host-cities/CityMatchScheduleRow";
-import type { LiveMatchUpdate } from "@/lib/espn/match-updates";
+import { useLiveScores } from "@/components/live/LiveScoresProvider";
 import {
   buildScheduleStatuses,
   getScheduleAnchorMatchNumber,
@@ -11,20 +11,9 @@ import {
 } from "@/lib/schedule/tournament-schedule";
 
 type TournamentScheduleViewProps = {
-  baseGroups: TournamentScheduleGroup[];
   initialGroups: TournamentScheduleGroup[];
   initialFetchedAt: string | null;
 };
-
-type LiveScheduleApiResponse = {
-  fetchedAt: string;
-  updates: LiveMatchUpdate[];
-  groups: TournamentScheduleGroup[];
-  playedMatches: number;
-  liveMatches: number;
-};
-
-const POLL_INTERVAL_MS = 30_000;
 
 const STATUS_LABELS: Record<"live", string> = {
   live: "Live",
@@ -58,14 +47,14 @@ function ScheduleStatusBadge({
 }
 
 export function TournamentScheduleView({
-  baseGroups,
   initialGroups,
   initialFetchedAt,
 }: TournamentScheduleViewProps) {
+  const { groups: liveGroups, fetchedAt: liveFetchedAt, feedError } =
+    useLiveScores();
   const anchorScrolledRef = useRef(false);
-  const [groups, setGroups] = useState(initialGroups);
-  const [fetchedAt, setFetchedAt] = useState(initialFetchedAt);
-  const [feedError, setFeedError] = useState<string | null>(null);
+  const groups = liveGroups ?? initialGroups;
+  const fetchedAt = liveFetchedAt ?? initialFetchedAt;
   const [statuses, setStatuses] = useState<Map<number, ScheduleMatchStatus>>(
     () => new Map(),
   );
@@ -80,36 +69,11 @@ export function TournamentScheduleView({
     setStatuses(buildScheduleStatuses(flatMatches));
   }, [flatMatches]);
 
-  const refreshLiveFeed = useCallback(async () => {
-    try {
-      const response = await fetch("/api/schedule/live", {
-        cache: "no-store",
-      });
-
-      if (!response.ok) {
-        throw new Error("Live schedule unavailable");
-      }
-
-      const payload = (await response.json()) as LiveScheduleApiResponse;
-      setGroups(payload.groups);
-      setFetchedAt(payload.fetchedAt);
-      setFeedError(null);
-    } catch {
-      setFeedError("Live scores unavailable");
-    }
-  }, []);
-
   useEffect(() => {
     syncStatuses();
     const interval = window.setInterval(syncStatuses, 60_000);
     return () => window.clearInterval(interval);
   }, [syncStatuses]);
-
-  useEffect(() => {
-    refreshLiveFeed();
-    const interval = window.setInterval(refreshLiveFeed, POLL_INTERVAL_MS);
-    return () => window.clearInterval(interval);
-  }, [refreshLiveFeed]);
 
   const scrollToAnchor = useCallback(
     (behavior: ScrollBehavior = "smooth") => {

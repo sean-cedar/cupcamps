@@ -190,8 +190,8 @@ export async function getEspnScoreboard(
 ): Promise<EspnScoreboardResponse> {
   const dateKey = formatDateKey(now);
   const [todayEvents, liveEvents] = await Promise.all([
-    fetchScoreboard(dateKey),
-    fetchScoreboard(),
+    fetchScoreboard(dateKey, "no-store"),
+    fetchScoreboard(undefined, "no-store"),
   ]);
 
   const merged = new Map<string, EspnScoreboardGame>();

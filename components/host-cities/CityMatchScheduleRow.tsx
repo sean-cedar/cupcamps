@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { MatchLocationLink } from "@/components/host-cities/MatchLocationLink";
+import { useLiveMatchScores } from "@/components/live/LiveScoresProvider";
 import { ScheduleMatchCard } from "@/components/schedule/ScheduleMatchCard";
 import { MatchupTeams } from "@/components/ui/MatchupTeams";
 import {
@@ -14,6 +17,11 @@ type CityMatchScheduleRowProps = {
 };
 
 export function CityMatchScheduleRow({ match }: CityMatchScheduleRowProps) {
+  const live = useLiveMatchScores(match.matchNumber);
+  const homeScore = live?.homeScore ?? match.homeScore;
+  const awayScore = live?.awayScore ?? match.awayScore;
+  const isLive = live?.isLive ?? false;
+
   const home = getOpponentDisplay(match.homeSlug);
   const away = getOpponentDisplay(match.awaySlug);
 
@@ -29,8 +37,8 @@ export function CityMatchScheduleRow({ match }: CityMatchScheduleRowProps) {
         hostCitySlug={match.hostCitySlug}
         home={home}
         away={away}
-        homeScore={match.homeScore}
-        awayScore={match.awayScore}
+        homeScore={homeScore}
+        awayScore={awayScore}
         hideStadium
       />
 
@@ -60,11 +68,16 @@ export function CityMatchScheduleRow({ match }: CityMatchScheduleRowProps) {
         </div>
 
         <div className="relative z-[1] min-w-0 pointer-events-none">
+          {isLive && (
+            <p className="mb-1 font-display text-[10px] font-bold uppercase tracking-[0.14em] text-red-300">
+              {live?.statusLabel ?? "Live"}
+            </p>
+          )}
           <MatchupTeams
             home={home}
             away={away}
-            homeScore={match.homeScore}
-            awayScore={match.awayScore}
+            homeScore={homeScore}
+            awayScore={awayScore}
             linkPointerEvents
           />
         </div>

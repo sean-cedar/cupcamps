@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type {
   EspnScoreboardGame,
   EspnScoreboardResponse,
 } from "@/lib/espn/types";
 
-const POLL_INTERVAL_MS = 30_000;
+const POLL_INTERVAL_MS = 15_000;
+const LIVE_POLL_INTERVAL_MS = 8_000;
 
 function ScorePill({ game }: { game: EspnScoreboardGame }) {
   const scoreLabel =
@@ -42,39 +43,59 @@ export function EspnScoreTicker() {
     null,
   );
   const [error, setError] = useState<string | null>(null);
+  const liveGamesRef = useRef(0);
+
+  const loadScoreboard = useCallback(async () => {
+    try {
+      const response = await fetch("/api/espn/scoreboard", {
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        throw new Error("Scoreboard unavailable");
+      }
+
+      const payload = (await response.json()) as EspnScoreboardResponse;
+      liveGamesRef.current = payload.liveGames.length;
+      setScoreboard(payload);
+      setError(null);
+    } catch {
+      setError("Scores unavailable");
+    }
+  }, []);
 
   useEffect(() => {
-    let active = true;
+    void loadScoreboard();
+  }, [loadScoreboard]);
 
-    async function loadScoreboard() {
-      try {
-        const response = await fetch("/api/espn/scoreboard", {
-          cache: "no-store",
-        });
+  useEffect(() => {
+    let intervalId = 0;
 
-        if (!response.ok) {
-          throw new Error("Scoreboard unavailable");
-        }
-
-        const payload = (await response.json()) as EspnScoreboardResponse;
-        if (active) {
-          setScoreboard(payload);
-          setError(null);
-        }
-      } catch {
-        if (active) {
-          setError("Scores unavailable");
-        }
-      }
-    }
-
-    loadScoreboard();
-    const interval = window.setInterval(loadScoreboard, POLL_INTERVAL_MS);
-    return () => {
-      active = false;
-      window.clearInterval(interval);
+    const schedulePoll = () => {
+      window.clearInterval(intervalId);
+      const interval =
+        liveGamesRef.current > 0 ? LIVE_POLL_INTERVAL_MS : POLL_INTERVAL_MS;
+      intervalId = window.setInterval(() => {
+        void loadScoreboard();
+      }, interval);
     };
-  }, []);
+
+    schedulePoll();
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        void loadScoreboard();
+        schedulePoll();
+      }
+    };
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    return () => {
+      window.clearInterval(intervalId);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
+  }, [loadScoreboard, scoreboard?.liveGames.length]);
 
   const tickerGames = useMemo(() => {
     if (!scoreboard) {

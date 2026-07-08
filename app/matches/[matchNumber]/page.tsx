@@ -8,6 +8,11 @@ import { GroupStandingsTable } from "@/components/groups/GroupStandingsTable";
 import { MatchAdvancementPanel } from "@/components/matches/MatchAdvancementPanel";
 import { MatchFeedersPanel } from "@/components/matches/MatchFeedersPanel";
 import { MatchHighlightsSection } from "@/components/matches/MatchHighlightsSection";
+import {
+  MatchLiveGoalStats,
+  MatchLiveScore,
+  MatchLiveStatus,
+} from "@/components/matches/MatchLiveScore";
 import { MatchParticipantPanel } from "@/components/matches/MatchParticipantPanel";
 import { formatMatchSchedule } from "@/lib/schedule";
 import {
@@ -55,11 +60,6 @@ export default async function MatchDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const scoreLabel =
-    view.isPlayed && view.homeScore !== null && view.awayScore !== null
-      ? `${view.homeScore}–${view.awayScore}`
-      : null;
-
   return (
     <div>
       <section className="border-b border-card-border bg-card/50">
@@ -92,11 +92,12 @@ export default async function MatchDetailPage({ params }: PageProps) {
               </p>
             </div>
 
-            {scoreLabel && (
-              <p className="font-display text-4xl font-black tabular-nums text-cream sm:text-5xl lg:text-6xl">
-                {scoreLabel}
-              </p>
-            )}
+            <MatchLiveScore
+              matchNumber={matchNumber}
+              initialHomeScore={view.homeScore}
+              initialAwayScore={view.awayScore}
+              initialIsPlayed={view.isPlayed}
+            />
           </div>
         </div>
       </section>
@@ -173,30 +174,19 @@ export default async function MatchDetailPage({ params }: PageProps) {
               <p className="text-[10px] uppercase tracking-wider text-muted">
                 Status
               </p>
-              <p className="mt-1 font-display text-lg font-black text-cream">
-                {view.isPlayed ? "Full time" : "Scheduled"}
-              </p>
+              <MatchLiveStatus
+                matchNumber={matchNumber}
+                initialIsPlayed={view.isPlayed}
+              />
             </div>
-            {scoreLabel && (
-              <>
-                <div className="wc26-panel p-4">
-                  <p className="text-[10px] uppercase tracking-wider text-muted">
-                    {view.home.team?.name ?? view.home.label} goals
-                  </p>
-                  <p className="mt-1 font-display text-lg font-black text-cream">
-                    {view.homeScore}
-                  </p>
-                </div>
-                <div className="wc26-panel p-4">
-                  <p className="text-[10px] uppercase tracking-wider text-muted">
-                    {view.away.team?.name ?? view.away.label} goals
-                  </p>
-                  <p className="mt-1 font-display text-lg font-black text-cream">
-                    {view.awayScore}
-                  </p>
-                </div>
-              </>
-            )}
+            <MatchLiveGoalStats
+              matchNumber={matchNumber}
+              initialHomeScore={view.homeScore}
+              initialAwayScore={view.awayScore}
+              initialIsPlayed={view.isPlayed}
+              homeLabel={view.home.team?.name ?? view.home.label}
+              awayLabel={view.away.team?.name ?? view.away.label}
+            />
             <div className="wc26-panel p-4">
               <p className="text-[10px] uppercase tracking-wider text-muted">
                 Stage

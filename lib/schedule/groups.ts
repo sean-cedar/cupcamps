@@ -4,7 +4,7 @@ import {
   isGroupComplete,
 } from "@/lib/schedule/bracket";
 import { matches } from "@/lib/schedule/matches";
-import type { CityMatch } from "@/lib/schedule/types";
+import type { CityMatch, MatchRecord } from "@/lib/schedule/types";
 import { getTeam, getTeamsByGroup, teams } from "@/lib/teams";
 
 export type GroupAdvancementStatus =
@@ -99,8 +99,9 @@ function buildStandings(
   group: string,
   isComplete: boolean,
   advancingThirds: Set<string> | null,
+  matchSource: MatchRecord[] = matches,
 ): GroupStandingView[] {
-  return getGroupStandings(group).map((row, index) => {
+  return getGroupStandings(group, matchSource).map((row, index) => {
     const team = getTeam(row.slug);
     const rank = index + 1;
 
@@ -134,8 +135,11 @@ function buildAdvancedTeams(standings: GroupStandingView[]): GroupAdvancedTeamVi
     }));
 }
 
-function buildGroupFixtures(group: string): CityMatch[] {
-  return matches
+function buildGroupFixtures(
+  group: string,
+  matchSource: MatchRecord[] = matches,
+): CityMatch[] {
+  return matchSource
     .filter((match) => match.group === group)
     .sort(
       (a, b) =>
@@ -159,11 +163,14 @@ function buildGroupFixtures(group: string): CityMatch[] {
     }));
 }
 
-function buildGroupSummary(group: string): GroupSummaryView {
-  const isComplete = isGroupComplete(group);
-  const advancingThirds = getAdvancingThirdPlaceSlugs();
-  const standings = buildStandings(group, isComplete, advancingThirds);
-  const fixtures = buildGroupFixtures(group);
+function buildGroupSummary(
+  group: string,
+  matchSource: MatchRecord[] = matches,
+): GroupSummaryView {
+  const isComplete = isGroupComplete(group, matchSource);
+  const advancingThirds = getAdvancingThirdPlaceSlugs(matchSource);
+  const standings = buildStandings(group, isComplete, advancingThirds, matchSource);
+  const fixtures = buildGroupFixtures(group, matchSource);
 
   return {
     group,
@@ -179,17 +186,22 @@ export function getAllGroups(): string[] {
   return GROUPS;
 }
 
-export function getGroupSummaries(): GroupSummaryView[] {
-  return GROUPS.map((group) => buildGroupSummary(group));
+export function getGroupSummaries(
+  matchSource: MatchRecord[] = matches,
+): GroupSummaryView[] {
+  return GROUPS.map((group) => buildGroupSummary(group, matchSource));
 }
 
-export function getGroupPageView(group: string): GroupPageView | undefined {
+export function getGroupPageView(
+  group: string,
+  matchSource: MatchRecord[] = matches,
+): GroupPageView | undefined {
   if (!GROUPS.includes(group)) {
     return undefined;
   }
 
-  const summary = buildGroupSummary(group);
-  const fixtures = buildGroupFixtures(group);
+  const summary = buildGroupSummary(group, matchSource);
+  const fixtures = buildGroupFixtures(group, matchSource);
   const matchdays = [...new Set(fixtures.map((match) => match.matchday ?? 0))].sort(
     (a, b) => a - b,
   );

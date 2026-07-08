@@ -19,13 +19,15 @@ export function applyLiveMatchUpdate(
     return match;
   }
 
-  const hasScores =
-    update.homeScore !== null && update.awayScore !== null;
+  const homeScore =
+    update.homeScore !== null ? update.homeScore : match.homeScore;
+  const awayScore =
+    update.awayScore !== null ? update.awayScore : match.awayScore;
 
   return {
     ...match,
-    homeScore: hasScores ? update.homeScore : match.homeScore,
-    awayScore: hasScores ? update.awayScore : match.awayScore,
+    homeScore,
+    awayScore,
     isPlayed: update.isFinal
       ? true
       : update.isLive

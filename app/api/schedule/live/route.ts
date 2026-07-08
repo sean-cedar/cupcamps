@@ -1,45 +1,17 @@
-import { getLiveSchedulePayload } from "@/lib/espn/match-updates";
-import {
-  countLiveMatches,
-  countPlayedMatches,
-  mergeLiveUpdatesIntoGroups,
-  mergeLiveUpdatesIntoSchedule,
-} from "@/lib/schedule/live-schedule";
-import {
-  getTournamentSchedule,
-  getTournamentScheduleView,
-} from "@/lib/schedule/tournament-schedule";
+import { buildLiveSitePayload } from "@/lib/schedule/live-payload";
 import { NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const base = getTournamentScheduleView();
-    const live = await getLiveSchedulePayload();
-    const groups = mergeLiveUpdatesIntoGroups(
-      base.groups,
-      live.updates,
-      live.fetchedAt,
-    );
-    const mergedSchedule = mergeLiveUpdatesIntoSchedule(
-      getTournamentSchedule(),
-      live.updates,
-      live.fetchedAt,
-    );
+    const payload = await buildLiveSitePayload();
 
-    return NextResponse.json(
-      {
-        fetchedAt: live.fetchedAt,
-        updates: live.updates,
-        groups,
-        playedMatches: countPlayedMatches(mergedSchedule),
-        liveMatches: countLiveMatches(mergedSchedule),
+    return NextResponse.json(payload, {
+      headers: {
+        "Cache-Control": "no-store",
       },
-      {
-        headers: {
-          "Cache-Control": "no-store",
-        },
-      },
-    );
+    });
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Unable to load live schedule.";

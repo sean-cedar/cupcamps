@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Noto_Sans } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { LiveScoresProvider } from "@/components/live/LiveScoresProvider";
 import { HapticProvider } from "@/components/feedback/HapticProvider";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import "./globals.css";
@@ -48,9 +49,11 @@ export default function RootLayout({
       <body className="wc26-bg flex min-h-full flex-col antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <HapticProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
+            <LiveScoresProvider>
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </LiveScoresProvider>
           </HapticProvider>
         </ThemeProvider>
       </body>
